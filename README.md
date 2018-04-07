@@ -158,6 +158,20 @@ cd dist
 t2 push server_tessel2.js
 ```
 
+You will be prompted with:
+
+```javascript
+INFO Looking for your Tessel...
+INFO Connected to Animatronixs-Snowy-Owl.
+INFO Building project.
+INFO Writing project to Flash on Animatronixs-Snowy-Owl (4291.072 kB)...
+INFO Deployed.
+INFO Your Tessel may now be untethered.
+INFO The application will run whenever Tessel boots up.
+INFO      To remove this application, use "t2 erase".
+INFO Running server_tessel2.js...
+```
+
 You can now unplug the USB cable from the Tessel 2 to your computer. Instead connect the USB cable from Tessel 2 to a battery pack. The Tessel 2's access point will still be available, whereas the Tessel 2 is now truly wireless.
 
 TO DO: 
