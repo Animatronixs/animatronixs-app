@@ -1,0 +1,30 @@
+//
+// === PAGE ===
+//
+
+//
+// - Html -
+//
+
+html {
+    background-color: $white;
+    color: $text-color-monochrome;
+    font-family: 'Lato', 'Arial', sans-serif;
+    font-weight: $font-weight-regular;
+    font-size: $font-size-regular;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+}
+
+//
+// - Clearfix -
+//
+
+.clearfix {zoom: 1}
+.clearfix:after {
+    content: '.';
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}

@@ -1,0 +1,6 @@
+/* Neutralise the default layout set by the browser */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Using box-sizing: border-box, the width of an element is exactly the width we defined (excl. padding and border) */
+}

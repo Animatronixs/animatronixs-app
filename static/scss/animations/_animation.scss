@@ -1,0 +1,22 @@
+//
+// === ANIMATION ===
+//
+
+.js--waypoint-1,
+.js--waypoint-2,
+.js--waypoint-3 {
+    opacity: 0; // hide until scrolled to
+    -webkit-animation-duration: 1s;    
+    animation-duration: 1s;
+}
+
+.js--waypoint-4 {
+    -webkit-animation-duration: 1s;     
+    animation-duration: 1s;
+}
+
+.js--waypoint-1.animated,
+.js--waypoint-2.animated,
+.js--waypoint-3.animated {
+    opacity: 1; // show when scrolled to
+}

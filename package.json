@@ -1,0 +1,48 @@
+{
+  "name": "animatronixs-app",
+  "version": "0.1.0",
+  "description": "Animatronixs - App",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "pulp build",
+    "compile:client": "pulp build --main Client --to dist/client.js",
+    "compile:server": "pulp build --main Server --to dist/server.js",
+    "run:server": "node dist/server.js",
+    "start": "npm run build && npm run compile:client && npm run compile:server && npm run run:server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "installPackages": "yarn && bower install",
+    "buildSrc": "pulp build",
+    "buildDist": "mkdir dist && pulp browserify --to dist/client.js && node-sass static/scss/core.scss dist/stylesheet.css && cpx \"static/images/*.*\" dist/ && cpx \"static/html/*.*\" dist/ && cpx \"static/fonts/*.*\" dist/ && cpx \"static/js/*.*\" dist/",
+    "watchBuildDist": "onchange './static/**/*' './src/**/*' -i -- yarn buildDist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/animatronixs/animatronixs-app.git"
+  },
+  "author": "Animatronixs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/animatronixs/animatronixs-app/issues"
+  },
+  "homepage": "https://github.com/animatronixs/animatronixs-app#readme",
+  "dependencies": {
+    "body-parser": "*",
+    "bower": "^1.8.4",
+    "compression": "^1.6.0",
+    "express": "*",
+    "g": "^2.0.1",
+    "pulp": "^11.0.0",
+    "purescript": "^0.11.6",
+    "purescript-psa": "0.5.1",
+    "t2-cli": "^0.1.18",
+    "xhr2": "^0.1.3"
+  },
+  "devDependencies": {
+    "browserify": "latest",
+    "cpx": "1.3.1",
+    "node-sass": "^4.5.3"
+  }
+}

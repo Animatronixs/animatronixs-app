@@ -1,0 +1,34 @@
+//
+// === ICON ===
+//
+
+//
+// - Icon -
+//
+i {
+
+}
+
+//
+// - Icon Modifiers -
+//
+
+i.icon-big {
+    font-size: 350%;
+    display: block;
+    color: $secondary-color;
+    margin-bottom: 10px;
+}
+
+i.icon-small {
+    font-size: 120%;
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    color: $secondary-color;
+    margin-right: 10px;
+    /* ways to align text and icons */
+    line-height: 120%;
+    vertical-align: middle;
+    margin-top: -5px;
+}

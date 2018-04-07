@@ -1,0 +1,23 @@
+//
+// === LINK ===
+//
+
+//
+// - Normal link -
+//
+
+a:link,
+a:visited {
+    color: $secondary-color;
+    text-decoration: none;
+    padding-bottom: 1px;
+    border-bottom: 1px solid $secondary-color;
+    -webkit-transition: border-bottom 0.2s, color 0.2s;
+    transition: border-bottom 0.2s, color 0.2s;
+}
+
+a:hover,
+a:active {
+    color: $gray;
+    border-bottom: 1px solid transparent;
+}

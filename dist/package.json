@@ -1,0 +1,36 @@
+{
+  "name": "animatronixs-app",
+  "version": "0.1.0",
+  "description": "Animatronixs App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "installPackages": "yarn && bower install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/animatronixs/animatronixs-app.git"
+  },
+  "dependencies": {
+    "body-parser": "*",
+    "bower": "^1.8.4",
+    "compression": "^1.6.0",
+    "express": "*",
+    "g": "^2.0.1",
+    "pulp": "^11.0.0",
+    "purescript": "^0.11.6",
+    "purescript-psa": "0.5.1",
+    "t2-cli": "^0.1.18",
+    "xhr2": "^0.1.3"
+  },
+  "keywords": [
+    "Tessel"
+  ],
+  "author": "Animatronixs",
+  "license": "ISC",
+  "readme": "Animatronixs",
+  "bugs": {
+    "url": "https://github.com/animatronixs/animatronixs-app/issues"
+  },
+  "homepage": "https://github.com/animatronixs/animatronixs-app#readme"
+}
