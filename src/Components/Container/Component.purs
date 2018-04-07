@@ -3,11 +3,6 @@ module Container.Component where
 import Prelude
 
 import CSS as CB
-import SubContainerA.Component as SubContainerA
-import SubContainerB.Component as SubContainerB
-import SubContainerC.Component as SubContainerC
-import SubContainerD.Component as SubContainerD
---import Container.Component.Query (Query)
 import Container.Component.State (State)
 import Control.Monad.Eff.Exception (stack)
 import Control.Monad.State (state)
@@ -19,6 +14,10 @@ import Halogen.Component.ChildPath as CP
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
+import SubContainerA.Component as SubContainerA
+import SubContainerB.Component as SubContainerB
+import SubContainerC.Component as SubContainerC
+import SubContainerD.Component as SubContainerD
 --import ItemList.Component as ComponentA
 
 data Query a = ReadStates a
@@ -55,7 +54,7 @@ ui =
     HH.div_
     [ HH.div
         [ HP.class_ (H.ClassName "box")]
-        [ HH.h2_ [ HH.text "SubContainer A" ]
+        [ HH.h2_ [ HH.text "SubContainer A!" ]
         , HH.slot' CP.cp1 unit SubContainerA.ui unit absurd
         ]
     , HH.div

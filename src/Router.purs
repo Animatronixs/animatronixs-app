@@ -3,7 +3,6 @@ module Router where
 import BigPrelude
 
 import Container.Component as Container
-import Profile.Component as Profile
 import Control.Monad.Aff (Aff)
 import Control.Monad.State.Class (modify)
 import Data.Either.Nested (Either3)
@@ -15,6 +14,7 @@ import Halogen.Aff as HA
 import Halogen.Component.ChildPath (ChildPath, cpL, cpR, (:>))
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
+import Profile.Component as Profile
 import Routing (matchesAff)
 import Routing.Match (Match)
 import Routing.Match.Class (lit, num)
@@ -86,9 +86,24 @@ ui = H.parentComponent
     render :: State -> H.ParentHTML Input ChildQuery ChildSlot m
     render st =
       HH.div_
-        [ HH.h1_ [ HH.text (st.currentPage) ]
-        , HH.ul_ (map link ["Container", "Profile", "Home"])
-        , viewPage st.currentPage
+        [ HH.header_
+          [ HH.nav_
+            [ HH.div
+              [ HP.class_ (H.ClassName "row")]
+              [ HH.h1_ [ HH.text (st.currentPage) ]
+              , HH.ul
+                [ HP.class_ (H.ClassName "main-nav js--main-nav")]
+                (map link ["Home", "Profile", "Container"])
+              ]
+              , HH.a
+                [ HP.class_ (H.ClassName "mobile-nav-icon js--nav-icon")]
+                [ HH.i
+                  [ HP.class_ (H.ClassName "ion-navicon-round")]
+                  []
+                ]
+            ]
+          ]
+          , viewPage st.currentPage
         ]
 
     link s = HH.li_ [ HH.a [ HP.href ("#/" <> toLower s) ] [ HH.text s ] ]
