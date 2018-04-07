@@ -2,7 +2,7 @@
   "name": "animatronixs-app",
   "version": "0.1.0",
   "description": "Animatronixs - App",
-  "main": "index.js",
+  "main": "server_tessel2.js",
   "directories": {
     "test": "test"
   },
@@ -15,7 +15,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "installPackages": "yarn && bower install",
     "buildSrc": "pulp build",
-    "buildDist": "mkdir dist && pulp browserify --to dist/client.js && node-sass static/scss/core.scss dist/stylesheet.css && cpx \"static/images/*.*\" dist/ && cpx \"static/html/*.*\" dist/ && cpx \"static/fonts/*.*\" dist/ && cpx \"static/js/*.*\" dist/",
+    "buildDist": "mkdir dist && pulp browserify --to dist/client.js && node-sass static/scss/core.scss dist/stylesheet.css && cpx \"static/images/*.*\" dist/ && cpx \"static/html/*.*\" dist/ && cpx \"static/fonts/*.*\" dist/ && cpx \"static/js/*.*\" dist/ && cpx \"static/miscellaneous/*.*\" dist/ && cpx \"static/miscellaneous/.*\" dist/",
     "watchBuildDist": "onchange './static/**/*' './src/**/*' -i -- yarn buildDist"
   },
   "repository": {
@@ -34,6 +34,7 @@
     "compression": "^1.6.0",
     "express": "*",
     "g": "^2.0.1",
+    "noble": "^1.8.1",
     "pulp": "^11.0.0",
     "purescript": "^0.11.6",
     "purescript-psa": "0.5.1",

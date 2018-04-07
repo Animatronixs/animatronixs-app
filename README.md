@@ -1,8 +1,24 @@
 # Animatronixs - App
 
-## Renaming Your Tessel On The Wi-Fi Network
+## Renaming your Tessel 2
 
-The following will make an open, or password-less, wifi network called Animatronixs Snowy Owl.
+The following will rename your Tessel 2 to ```Animatronixs-Snowy-Owl```:
+
+```javascript
+t2 rename Animatronixs-Snowy-Owl
+```
+
+Check if the renaming has been successful as follows:
+
+```javascript
+t2 list
+INFO Searching for nearby Tessels...
+        USB     Animatronixs-Snowy-Owl
+```
+
+## Renaming Your Tessel 2 On The Wi-Fi Network
+
+The following will make an open, or password-less, wifi network called Animatronixs-Snowy-Owl.
 
 ```javascript
 t2 ap -n Animatronixs-Snowy-Owl
@@ -12,8 +28,17 @@ You will be prompted as follows:
 
 ```javascript
 node-pre-gyp INFO Looking for your Tessel...
-node-pre-gyp INFO Connected to Tessel-02A397FA63A5.
+node-pre-gyp INFO Connected to Animatronixs-Snowy-Owl.
 node-pre-gyp INFO Updated Access Point successfully. SSID: Animatronixs-Snowy-Owl
+```
+
+Check if the renaming has been successful as follows:
+
+```javascript
+t2 list
+INFO Searching for nearby Tessels...
+        USB     Animatronixs-Snowy-Owl
+        LAN     Animatronixs-Snowy-Owl
 ```
 
 Open the wifi setting of your computer, or a separate device like a smartphone or tablet, and scan for new devices to see and connect to this new network.
@@ -125,6 +150,15 @@ t2 run server_tessel2.js
 ```
 
 The Server now runs on the Tessel 2 and listens to http://192.168.1.101 on WiFi Access Point "Animatronixs-Snowy-Owl"
+
+Want to untether your computer from your Tessel? Run:
+
+```javascript
+cd dist
+t2 push server_tessel2.js
+```
+
+You can now unplug the USB cable from the Tessel 2 to your computer. Instead connect the USB cable from Tessel 2 to a battery pack. The Tessel 2's access point will still be available, whereas the Tessel 2 is now truly wireless.
 
 TO DO: 
 The Server should apply the LED id to toggle the GREEN LED which has ID 2 on the Tessel 2.

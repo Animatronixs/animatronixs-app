@@ -2,7 +2,7 @@
     "name": "animatronixs-app",
     "version": "0.1.0",
     "description": "Animatronixs App",
-    "main": "index.js",
+    "main": "server_tessel2.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "installPackages": "yarn && bower install"
