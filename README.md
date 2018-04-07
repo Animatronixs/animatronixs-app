@@ -13,7 +13,7 @@ You will be prompted as follows:
 ```javascript
 node-pre-gyp INFO Looking for your Tessel...
 node-pre-gyp INFO Connected to Tessel-02A397FA63A5.
-node-pre-gyp INFO Updated Access Point successfully. SSID: Animatronixs Snowy Owl
+node-pre-gyp INFO Updated Access Point successfully. SSID: Animatronixs-Snowy-Owl
 ```
 
 Open the wifi setting of your computer, or a separate device like a smartphone or tablet, and scan for new devices to see and connect to this new network.
