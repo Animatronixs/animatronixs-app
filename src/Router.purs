@@ -90,13 +90,11 @@ ui = H.parentComponent
           [ HH.nav_
             [ HH.div
               [ HP.class_ (H.ClassName "row")]
-              --[ HH.h1_ 
               --[ HH.text (st.currentPage) ]
                 [ HH.ul
                   [ HP.class_ (H.ClassName "main-nav js--main-nav")]
                   (map link ["Home", "Profile", "Container"])
                 ]
-              --]
               , HH.a
                 [ HP.class_ (H.ClassName "mobile-nav-icon js--nav-icon")]
                 [ HH.i
