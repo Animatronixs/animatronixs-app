@@ -8535,15 +8535,19 @@ var PS = {};
   var Unsafe_Coerce = PS["Unsafe.Coerce"];
   var prop = function (dictIsProp) {
       return Halogen_HTML_Core.prop(dictIsProp);
-  };
+  };                                                                   
+  var src = prop(Halogen_HTML_Core.stringIsProp)("src");
   var value = prop(Halogen_HTML_Core.stringIsProp)("value");
   var href = prop(Halogen_HTML_Core.stringIsProp)("href");
   var class_ = function ($9) {
       return prop(Halogen_HTML_Core.stringIsProp)("className")(Data_Newtype.unwrap(Halogen_HTML_Core.newtypeClassName)($9));
-  };
+  };                                                          
+  var alt = prop(Halogen_HTML_Core.stringIsProp)("alt");
   exports["prop"] = prop;
+  exports["alt"] = alt;
   exports["class_"] = class_;
   exports["href"] = href;
+  exports["src"] = src;
   exports["value"] = value;
 })(PS["Halogen.HTML.Properties"] = PS["Halogen.HTML.Properties"] || {});
 (function(exports) {
@@ -8572,6 +8576,9 @@ var PS = {};
   var header = element("header");
   var header_ = header([  ]);
   var i = element("i");
+  var img = function (props) {
+      return element("img")(props)([  ]);
+  };
   var input = function (props) {
       return element("input")(props)([  ]);
   };                   
@@ -8611,6 +8618,7 @@ var PS = {};
   exports["header"] = header;
   exports["header_"] = header_;
   exports["i"] = i;
+  exports["img"] = img;
   exports["input"] = input;
   exports["label"] = label;
   exports["label_"] = label_;
@@ -10324,7 +10332,7 @@ var PS = {};
           return Halogen_HTML_Elements.li_([ Halogen_HTML_Elements.a([ Halogen_HTML_Properties.href("#/" + Data_String.toLower(s)) ])([ Halogen_HTML_Core.text(s) ]) ]);
       };
       var render = function (st) {
-          return Halogen_HTML_Elements.div_([ Halogen_HTML_Elements.header_([ Halogen_HTML_Elements.nav_([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.ul([ Halogen_HTML_Properties.class_("main-nav js--main-nav") ])(Data_Functor.map(Data_Functor.functorArray)(link)([ "Home", "Profile", "Container" ])) ]), Halogen_HTML_Elements.a([ Halogen_HTML_Properties.class_("mobile-nav-icon js--nav-icon") ])([ Halogen_HTML_Elements.i([ Halogen_HTML_Properties.class_("ion-navicon-round") ])([  ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("hero-text-box") ])([ Halogen_HTML_Elements.h1_([ Halogen_HTML_Core.text("Goodbye junk food."), Halogen_HTML_Elements.br_, Halogen_HTML_Core.text("Hello super healthy meals.") ]), Halogen_HTML_Elements.a([ Halogen_HTML_Properties.class_("btn btn-full js--scroll-to-plans"), Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Core.text("I'm hungry") ]), Halogen_HTML_Elements.a([ Halogen_HTML_Properties.class_("btn btn-ghost js--scroll-to-start"), Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Core.text("Show me more") ]) ]) ]), viewPage(st.currentPage), Halogen_HTML_Elements.footer_([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-2") ])([ Halogen_HTML_Elements.ul([ Halogen_HTML_Properties.class_("footer-nav") ])([ Halogen_HTML_Elements.li_([ Halogen_HTML_Elements.a([ Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Core.text("About us") ]) ]) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-2") ])([ Halogen_HTML_Elements.ul([ Halogen_HTML_Properties.class_("social-links") ])([ Halogen_HTML_Elements.li_([ Halogen_HTML_Elements.a([ Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Elements.i([ Halogen_HTML_Properties.class_("ion-social-facebook") ])([  ]) ]) ]), Halogen_HTML_Elements.li_([ Halogen_HTML_Elements.a([ Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Elements.i([ Halogen_HTML_Properties.class_("ion-social-twitter") ])([  ]) ]) ]), Halogen_HTML_Elements.li_([ Halogen_HTML_Elements.a([ Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Elements.i([ Halogen_HTML_Properties.class_("ion-social-googleplus") ])([  ]) ]) ]), Halogen_HTML_Elements.li_([ Halogen_HTML_Elements.a([ Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Elements.i([ Halogen_HTML_Properties.class_("ion-social-instagram") ])([  ]) ]) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.p_([ Halogen_HTML_Core.text("Copyright \xa9 2018 by Animatronixs. All rights reserved.") ]) ]) ]) ]) ]);
+          return Halogen_HTML_Elements.div_([ Halogen_HTML_Elements.header_([ Halogen_HTML_Elements.nav_([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.img([ Halogen_HTML_Properties.src("logo-white.png"), Halogen_HTML_Properties.alt("Animatronixs logo"), Halogen_HTML_Properties.class_("logo") ]) ]), Halogen_HTML_Elements.ul([ Halogen_HTML_Properties.class_("main-nav js--main-nav") ])(Data_Functor.map(Data_Functor.functorArray)(link)([ "Home", "Profile", "Container" ])), Halogen_HTML_Elements.a([ Halogen_HTML_Properties.class_("mobile-nav-icon js--nav-icon") ])([ Halogen_HTML_Elements.i([ Halogen_HTML_Properties.class_("ion-navicon-round") ])([  ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("hero-text-box") ])([ Halogen_HTML_Elements.h1_([ Halogen_HTML_Core.text("Goodbye junk food."), Halogen_HTML_Elements.br_, Halogen_HTML_Core.text("Hello super healthy meals.") ]), Halogen_HTML_Elements.a([ Halogen_HTML_Properties.class_("btn btn-full js--scroll-to-plans"), Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Core.text("I'm hungry") ]), Halogen_HTML_Elements.a([ Halogen_HTML_Properties.class_("btn btn-ghost js--scroll-to-start"), Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Core.text("Show me more") ]) ]) ]), viewPage(st.currentPage), Halogen_HTML_Elements.footer_([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-2") ])([ Halogen_HTML_Elements.ul([ Halogen_HTML_Properties.class_("footer-nav") ])([ Halogen_HTML_Elements.li_([ Halogen_HTML_Elements.a([ Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Core.text("About us") ]) ]) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-2") ])([ Halogen_HTML_Elements.ul([ Halogen_HTML_Properties.class_("social-links") ])([ Halogen_HTML_Elements.li_([ Halogen_HTML_Elements.a([ Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Elements.i([ Halogen_HTML_Properties.class_("ion-social-facebook") ])([  ]) ]) ]), Halogen_HTML_Elements.li_([ Halogen_HTML_Elements.a([ Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Elements.i([ Halogen_HTML_Properties.class_("ion-social-twitter") ])([  ]) ]) ]), Halogen_HTML_Elements.li_([ Halogen_HTML_Elements.a([ Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Elements.i([ Halogen_HTML_Properties.class_("ion-social-googleplus") ])([  ]) ]) ]), Halogen_HTML_Elements.li_([ Halogen_HTML_Elements.a([ Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Elements.i([ Halogen_HTML_Properties.class_("ion-social-instagram") ])([  ]) ]) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.p_([ Halogen_HTML_Core.text("Copyright \xa9 2018 by Animatronixs. All rights reserved.") ]) ]) ]) ]) ]);
       };
       var $$eval = function (v) {
           if (v.value0 instanceof Profile) {
@@ -10369,7 +10377,7 @@ var PS = {};
                   return Control_Applicative.pure(Halogen_Query_HalogenM.applicativeHalogenM)(v.value1);
               });
           };
-          throw new Error("Failed pattern match at Router line 205, column 5 - line 205, column 73: " + [ v.constructor.name ]);
+          throw new Error("Failed pattern match at Router line 210, column 5 - line 210, column 73: " + [ v.constructor.name ]);
       };
       return Halogen_Component.parentComponent(Data_Either.ordEither(Profile_Component.ordSlot)(Container_Component.ordSlot))({
           initialState: Data_Function["const"](init),

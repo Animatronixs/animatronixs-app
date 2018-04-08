@@ -4960,6 +4960,28 @@ header {
   background-attachment: fixed;
   height: 100vh; }
 
+.logo {
+  height: 100px;
+  width: auto;
+  float: left;
+  margin-top: 20px; }
+
+.logo-black {
+  display: none;
+  height: 50px;
+  width: auto;
+  float: left;
+  margin: 5px 0; }
+
+.hero-text-box {
+  position: absolute;
+  width: 1140px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); }
+
 html {
   background-color: #fff;
   color: #545454;
@@ -4981,15 +5003,6 @@ html {
 
 section {
   padding: 80px 0; }
-
-.hero-text-box {
-  position: absolute;
-  width: 1140px;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%); }
 
 .section-features .long-copy {
   margin-bottom: 30px; }

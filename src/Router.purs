@@ -91,10 +91,15 @@ ui = H.parentComponent
             [ HH.div
               [ HP.class_ (H.ClassName "row")]
               --[ HH.text (st.currentPage) ]
-                [ HH.ul
+                [ HH.img 
+                  [ HP.src ("logo-white.png")
+                    , HP.alt ("Animatronixs logo")
+                    , HP.class_ (H.ClassName "logo")
+                  ]
+                ]
+              , HH.ul
                   [ HP.class_ (H.ClassName "main-nav js--main-nav")]
                   (map link ["Home", "Profile", "Container"])
-                ]
               , HH.a
                 [ HP.class_ (H.ClassName "mobile-nav-icon js--nav-icon")]
                 [ HH.i
