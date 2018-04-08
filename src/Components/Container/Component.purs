@@ -66,7 +66,26 @@ ui =
         ]
       , HH.div
         [ HP.class_ (H.ClassName "row js-wp-1 animated fadeIn")]
-        []
+        [ HH.div 
+          [ HP.class_ (H.ClassName "col span-1-of-4 box")]
+          [ HH.i 
+            [ HP.class_ (H.ClassName "ion-ios-infinite-outline icon-big")]
+            []
+          , HH.h3_
+            [ HH.text "Up to 365 days/year"]
+          , HH.p_
+            [ HH.text "Never cook again! We really mean that. Our subscription plans include up to 365 days/year coverage. You can also choose to order more flexibly if that's your style."] 
+          ]
+        , HH.div
+          [ HP.class_ (H.ClassName "col span-1-of-4 box")]
+          [ ]
+        , HH.div
+          [ HP.class_ (H.ClassName "col span-1-of-4 box")]
+          [ ]
+        , HH.div
+          [ HP.class_ (H.ClassName "col span-1-of-4 box")]
+          [ ]   
+        ]
       ]
 
 --      HH.div

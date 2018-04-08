@@ -8232,7 +8232,9 @@ var PS = {};
   var h1 = element("h1");
   var h1_ = h1([  ]);
   var h2 = element("h2");
-  var h2_ = h2([  ]);    
+  var h2_ = h2([  ]);
+  var h3 = element("h3");
+  var h3_ = h3([  ]);    
   var header = element("header");
   var header_ = header([  ]);
   var i = element("i");
@@ -8266,6 +8268,8 @@ var PS = {};
   exports["h1_"] = h1_;
   exports["h2"] = h2;
   exports["h2_"] = h2_;
+  exports["h3"] = h3;
+  exports["h3_"] = h3_;
   exports["header"] = header;
   exports["header_"] = header_;
   exports["i"] = i;
@@ -8366,7 +8370,7 @@ var PS = {};
   })();
   var ui = (function () {
       var render = function (state) {
-          return Halogen_HTML_Elements.div_([ Halogen_HTML_Elements.section([ Halogen_HTML_Properties.class_("section-features js--section-features"), Halogen_HTML_Properties.id_("features") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.h2_([ Halogen_HTML_Core.text("Get food fast \u2014 not fast food") ]), Halogen_HTML_Elements.p([ Halogen_HTML_Properties.class_("long-copy") ])([ Halogen_HTML_Core.text("Hello, we're Animatronixs, your new premium food delivery service.&nbsp;We know you're always busy. No time for cooking. So let us take care of that, we'really good at it, we promise!") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row js-wp-1 animated fadeIn") ])([  ]) ]) ]);
+          return Halogen_HTML_Elements.div_([ Halogen_HTML_Elements.section([ Halogen_HTML_Properties.class_("section-features js--section-features"), Halogen_HTML_Properties.id_("features") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.h2_([ Halogen_HTML_Core.text("Get food fast \u2014 not fast food") ]), Halogen_HTML_Elements.p([ Halogen_HTML_Properties.class_("long-copy") ])([ Halogen_HTML_Core.text("Hello, we're Animatronixs, your new premium food delivery service. We know you're always busy. No time for cooking. So let us take care of that, we'really good at it, we promise!") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row js-wp-1 animated fadeIn") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-4 box") ])([ Halogen_HTML_Elements.i([ Halogen_HTML_Properties.class_("ion-ios-infinite-outline icon-big") ])([  ]), Halogen_HTML_Elements.h3_([ Halogen_HTML_Core.text("Up to 365 days/year") ]), Halogen_HTML_Elements.p_([ Halogen_HTML_Core.text("Never cook again! We really mean that. Our subscription plans include up to 365 days/year coverage. You can also choose to order more flexibly if that's your style.") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-4 box") ])([  ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-4 box") ])([  ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-4 box") ])([  ]) ]) ]) ]);
       };
       var initialState = {};
       var $$eval = function (v) {
