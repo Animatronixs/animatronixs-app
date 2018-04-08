@@ -10320,7 +10320,7 @@ var PS = {};
           return Halogen_HTML_Elements.li_([ Halogen_HTML_Elements.a([ Halogen_HTML_Properties.href("#/" + Data_String.toLower(s)) ])([ Halogen_HTML_Core.text(s) ]) ]);
       };
       var render = function (st) {
-          return Halogen_HTML_Elements.div_([ Halogen_HTML_Elements.header_([ Halogen_HTML_Elements.nav_([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.h1_([ Halogen_HTML_Core.text(st.currentPage) ]), Halogen_HTML_Elements.ul([ Halogen_HTML_Properties.class_("main-nav js--main-nav") ])(Data_Functor.map(Data_Functor.functorArray)(link)([ "Home", "Profile", "Container" ])) ]), Halogen_HTML_Elements.a([ Halogen_HTML_Properties.class_("mobile-nav-icon js--nav-icon") ])([ Halogen_HTML_Elements.i([ Halogen_HTML_Properties.class_("ion-navicon-round") ])([  ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("hero-text-box") ])([ Halogen_HTML_Elements.h1_([ Halogen_HTML_Core.text("Goodbye junk food."), Halogen_HTML_Elements.br_, Halogen_HTML_Core.text("Hello super healthy meals.") ]) ]) ]), viewPage(st.currentPage) ]);
+          return Halogen_HTML_Elements.div_([ Halogen_HTML_Elements.header_([ Halogen_HTML_Elements.nav_([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.h1_([ Halogen_HTML_Core.text(st.currentPage) ]), Halogen_HTML_Elements.ul([ Halogen_HTML_Properties.class_("main-nav js--main-nav") ])(Data_Functor.map(Data_Functor.functorArray)(link)([ "Home", "Profile", "Container" ])) ]), Halogen_HTML_Elements.a([ Halogen_HTML_Properties.class_("mobile-nav-icon js--nav-icon") ])([ Halogen_HTML_Elements.i([ Halogen_HTML_Properties.class_("ion-navicon-round") ])([  ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("hero-text-box") ])([ Halogen_HTML_Elements.h1_([ Halogen_HTML_Core.text("Goodbye junk food."), Halogen_HTML_Elements.br_, Halogen_HTML_Core.text("Hello super healthy meals.") ]), Halogen_HTML_Elements.a([ Halogen_HTML_Properties.class_("btn btn-full js--scroll-to-plans"), Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Core.text("I'm hungry") ]), Halogen_HTML_Elements.a([ Halogen_HTML_Properties.class_("btn btn-ghost js--scroll-to-start"), Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Core.text("Show me more") ]) ]) ]), viewPage(st.currentPage) ]);
       };
       var $$eval = function (v) {
           if (v.value0 instanceof Profile) {
@@ -10365,7 +10365,7 @@ var PS = {};
                   return Control_Applicative.pure(Halogen_Query_HalogenM.applicativeHalogenM)(v.value1);
               });
           };
-          throw new Error("Failed pattern match at Router line 127, column 5 - line 127, column 73: " + [ v.constructor.name ]);
+          throw new Error("Failed pattern match at Router line 137, column 5 - line 137, column 73: " + [ v.constructor.name ]);
       };
       return Halogen_Component.parentComponent(Data_Either.ordEither(Profile_Component.ordSlot)(Container_Component.ordSlot))({
           initialState: Data_Function["const"](init),
