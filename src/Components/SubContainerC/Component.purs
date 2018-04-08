@@ -73,13 +73,25 @@ ui =
         [ HP.class_ (H.ClassName "col span-1-of-2 stepsbox")]
         [ HH.div
           [ HP.class_ (H.ClassName "works-step clearfix")]
-          []
+          [ HH.div_
+            [ HH.text "1"]
+          , HH.p_
+            [ HH.text "Choose the subscription plan that best fits your needs and sign up today."]
+          ]
         , HH.div
           [ HP.class_ (H.ClassName "works-step clearfix")]
-          []
+          [ HH.div_
+            [ HH.text "2"]
+          , HH.p_
+            [ HH.text "Order your delicious meal using our mobile app or website. Or you can even call us!"]
+          ]
         , HH.div
           [ HP.class_ (H.ClassName "works-step clearfix")]
-          []
+          [ HH.div_
+            [ HH.text "3"]
+          , HH.p_
+            [ HH.text "Enjoy your meal after less than 20 minutes. See you the next time!"]
+          ]
         , HH.a
           [ HP.href ("#")
           , HP.class_ (H.ClassName "btn-app")
