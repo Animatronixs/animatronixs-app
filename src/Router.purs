@@ -122,6 +122,20 @@ ui = H.parentComponent
               ]
           ]
           , viewPage st.currentPage
+          , HH.footer_
+            [ HH.div 
+              [ HP.class_ (H.ClassName "row")]
+              [ HH.div 
+                [ HP.class_ (H.ClassName "col span-1-of-2")]
+                []
+              ]
+              , HH.div 
+              [ HP.class_ (H.ClassName "row")]
+              [ HH.div 
+                [ HP.class_ (H.ClassName "col span-1-of-2")]
+                []
+              ]
+            ]
         ]
 
     link s = HH.li_ [ HH.a [ HP.href ("#/" <> toLower s) ] [ HH.text s ] ]
