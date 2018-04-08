@@ -90,11 +90,13 @@ ui = H.parentComponent
           [ HH.nav_
             [ HH.div
               [ HP.class_ (H.ClassName "row")]
-              [ HH.h1_ [ HH.text (st.currentPage) ]
-              , HH.ul
-                [ HP.class_ (H.ClassName "main-nav js--main-nav")]
-                (map link ["Home", "Profile", "Container"])
-              ]
+              --[ HH.h1_ 
+              --[ HH.text (st.currentPage) ]
+                [ HH.ul
+                  [ HP.class_ (H.ClassName "main-nav js--main-nav")]
+                  (map link ["Home", "Profile", "Container"])
+                ]
+              --]
               , HH.a
                 [ HP.class_ (H.ClassName "mobile-nav-icon js--nav-icon")]
                 [ HH.i
@@ -130,18 +132,64 @@ ui = H.parentComponent
                 [
                   HH.ul
                     [ HP.class_ (H.ClassName "footer-nav")]
-                    []
+                    [
+                      HH.li_
+                        [ HH.a
+                            [ HP.href ("#")]
+                            [ HH.text "About us"]
+                        ]
+                    ]
                 ]
               ]
               , HH.div 
-              [ HP.class_ (H.ClassName "row")]
-              [ HH.div 
-                [ HP.class_ (H.ClassName "col span-1-of-2")]
-                [
-                  HH.ul
-                    [ HP.class_ (H.ClassName "social-links")]
-                    []
+                [ HP.class_ (H.ClassName "row")]
+                [ HH.div 
+                  [ HP.class_ (H.ClassName "col span-1-of-2")]
+                  [
+                    HH.ul
+                      [ HP.class_ (H.ClassName "social-links")]
+                      [
+                        HH.li_
+                          [ HH.a
+                              [ HP.href ("#")]
+                              [ HH.i 
+                                [ HP.class_ (H.ClassName "ion-social-facebook")]
+                                []
+                              ]
+                          ]
+                        , HH.li_
+                          [ HH.a
+                              [ HP.href ("#")]
+                              [ HH.i 
+                                [ HP.class_ (H.ClassName "ion-social-twitter")]
+                                []
+                              ]
+                          ]
+                        , HH.li_
+                          [ HH.a
+                            [ HP.href ("#")]
+                            [ HH.i 
+                              [ HP.class_ (H.ClassName "ion-social-googleplus")]
+                              []
+                            ]
+                          ]
+                        , HH.li_
+                          [ HH.a
+                            [ HP.href ("#")]
+                            [ HH.i 
+                              [ HP.class_ (H.ClassName "ion-social-instagram")]
+                              []
+                            ]
+                        ]
+                    ]
                 ]
+
+              , HH.div 
+                [ HP.class_ (H.ClassName "row")]
+                [ HH.p_ 
+                  [ HH.text "Copyright © 2018 by Animatronixs. All rights reserved."]
+                ]
+
               ]
             ]
         ]
