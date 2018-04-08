@@ -102,6 +102,14 @@ ui = H.parentComponent
                   []
                 ]
             ]
+            , HH.div
+              [ HP.class_ (H.ClassName "hero-text-box")]
+              [ HH.h1_
+                [ HH.text "Goodbye junk food." 
+                  , HH.br_
+                  , HH.text "Hello super healthy meals."
+                ]
+              ]
           ]
           , viewPage st.currentPage
         ]
