@@ -6,8 +6,6 @@ import CSS as CB
 import ComponentA.Component as ComponentA
 import ComponentB.Component as ComponentB
 import ComponentC.Component as ComponentC
-
-import SubContainerC.Component.State (State)
 import Control.Monad.Eff.Exception (stack)
 import Control.Monad.State (state)
 import Data.Either.Nested (Either3)
@@ -16,8 +14,11 @@ import Data.Maybe (Maybe(..), maybe)
 import Halogen as H
 import Halogen.Component.ChildPath as CP
 import Halogen.HTML as HH
+import Halogen.HTML as HH
+import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
+import SubContainerC.Component.State (State)
 
 data Query a = ReadStates a
 
@@ -53,7 +54,52 @@ ui =
     , HP.id_ ("works")
     ]
     [
-
+      HH.div
+      [ HP.class_ (H.ClassName "row")]
+      [ HH.h2_ 
+        [ HH.text "How it works — Simple as 1, 2, 3"]
+      ]
+    , HH.div
+      [ HP.class_ (H.ClassName "row")]
+      [ HH.div
+        [ HP.class_ (H.ClassName "col span-1-of-2 steps-box")]
+        [ HH.img
+          [ HP.src "app-iPhone.png"
+          , HP.alt "Animatronixs app on iPhone"
+          , HP.class_ (H.ClassName "app-screen js--wp-2 animated fadeInUp")
+          ]
+        ]
+      , HH.div
+        [ HP.class_ (H.ClassName "col span-1-of-2 stepsbox")]
+        [ HH.div
+          [ HP.class_ (H.ClassName "works-step clearfix")]
+          []
+        , HH.div
+          [ HP.class_ (H.ClassName "works-step clearfix")]
+          []
+        , HH.div
+          [ HP.class_ (H.ClassName "works-step clearfix")]
+          []
+        , HH.a
+          [ HP.href ("#")
+          , HP.class_ (H.ClassName "btn-app")
+          ]
+          [ HH.img
+            [ HP.src "download-app.svg"
+            , HP.alt "App Store Button"  
+            ]
+          ]
+        , HH.a
+          [ HP.href ("#")
+          , HP.class_ (H.ClassName "btn-app") 
+          ]
+          [ HH.img
+            [ HP.src "download-app-android.png"
+            , HP.alt "Play Store Button" 
+            ]
+          ]
+        ]  
+      ] 
     ]
 
 --    HH.div_
