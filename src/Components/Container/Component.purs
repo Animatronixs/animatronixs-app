@@ -52,26 +52,46 @@ ui =
   render :: State -> H.ParentHTML Query ChildQuery ChildSlot m 
   render state = 
     HH.div_
-    [ HH.div
-        [ HP.class_ (H.ClassName "box")]
-        [ HH.h2_ [ HH.text "SubContainer A!" ]
-        , HH.slot' CP.cp1 unit SubContainerA.ui unit absurd
+    [ HH.section
+      [ HP.class_ (H.ClassName "section-features js--section-features")
+      , HP.id_ ("features")
+      ]
+      [ HH.div 
+        [ HP.class_ (H.ClassName "row")]
+        [ HH.h2_
+          [ HH.text "Get food fast — not fast food"]
+        , HH.p
+          [ HP.class_ (H.ClassName "long-copy")]
+          [ HH.text "Hello, we're Animatronixs, your new premium food delivery service. We know you're always busy. No time for cooking. So let us take care of that, we'really good at it, we promise!"]  
         ]
-    , HH.div
-        [ HP.class_ (H.ClassName "box")]
-        [ HH.h2_ [ HH.text "SubContainer B" ]
-        , HH.slot' CP.cp2 unit SubContainerB.ui unit absurd
-        ]
-    , HH.div
-        [ HP.class_ (H.ClassName "box")]
-        [ HH.h2_ [ HH.text "SubContainer C" ]
-        , HH.slot' CP.cp3 unit SubContainerC.ui unit absurd
-        ]
-    , HH.div
-        [ HP.class_ (H.ClassName "box")]
-        [ HH.h2_ [ HH.text "SubContainer D" ]
-        , HH.slot' CP.cp4 unit SubContainerD.ui unit absurd
-        ]       
+      , HH.div
+        [ HP.class_ (H.ClassName "row js-wp-1 animated fadeIn")]
+        []
+      ]
+
+--      HH.div
+--        [ HP.class_ (H.ClassName "box")]
+--        [ HH.h2_ [ HH.text "SubContainer A!" ]
+--        , HH.slot' CP.cp1 unit SubContainerA.ui unit absurd
+--        ]
+--    , HH.div
+--        [ HP.class_ (H.ClassName "box")]
+--        [ HH.h2_ [ HH.text "SubContainer B" ]
+--        , HH.slot' CP.cp2 unit SubContainerB.ui unit absurd
+--        ]
+--    , HH.div
+--        [ HP.class_ (H.ClassName "box")]
+--        [ HH.h2_ [ HH.text "SubContainer C" ]
+--        , HH.slot' CP.cp3 unit SubContainerC.ui unit absurd
+--        ]
+--    , HH.div
+--        [ HP.class_ (H.ClassName "box")]
+--        [ HH.h2_ [ HH.text "SubContainer D" ]
+--        , HH.slot' CP.cp4 unit SubContainerD.ui unit absurd
+--        ]
+
+
+
     --, HH.p_
     --    [ HH.text "Last observed states:"]
     --, HH.ul_
