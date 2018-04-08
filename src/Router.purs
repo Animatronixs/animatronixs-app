@@ -127,13 +127,21 @@ ui = H.parentComponent
               [ HP.class_ (H.ClassName "row")]
               [ HH.div 
                 [ HP.class_ (H.ClassName "col span-1-of-2")]
-                []
+                [
+                  HH.ul
+                    [ HP.class_ (H.ClassName "footer-nav")]
+                    []
+                ]
               ]
               , HH.div 
               [ HP.class_ (H.ClassName "row")]
               [ HH.div 
                 [ HP.class_ (H.ClassName "col span-1-of-2")]
-                []
+                [
+                  HH.ul
+                    [ HP.class_ (H.ClassName "social-links")]
+                    []
+                ]
               ]
             ]
         ]
