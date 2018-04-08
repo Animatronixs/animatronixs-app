@@ -1,4 +1,4 @@
-module SubContainerB.Component where
+module SubContainerG.Component where
 
 import Prelude
 
@@ -6,6 +6,8 @@ import CSS as CB
 import ComponentA.Component as ComponentA
 import ComponentB.Component as ComponentB
 import ComponentC.Component as ComponentC
+
+import SubContainerG.Component.State (State)
 import Control.Monad.Eff.Exception (stack)
 import Control.Monad.State (state)
 import Data.Either.Nested (Either3)
@@ -16,7 +18,6 @@ import Halogen.Component.ChildPath as CP
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import SubContainerB.Component.State (State)
 
 data Query a = ReadStates a
 
@@ -46,91 +47,14 @@ ui =
     }     
 
   render :: State -> H.ParentHTML Query ChildQuery ChildSlot m 
-  render state = 
-    HH.section
-    [ HP.class_ (H.ClassName "section-meals")
-    , HP.id_ ("meals")
+  render state =
+     HH.section
+    [ HP.class_ (H.ClassName "section-form")
+    , HP.id_ ("form")
     ]
-    [ HH.ul
-      [ HP.class_ (H.ClassName "meals-showcase clearfix")]
-      [ HH.li_
-        [ HH.figure 
-          [ HP.class_ (H.ClassName "meal-photo")]
-          [ HH.img
-            [ HP.src ("meal-001.jpg")
-            , HP.alt ("Korean bibimbap with egg and vegetables")
-            ]
-          ]
-        ]
-      , HH.li_
-        [ HH.figure 
-          [ HP.class_ (H.ClassName "meal-photo")]
-          [ HH.img
-            [ HP.src ("meal-002.jpg")
-            , HP.alt ("Simple italian pizza with cherry tomatoes")
-            ]
-          ]
-        ]
-      , HH.li_
-        [ HH.figure 
-          [ HP.class_ (H.ClassName "meal-photo")]
-          [ HH.img
-            [ HP.src ("meal-003.jpg")
-            , HP.alt ("Chicken breast steak with vegetables")
-            ]
-          ]
-        ]
-      , HH.li_
-        [ HH.figure 
-          [ HP.class_ (H.ClassName "meal-photo")]
-          [ HH.img
-            [ HP.src ("meal-004.jpg")
-            , HP.alt ("Autumn pumpkin soup")
-            ]
-          ]
-        ]
-      ]
-    , HH.ul
-      [ HP.class_ (H.ClassName "meals-showcase clearfix")]
-      [ HH.li_
-        [ HH.figure 
-          [ HP.class_ (H.ClassName "meal-photo")]
-          [ HH.img
-            [ HP.src ("meal-005.jpg")
-            , HP.alt ("Paleo beef steak with vegetables")
-            ]
-          ]
-        ]
-      , HH.li_
-        [ HH.figure 
-          [ HP.class_ (H.ClassName "meal-photo")]
-          [ HH.img
-            [ HP.src ("meal-006.jpg")
-            , HP.alt ("Healthy baguette with egg and vegetables")
-            ]
-          ]
-        ]
-      , HH.li_
-        [ HH.figure 
-          [ HP.class_ (H.ClassName "meal-photo")]
-          [ HH.img
-            [ HP.src ("meal-007.jpg")
-            , HP.alt ("Burger with cheddar and bacon")
-            ]
-          ]
-        ]
-      , HH.li_
-        [ HH.figure 
-          [ HP.class_ (H.ClassName "meal-photo")]
-          [ HH.img
-            [ HP.src ("meal-008.jpg")
-            , HP.alt ("Granola with cherries and strawberries")
-            ]
-          ]
-        ]
-      ]
-    ]
+    [
 
+    ] 
 
 --    HH.div_
 --    [ HH.div

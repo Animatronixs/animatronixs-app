@@ -6,8 +6,8 @@ import CSS as CB
 import Container.Component.State (State)
 import Control.Monad.Eff.Exception (stack)
 import Control.Monad.State (state)
-import Data.Either.Nested (Either4)
-import Data.Functor.Coproduct.Nested (Coproduct4)
+import Data.Either.Nested (Either7)
+import Data.Functor.Coproduct.Nested (Coproduct7)
 import Data.Maybe (Maybe(..), maybe)
 import Halogen as H
 import Halogen.Component.ChildPath as CP
@@ -18,12 +18,15 @@ import SubContainerA.Component as SubContainerA
 import SubContainerB.Component as SubContainerB
 import SubContainerC.Component as SubContainerC
 import SubContainerD.Component as SubContainerD
+import SubContainerE.Component as SubContainerE
+import SubContainerF.Component as SubContainerF
+import SubContainerG.Component as SubContainerG
 --import ItemList.Component as ComponentA
 
 data Query a = ReadStates a
 
-type ChildQuery = Coproduct4 SubContainerA.Query SubContainerB.Query SubContainerC.Query SubContainerD.Query
-type ChildSlot = Either4 Unit Unit Unit Unit
+type ChildQuery = Coproduct7 SubContainerA.Query SubContainerB.Query SubContainerC.Query SubContainerD.Query SubContainerE.Query SubContainerF.Query SubContainerG.Query
+type ChildSlot = Either7 Unit Unit Unit Unit Unit Unit Unit
 
 -- Values of the type Slot are used as the IDs for child components
 -- in the rendered HTML.
@@ -46,68 +49,22 @@ ui =
     { --a: Nothing
     --, b: Nothing
     --, c: Nothing  
-    --, d: Nothing      
+    --, d: Nothing
+    --, e: Nothing
+    --, f: Nothing
+    --, g: Nothing                  
     }   
 
   render :: State -> H.ParentHTML Query ChildQuery ChildSlot m 
   render state = 
     HH.div_
-    [ HH.section
-      [ HP.class_ (H.ClassName "section-features js--section-features")
-      , HP.id_ ("features")
-      ]
-      [ HH.div 
-        [ HP.class_ (H.ClassName "row")]
-        [ HH.h2_
-          [ HH.text "Get food fast — not fast food"]
-        , HH.p
-          [ HP.class_ (H.ClassName "long-copy")]
-          [ HH.text "Hello, we're Animatronixs, your new premium food delivery service. We know you're always busy. No time for cooking. So let us take care of that, we'really good at it, we promise!"]  
-        ]
-      , HH.div
-        [ HP.class_ (H.ClassName "row js-wp-1 animated fadeIn")]
-        [ HH.div 
-          [ HP.class_ (H.ClassName "col span-1-of-4 box")]
-          [ HH.i 
-            [ HP.class_ (H.ClassName "ion-ios-infinite-outline icon-big")]
-            []
-          , HH.h3_
-            [ HH.text "Up to 365 days/year"]
-          , HH.p_
-            [ HH.text "Never cook again! We really mean that. Our subscription plans include up to 365 days/year coverage. You can also choose to order more flexibly if that's your style."] 
-          ]
-        , HH.div
-          [ HP.class_ (H.ClassName "col span-1-of-4 box")]
-          [ HH.i 
-            [ HP.class_ (H.ClassName "ion-ios-stopwatch-outline icon-big")]
-            []
-          , HH.h3_
-            [ HH.text "Ready in 20 minutes"]
-          , HH.p_
-            [ HH.text "You're only twenty minutes away from your delicious and super healthy meals delivered right to your home. We work with the best chefs in each town to ensure that you're 100% happy."]
-          ]
-        , HH.div
-          [ HP.class_ (H.ClassName "col span-1-of-4 box")]
-          [ HH.i 
-            [ HP.class_ (H.ClassName "ion-ios-nutrition-outline icon-big")]
-            []
-          , HH.h3_
-            [ HH.text "100% organic"]
-          , HH.p_
-            [ HH.text "All our vegetables are fresh, organic and local. Animals are raised without added hormones or antibiotics. Good for your health, the environment, and it also tastes better!"]
-          ]
-        , HH.div
-          [ HP.class_ (H.ClassName "col span-1-of-4 box")]
-          [ HH.i 
-            [ HP.class_ (H.ClassName "ion-ios-cart-outline icon-big")]
-            []
-          , HH.h3_
-            [ HH.text "Order anything"]
-          , HH.p_
-            [ HH.text "We don't limit your creativity, which means you can order whatever you feel like. You can also choose from our menu containing over 100 delicious meals. It's up to you!"]
-          ]
-        ]
-      ]
+    [ HH.slot' CP.cp1 unit SubContainerA.ui unit absurd
+    , HH.slot' CP.cp2 unit SubContainerB.ui unit absurd
+    , HH.slot' CP.cp3 unit SubContainerC.ui unit absurd
+    , HH.slot' CP.cp4 unit SubContainerD.ui unit absurd
+    , HH.slot' CP.cp5 unit SubContainerE.ui unit absurd
+    , HH.slot' CP.cp6 unit SubContainerF.ui unit absurd
+    , HH.slot' CP.cp7 unit SubContainerG.ui unit absurd            
 
 --      HH.div
 --        [ HP.class_ (H.ClassName "box")]
@@ -151,5 +108,8 @@ ui =
       --b <- H.query' CP.cp2 unit (H.request ComponentB.GetValue)
       --c <- H.query' CP.cp3 unit (H.request ComponentC.GetCount)
       --d <- H.query' CP.cp4 unit (H.request ComponentD.GetCount)
+      --e <- H.query' CP.cp5 unit (H.request ComponentE.GetCount)
+      --f <- H.query' CP.cp6 unit (H.request ComponentF.GetCount)
+      --g <- H.query' CP.cp7 unit (H.request ComponentG.GetCount)               
       H.put {}
       pure next

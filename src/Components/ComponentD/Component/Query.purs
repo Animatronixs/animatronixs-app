@@ -1,0 +1,1 @@
+module ComponentD.Component.Query where

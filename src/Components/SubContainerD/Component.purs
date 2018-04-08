@@ -47,34 +47,42 @@ ui =
     }     
 
   render :: State -> H.ParentHTML Query ChildQuery ChildSlot m 
-  render state = 
-    HH.div_
-    [ HH.div
-        [ HP.class_ (H.ClassName "box")]
-        [ HH.h2_ [ HH.text "Component A" ]
-        , HH.slot' CP.cp1 unit ComponentA.component unit absurd
-        ]
-    , HH.div
-        [ HP.class_ (H.ClassName "box")]
-        [ HH.h2_ [ HH.text "Component B" ]
-        , HH.slot' CP.cp2 unit ComponentB.component unit absurd
-        ]
-    , HH.div
-        [ HP.class_ (H.ClassName "box")]
-        [ HH.h2_ [ HH.text "Component C" ]
-        , HH.slot' CP.cp3 unit ComponentC.component unit absurd
-        ]
-    , HH.p_
-        [ HH.text "Last observed states:"]
-    , HH.ul_
-        [ HH.li_ [ HH.text ("Component A: ") ]
-        , HH.li_ [ HH.text ("Component B: ") ]
-        , HH.li_ [ HH.text ("Component C: ") ]
-        ]
-    , HH.button
-        [ HE.onClick (HE.input_ ReadStates) ]
-        [ HH.text "Check states now" ]
+  render state =
+     HH.section
+    [ HP.class_ (H.ClassName "section-cities")
+    , HP.id_ ("cities")
     ]
+    [
+
+    ] 
+
+--    HH.div_
+--    [ HH.div
+--        [ HP.class_ (H.ClassName "box")]
+--        [ HH.h2_ [ HH.text "Component A" ]
+--        , HH.slot' CP.cp1 unit ComponentA.component unit absurd
+--        ]
+--    , HH.div
+--        [ HP.class_ (H.ClassName "box")]
+--        [ HH.h2_ [ HH.text "Component B" ]
+--        , HH.slot' CP.cp2 unit ComponentB.component unit absurd
+--        ]
+--    , HH.div
+--        [ HP.class_ (H.ClassName "box")]
+--        [ HH.h2_ [ HH.text "Component C" ]
+--        , HH.slot' CP.cp3 unit ComponentC.component unit absurd
+--        ]
+--    , HH.p_
+--        [ HH.text "Last observed states:"]
+--    , HH.ul_
+--        [ HH.li_ [ HH.text ("Component A: ") ]
+--        , HH.li_ [ HH.text ("Component B: ") ]
+--        , HH.li_ [ HH.text ("Component C: ") ]
+--        ]
+--    , HH.button
+--        [ HE.onClick (HE.input_ ReadStates) ]
+--        [ HH.text "Check states now" ]
+--    ]
 
   eval :: Query ~> H.ParentDSL State Query ChildQuery ChildSlot Void m
   eval = case _ of
