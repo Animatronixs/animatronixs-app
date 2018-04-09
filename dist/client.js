@@ -8919,7 +8919,7 @@ var PS = {};
   var SubContainerD_Component_State = PS["SubContainerD.Component.State"];
   var ui = (function () {
       var render = function (state) {
-          return Halogen_HTML_Elements.section([ Halogen_HTML_Properties.class_("section-cities"), Halogen_HTML_Properties.id_("cities") ])([  ]);
+          return Halogen_HTML_Elements.section([ Halogen_HTML_Properties.class_("section-cities"), Halogen_HTML_Properties.id_("cities") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.h2_([ Halogen_HTML_Core.text("We're currently in these cities") ]) ]) ]);
       };
       var initialState = {
           b: Data_Maybe.Nothing.value,

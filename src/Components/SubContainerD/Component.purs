@@ -6,8 +6,6 @@ import CSS as CB
 import ComponentA.Component as ComponentA
 import ComponentB.Component as ComponentB
 import ComponentC.Component as ComponentC
-
-import SubContainerD.Component.State (State)
 import Control.Monad.Eff.Exception (stack)
 import Control.Monad.State (state)
 import Data.Either.Nested (Either3)
@@ -18,6 +16,7 @@ import Halogen.Component.ChildPath as CP
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
+import SubContainerD.Component.State (State)
 
 data Query a = ReadStates a
 
@@ -52,8 +51,11 @@ ui =
     [ HP.class_ (H.ClassName "section-cities")
     , HP.id_ ("cities")
     ]
-    [
-
+    [ HH.div
+        [ HP.class_ (H.ClassName "row")]
+        [ HH.h2_
+          [ HH.text "We're currently in these cities"]
+        ]
     ] 
 
 --    HH.div_
