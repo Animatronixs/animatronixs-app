@@ -61,7 +61,7 @@ ui =
         [ HH.text "Hello, we're Animatronixs, your new premium food delivery service. We know you're always busy. No time for cooking. So let us take care of that, we'really good at it, we promise!"]  
       ]
     , HH.div
-      [ HP.class_ (H.ClassName "row js-wp-1 animated fadeIn")]
+      [ HP.class_ (H.ClassName "row js-waypoint-1 animated fadeIn")]
       [ HH.div 
         [ HP.class_ (H.ClassName "col span-1-of-4 box")]
         [ HH.i 

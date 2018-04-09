@@ -4428,6 +4428,11 @@ h2:after {
   margin: 0 auto;
   margin-top: 30px; }
 
+.box img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 15px; }
+
 footer {
   background-color: #1a1a1a;
   padding: 50px;

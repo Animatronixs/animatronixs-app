@@ -56,6 +56,137 @@ ui =
         [ HH.h2_
           [ HH.text "We're currently in these cities"]
         ]
+    , HH.div
+        [ HP.class_ (H.ClassName "row js--waypoint-3 animated fadeIn")]
+        [ HH.div 
+            [ HP.class_ (H.ClassName "col span-1-of-4 box")]
+            [ HH.img 
+              [ HP.src "lisbon.jpg"
+              , HP.alt "Lisbon"
+              ]
+            , HH.h3_
+                [ HH.text "Lisbon"]
+            , HH.div
+                [ HP.class_ (H.ClassName "city-feature")]
+                [ HH.i 
+                    [ HP.class_ (H.ClassName "ion-ios-person icon-small")]
+                    []
+                , HH.text "1600+ happy eaters"
+                ]
+            , HH.div
+                [ HP.class_ (H.ClassName "city-feature")]
+                [ HH.i 
+                    [ HP.class_ (H.ClassName "ion-ios-star icon-small")]
+                    []
+                , HH.text "60+ top chefs"
+                ]
+            , HH.div
+                [ HP.class_ (H.ClassName "city-feature")]
+                [ HH.i 
+                    [ HP.class_ (H.ClassName "ion-social-twitter icon-small")]
+                    []
+                , HH.a
+                    [ HP.href "#"]
+                    [ HH.text "@animatronixs_lx"]
+                ]
+            ]
+        , HH.div
+            [ HP.class_ (H.ClassName "col span-1-of-4 box")]
+            [ HH.img 
+              [ HP.src "san-francisco.jpg"
+              , HP.alt "San Francisco"
+              ]
+            , HH.h3_
+                [ HH.text "San Francisco"]
+            , HH.div
+                [ HP.class_ (H.ClassName "city-feature")]
+                [ HH.i 
+                    [ HP.class_ (H.ClassName "ion-ios-person icon-small")]
+                    []
+                , HH.text "3700+ happy eaters"
+                ]
+            , HH.div
+                [ HP.class_ (H.ClassName "city-feature")]
+                [ HH.i 
+                    [ HP.class_ (H.ClassName "ion-ios-star icon-small")]
+                    []
+                , HH.text "160+ top chefs"
+                ]
+            , HH.div
+                [ HP.class_ (H.ClassName "city-feature")]
+                [ HH.i 
+                    [ HP.class_ (H.ClassName "ion-social-twitter icon-small")]
+                    []
+                , HH.a
+                    [ HP.href "#"]
+                    [ HH.text "@animatronixs_sf"]
+                ]
+            ]
+        , HH.div 
+            [ HP.class_ (H.ClassName "col span-1-of-4 box")]
+            [ HH.img 
+              [ HP.src "berlin.jpg"
+              , HP.alt "Berlin"
+              ]
+            , HH.h3_
+                [ HH.text "Berlin"]
+            , HH.div
+                [ HP.class_ (H.ClassName "city-feature")]
+                [ HH.i 
+                    [ HP.class_ (H.ClassName "ion-ios-person icon-small")]
+                    []
+                , HH.text "2300+ happy eaters"
+                ]
+            , HH.div
+                [ HP.class_ (H.ClassName "city-feature")]
+                [ HH.i 
+                    [ HP.class_ (H.ClassName "ion-ios-star icon-small")]
+                    []
+                , HH.text "110+ top chefs"
+                ]
+            , HH.div
+                [ HP.class_ (H.ClassName "city-feature")]
+                [ HH.i 
+                    [ HP.class_ (H.ClassName "ion-social-twitter icon-small")]
+                    []
+                , HH.a
+                    [ HP.href "#"]
+                    [ HH.text "@animatronixs_berlin"]
+                ]
+            ]
+        , HH.div
+            [ HP.class_ (H.ClassName "col span-1-of-4 box")]
+            [ HH.img 
+              [ HP.src "london.jpg"
+              , HP.alt "London"
+              ]
+            , HH.h3_
+                [ HH.text "London"]
+            , HH.div
+                [ HP.class_ (H.ClassName "city-feature")]
+                [ HH.i 
+                    [ HP.class_ (H.ClassName "ion-ios-person icon-small")]
+                    []
+                , HH.text "1200+ happy eaters"
+                ]
+            , HH.div
+                [ HP.class_ (H.ClassName "city-feature")]
+                [ HH.i 
+                    [ HP.class_ (H.ClassName "ion-ios-star icon-small")]
+                    []
+                , HH.text "50+ top chefs"
+                ]
+            , HH.div
+                [ HP.class_ (H.ClassName "city-feature")]
+                [ HH.i 
+                    [ HP.class_ (H.ClassName "ion-social-twitter icon-small")]
+                    []
+                , HH.a
+                    [ HP.href "#"]
+                    [ HH.text "@animatronixs_london"]
+                ]
+            ]            
+        ]
     ] 
 
 --    HH.div_
