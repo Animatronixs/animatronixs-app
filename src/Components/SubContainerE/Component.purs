@@ -6,8 +6,6 @@ import CSS as CB
 import ComponentA.Component as ComponentA
 import ComponentB.Component as ComponentB
 import ComponentC.Component as ComponentC
-
-import SubContainerE.Component.State (State)
 import Control.Monad.Eff.Exception (stack)
 import Control.Monad.State (state)
 import Data.Either.Nested (Either3)
@@ -18,6 +16,7 @@ import Halogen.Component.ChildPath as CP
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
+import SubContainerE.Component.State (State)
 
 data Query a = ReadStates a
 
@@ -52,9 +51,45 @@ ui =
     [ HP.class_ (H.ClassName "section-testimonials")
     , HP.id_ ("testimonials")
     ]
-    [
-
-    ] 
+    [ HH.div
+        [ HP.class_ (H.ClassName "row")]
+        [ HH.h2_ 
+            [ HH.text "Our customers can't live without us"]
+        ]
+    , HH.div
+        [ HP.class_ (H.ClassName "row")]
+        [ HH.div
+            [ HP.class_ (H.ClassName "col span-1-of-3")]
+            [ HH.blockquote_
+                [ HH.text "Omnifood is just awesome! I just launched a startup which leaves me with no time for cooking, so Omnifood is a life-saver. Now that I got used to it, I couldn't live without my daily meals!"]
+                , HH.cite_
+                    [ HH.img 
+                      [ HP.src "customer-1.jpg", HP.alt "Customer 1 photo"]
+                    , HH.text "Alberto Duncan"
+                    ]
+            ]
+        , HH.div
+            [ HP.class_ (H.ClassName "col span-1-of-3")]
+            [ HH.blockquote_
+                [ HH.text "Inexpensive, healthy and great-tasting meals, delivered right to my home. We have lots of food delivery here in Lisbon, but no one comes even close to Omifood. Me and my family are so in love!"]
+                , HH.cite_
+                    [ HH.img 
+                      [ HP.src "customer-2.jpg", HP.alt "Customer 2 photo"]
+                    , HH.text "Joana Silva"
+                    ]
+            ]            
+        , HH.div
+            [ HP.class_ (H.ClassName "col span-1-of-3")]
+            [ HH.blockquote_
+                [ HH.text "I was looking for a quick and easy food delivery service in San Franciso. I tried a lot of them and ended up with Omnifood. Best food delivery service in the Bay Area. Keep up the great work!"]
+                , HH.cite_
+                    [ HH.img 
+                      [ HP.src "customer-3.jpg", HP.alt "Customer 3 photo"]
+                    , HH.text "Milton Chapman"
+                    ]                
+            ]            
+        ]  
+    ]
 
 --    HH.div_
 --    [ HH.div

@@ -8610,16 +8610,24 @@ var PS = {};
   var section = element("section");
   var ul = element("ul");
   var div = element("div");
-  var div_ = div([  ]);      
+  var div_ = div([  ]);  
+  var cite = element("cite");
+  var cite_ = cite([  ]);    
   var br = function (props) {
       return element("br")(props)([  ]);
   };
   var br_ = br([  ]);    
+  var blockquote = element("blockquote");
+  var blockquote_ = blockquote([  ]);
   var a = element("a");
   exports["element"] = element;
   exports["a"] = a;
+  exports["blockquote"] = blockquote;
+  exports["blockquote_"] = blockquote_;
   exports["br"] = br;
   exports["br_"] = br_;
+  exports["cite"] = cite;
+  exports["cite_"] = cite_;
   exports["div"] = div;
   exports["div_"] = div_;
   exports["figure"] = figure;
@@ -9022,7 +9030,7 @@ var PS = {};
   var SubContainerE_Component_State = PS["SubContainerE.Component.State"];
   var ui = (function () {
       var render = function (state) {
-          return Halogen_HTML_Elements.section([ Halogen_HTML_Properties.class_("section-testimonials"), Halogen_HTML_Properties.id_("testimonials") ])([  ]);
+          return Halogen_HTML_Elements.section([ Halogen_HTML_Properties.class_("section-testimonials"), Halogen_HTML_Properties.id_("testimonials") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.h2_([ Halogen_HTML_Core.text("Our customers can't live without us") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.blockquote_([ Halogen_HTML_Core.text("Omnifood is just awesome! I just launched a startup which leaves me with no time for cooking, so Omnifood is a life-saver. Now that I got used to it, I couldn't live without my daily meals!") ]), Halogen_HTML_Elements.cite_([ Halogen_HTML_Elements.img([ Halogen_HTML_Properties.src("customer-1.jpg"), Halogen_HTML_Properties.alt("Customer 1 photo") ]), Halogen_HTML_Core.text("Alberto Duncan") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.blockquote_([ Halogen_HTML_Core.text("Inexpensive, healthy and great-tasting meals, delivered right to my home. We have lots of food delivery here in Lisbon, but no one comes even close to Omifood. Me and my family are so in love!") ]), Halogen_HTML_Elements.cite_([ Halogen_HTML_Elements.img([ Halogen_HTML_Properties.src("customer-2.jpg"), Halogen_HTML_Properties.alt("Customer 2 photo") ]), Halogen_HTML_Core.text("Joana Silva") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.blockquote_([ Halogen_HTML_Core.text("I was looking for a quick and easy food delivery service in San Franciso. I tried a lot of them and ended up with Omnifood. Best food delivery service in the Bay Area. Keep up the great work!") ]), Halogen_HTML_Elements.cite_([ Halogen_HTML_Elements.img([ Halogen_HTML_Properties.src("customer-3.jpg"), Halogen_HTML_Properties.alt("Customer 3 photo") ]), Halogen_HTML_Core.text("Milton Chapman") ]) ]) ]) ]);
       };
       var initialState = {
           b: Data_Maybe.Nothing.value,
