@@ -6,18 +6,22 @@ import CSS as CB
 import ComponentA.Component as ComponentA
 import ComponentB.Component as ComponentB
 import ComponentC.Component as ComponentC
-
-import SubContainerG.Component.State (State)
 import Control.Monad.Eff.Exception (stack)
 import Control.Monad.State (state)
 import Data.Either.Nested (Either3)
 import Data.Functor.Coproduct.Nested (Coproduct3)
+import Data.HTTP.Method (Method(..))
+import Data.HTTP.Method as Data.HTTP.Method
 import Data.Maybe (Maybe(..), maybe)
 import Halogen as H
 import Halogen.Component.ChildPath as CP
 import Halogen.HTML as HH
+import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties (FormMethod(..))
+import Halogen.HTML.Properties as H.HTML
 import Halogen.HTML.Properties as HP
+import SubContainerG.Component.State (State)
 
 data Query a = ReadStates a
 
@@ -48,13 +52,66 @@ ui =
 
   render :: State -> H.ParentHTML Query ChildQuery ChildSlot m 
   render state =
-     HH.section
-    [ HP.class_ (H.ClassName "section-form")
-    , HP.id_ ("form")
-    ]
-    [
+    HH.section
+      [ HP.class_ (H.ClassName "section-form")
+      , HP.id_ ("form")
+      ]
+      [ HH.div
+          [ HP.class_ (H.ClassName "row")]
+          [ HH. h2_ 
+              [ HH.text "We're happy to hear from you"]
+          ]
+      , HH.div
+          [ HP.class_ (H.ClassName "row")]
+          [ HH.form
+              [ HP.method (H.HTML.POST)
+              , HP.action "#"
+              , HP.class_ (H.ClassName "contact-form")  
+              ] 
 
-    ] 
+              []
+
+--              [ HH.div
+--                  [ HP.class_ (H.ClassName "row")]
+--                  [ HH.div
+--                      [ HP.class_ (H.ClassName "col span-1-of-3")]
+--                      [ HH.label
+--                          [ HP.for "name"]
+--                          [ HH.text "Name"]
+--                      ]
+--                  , HH.div
+--                      [ HP.class_ (H.ClassName "col span-2-of-3")]
+--                      [ HH.input
+--                          [ HP.type "text"
+--                          , HP.name "name"
+--                          , HP.id "name"
+--                          , HP.placeholder "Your name"
+--                          , HP.required true
+--                          ]
+--                          []
+--                      ]
+--                  ]
+--              , HH.div
+--                  [ HP.class_ (H.ClassName "row")]
+--                  []
+--              , HH.div
+--                  [ HP.class_ (H.ClassName "row")]
+--                  []
+--              , HH.div
+--                  [ HP.class_ (H.ClassName "row")]
+--                  []
+--              , HH.div
+--                  [ HP.class_ (H.ClassName "row")]
+--                  []
+--              , HH.div
+--                  [ HP.class_ (H.ClassName "row")]
+--                  []        
+--              ]
+          ]
+      ] 
+
+
+
 
 --    HH.div_
 --    [ HH.div
