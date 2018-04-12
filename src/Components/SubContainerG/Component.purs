@@ -68,17 +68,14 @@ ui =
               , HP.action "#"
               , HP.class_ (H.ClassName "contact-form")  
               ] 
-
-              []
-
---              [ HH.div
---                  [ HP.class_ (H.ClassName "row")]
---                  [ HH.div
---                      [ HP.class_ (H.ClassName "col span-1-of-3")]
---                      [ HH.label
---                          [ HP.for "name"]
---                          [ HH.text "Name"]
---                      ]
+              [ HH.div
+                  [ HP.class_ (H.ClassName "row")]
+                  [ HH.div
+                      [ HP.class_ (H.ClassName "col span-1-of-3")]
+                      [ HH.label
+                          [ HP.for "name"]
+                          [ HH.text "Name"]
+                      ]
 --                  , HH.div
 --                      [ HP.class_ (H.ClassName "col span-2-of-3")]
 --                      [ HH.input
@@ -105,8 +102,9 @@ ui =
 --                  []
 --              , HH.div
 --                  [ HP.class_ (H.ClassName "row")]
---                  []        
---              ]
+--                  [] 
+                ]       
+              ]
           ]
       ] 
 

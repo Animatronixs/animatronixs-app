@@ -8592,7 +8592,8 @@ var PS = {};
   var src = prop(Halogen_HTML_Core.stringIsProp)("src");
   var method = prop(Halogen_HTML_Core.formMethodIsProp)("method");
   var id_ = prop(Halogen_HTML_Core.stringIsProp)("id");
-  var href = prop(Halogen_HTML_Core.stringIsProp)("href");
+  var href = prop(Halogen_HTML_Core.stringIsProp)("href"); 
+  var $$for = prop(Halogen_HTML_Core.stringIsProp)("htmlFor");
   var class_ = function ($9) {
       return prop(Halogen_HTML_Core.stringIsProp)("className")(Data_Newtype.unwrap(Halogen_HTML_Core.newtypeClassName)($9));
   };                                                          
@@ -8601,6 +8602,7 @@ var PS = {};
   exports["prop"] = prop;
   exports["alt"] = alt;
   exports["class_"] = class_;
+  exports["for"] = $$for;
   exports["href"] = href;
   exports["id_"] = id_;
   exports["src"] = src;
@@ -8639,7 +8641,8 @@ var PS = {};
   var i = element("i");
   var img = function (props) {
       return element("img")(props)([  ]);
-  };                         
+  };                   
+  var label = element("label");
   var li = element("li");
   var li_ = li([  ]);      
   var nav = element("nav");
@@ -8686,6 +8689,7 @@ var PS = {};
   exports["header_"] = header_;
   exports["i"] = i;
   exports["img"] = img;
+  exports["label"] = label;
   exports["li"] = li;
   exports["li_"] = li_;
   exports["nav"] = nav;
@@ -9230,7 +9234,7 @@ var PS = {};
   var SubContainerG_Component_State = PS["SubContainerG.Component.State"];
   var ui = (function () {
       var render = function (state) {
-          return Halogen_HTML_Elements.section([ Halogen_HTML_Properties.class_("section-form"), Halogen_HTML_Properties.id_("form") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.h2_([ Halogen_HTML_Core.text("We're happy to hear from you") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.form([ Halogen_HTML_Properties.method(DOM_HTML_Indexed_FormMethod.POST.value), Halogen_HTML_Properties.action("#"), Halogen_HTML_Properties.class_("contact-form") ])([  ]) ]) ]);
+          return Halogen_HTML_Elements.section([ Halogen_HTML_Properties.class_("section-form"), Halogen_HTML_Properties.id_("form") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.h2_([ Halogen_HTML_Core.text("We're happy to hear from you") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.form([ Halogen_HTML_Properties.method(DOM_HTML_Indexed_FormMethod.POST.value), Halogen_HTML_Properties.action("#"), Halogen_HTML_Properties.class_("contact-form") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("name") ])([ Halogen_HTML_Core.text("Name") ]) ]) ]) ]) ]) ]);
       };
       var initialState = {
           b: Data_Maybe.Nothing.value,
