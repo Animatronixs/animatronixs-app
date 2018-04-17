@@ -2,7 +2,7 @@
   "name": "animatronixs-app",
   "version": "0.1.0",
   "description": "Animatronixs - App",
-  "main": "server_tessel2.js",
+  "main": "dist/server_tessel2.js",
   "directories": {
     "test": "test"
   },

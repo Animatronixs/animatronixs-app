@@ -76,18 +76,19 @@ ui =
                           [ HP.for "name"]
                           [ HH.text "Name"]
                       ]
---                  , HH.div
---                      [ HP.class_ (H.ClassName "col span-2-of-3")]
---                      [ HH.input
---                          [ HP.type "text"
---                          , HP.name "name"
---                          , HP.id "name"
---                          , HP.placeholder "Your name"
---                          , HP.required true
---                          ]
---                          []
---                      ]
---                  ]
+                  , HH.div
+                      [ HP.class_ (H.ClassName "col span-2-of-3")]
+                      [ HH.input
+                          [ HP.type_ HP.InputText
+                          , HP.name "name"
+                          , HP.id_ "name"
+                          , HP.placeholder "Your name"
+                          , HP.required true
+                          ]
+                      ]
+
+
+                  ]
 --              , HH.div
 --                  [ HP.class_ (H.ClassName "row")]
 --                  []
@@ -103,7 +104,7 @@ ui =
 --              , HH.div
 --                  [ HP.class_ (H.ClassName "row")]
 --                  [] 
-                ]       
+      
               ]
           ]
       ] 
