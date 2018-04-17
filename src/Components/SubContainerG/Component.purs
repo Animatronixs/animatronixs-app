@@ -155,9 +155,6 @@ ui =
                       , HH.text "Yes please"
                       ]                      
                   ]
-
-
-
               , HH.div
                   [ HP.class_ (H.ClassName "row")]
                   [ HH.div
@@ -173,14 +170,24 @@ ui =
                           ]
                       ]                      
                   ]
-
- 
-      
+              , HH.div
+                  [ HP.class_ (H.ClassName "row")]
+                  [ HH.div
+                      [ HP.class_ (H.ClassName "col span-1-of-3")]
+                      [ HH.label_
+                          [ HH.text " "]
+                      ]
+                  , HH.div
+                      [ HP.class_ (H.ClassName "col span-2-of-3")]
+                      [ HH.input
+                          [ HP.type_ HP.InputSubmit
+                          , HP.value "Send it!"
+                          ]
+                      ]                      
+                  ]
               ]
           ]
       ] 
-
-
 
 
 --    HH.div_
