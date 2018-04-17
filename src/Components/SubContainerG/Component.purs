@@ -158,13 +158,23 @@ ui =
 
 
 
---              , HH.div
---                  [ HP.class_ (H.ClassName "row")]
---                  []
+              , HH.div
+                  [ HP.class_ (H.ClassName "row")]
+                  [ HH.div
+                      [ HP.class_ (H.ClassName "col span-1-of-3")]
+                      [ HH.label_
+                          [ HH.text "Drop us a line"]
+                      ]
+                  , HH.div
+                      [ HP.class_ (H.ClassName "col span-2-of-3")]
+                      [ HH.textarea
+                          [ HP.name "message"
+                          , HP.placeholder "Your message"
+                          ]
+                      ]                      
+                  ]
 
---              , HH.div
---                  [ HP.class_ (H.ClassName "row")]
---                  [] 
+ 
       
               ]
           ]
