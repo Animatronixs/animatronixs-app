@@ -86,21 +86,66 @@ ui =
                           , HP.required true
                           ]
                       ]
-
-
                   ]
+              , HH.div
+                  [ HP.class_ (H.ClassName "row")]
+                  [ HH.div
+                      [ HP.class_ (H.ClassName "col span-1-of-3")]
+                      [ HH.label
+                          [ HP.for "email"]
+                          [ HH.text "Email"]
+                      ]
+                  , HH.div
+                      [ HP.class_ (H.ClassName "col span-2-of-3")]
+                      [ HH.input
+                          [ HP.type_ HP.InputEmail
+                          , HP.name "email"
+                          , HP.id_ "email"
+                          , HP.placeholder "Your email"
+                          , HP.required true
+                          ]
+                      ]
+                  ]
+              , HH.div
+                  [ HP.class_ (H.ClassName "row")]
+                  [ HH.div
+                      [ HP.class_ (H.ClassName "col span-1-of-3")]
+                      [ HH.label
+                          [ HP.for "find-us"]
+                          [ HH.text "How did you find us?"]
+                      ]
+                  , HH.div
+                      [ HP.class_ (H.ClassName "col span-2-of-3")]
+                      [ HH.select
+                          [ HP.name "find-us"
+                          , HP.id_ "find-us"
+                          ]
+                          [ HH.option
+                              [ HP.value "friends"
+                              , HP.selected true 
+                              ]
+                              [ HH.text "Friends"]
+                          , HH.option
+                              [ HP.value "search"]
+                              [ HH.text "Search engine"]
+                          , HH.option
+                              [ HP.value "ad"]
+                              [ HH.text "Advertisement"]
+                          , HH.option
+                              [ HP.value "other"]
+                              [ HH.text "Other"]
+                          ]
+                      ]
+                  ]
+
 --              , HH.div
 --                  [ HP.class_ (H.ClassName "row")]
 --                  []
+
 --              , HH.div
 --                  [ HP.class_ (H.ClassName "row")]
 --                  []
---              , HH.div
---                  [ HP.class_ (H.ClassName "row")]
---                  []
---              , HH.div
---                  [ HP.class_ (H.ClassName "row")]
---                  []
+
 --              , HH.div
 --                  [ HP.class_ (H.ClassName "row")]
 --                  [] 
