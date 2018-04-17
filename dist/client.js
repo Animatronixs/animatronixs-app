@@ -8873,7 +8873,8 @@ var PS = {};
   var $$for = prop(Halogen_HTML_Core.stringIsProp)("htmlFor");
   var class_ = function ($9) {
       return prop(Halogen_HTML_Core.stringIsProp)("className")(Data_Newtype.unwrap(Halogen_HTML_Core.newtypeClassName)($9));
-  };                                                          
+  };
+  var checked = prop(Halogen_HTML_Core.booleanIsProp)("checked");
   var alt = prop(Halogen_HTML_Core.stringIsProp)("alt");
   var action = prop(Halogen_HTML_Core.stringIsProp)("action");
   exports["prop"] = prop;
@@ -8889,6 +8890,7 @@ var PS = {};
   exports["type_"] = type_;
   exports["value"] = value;
   exports["required"] = required;
+  exports["checked"] = checked;
   exports["selected"] = selected;
   exports["placeholder"] = placeholder;
 })(PS["Halogen.HTML.Properties"] = PS["Halogen.HTML.Properties"] || {});
@@ -8929,6 +8931,7 @@ var PS = {};
       return element("input")(props)([  ]);
   };                   
   var label = element("label");
+  var label_ = label([  ]);  
   var li = element("li");
   var li_ = li([  ]);      
   var nav = element("nav");
@@ -8979,6 +8982,7 @@ var PS = {};
   exports["img"] = img;
   exports["input"] = input;
   exports["label"] = label;
+  exports["label_"] = label_;
   exports["li"] = li;
   exports["li_"] = li_;
   exports["nav"] = nav;
@@ -9527,7 +9531,7 @@ var PS = {};
   var SubContainerG_Component_State = PS["SubContainerG.Component.State"];
   var ui = (function () {
       var render = function (state) {
-          return Halogen_HTML_Elements.section([ Halogen_HTML_Properties.class_("section-form"), Halogen_HTML_Properties.id_("form") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.h2_([ Halogen_HTML_Core.text("We're happy to hear from you") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.form([ Halogen_HTML_Properties.method(DOM_HTML_Indexed_FormMethod.POST.value), Halogen_HTML_Properties.action("#"), Halogen_HTML_Properties.class_("contact-form") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("name") ])([ Halogen_HTML_Core.text("Name") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputText.value), Halogen_HTML_Properties.name("name"), Halogen_HTML_Properties.id_("name"), Halogen_HTML_Properties.placeholder("Your name"), Halogen_HTML_Properties.required(true) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("email") ])([ Halogen_HTML_Core.text("Email") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputEmail.value), Halogen_HTML_Properties.name("email"), Halogen_HTML_Properties.id_("email"), Halogen_HTML_Properties.placeholder("Your email"), Halogen_HTML_Properties.required(true) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("find-us") ])([ Halogen_HTML_Core.text("How did you find us?") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.select([ Halogen_HTML_Properties.name("find-us"), Halogen_HTML_Properties.id_("find-us") ])([ Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("friends"), Halogen_HTML_Properties.selected(true) ])([ Halogen_HTML_Core.text("Friends") ]), Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("search") ])([ Halogen_HTML_Core.text("Search engine") ]), Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("ad") ])([ Halogen_HTML_Core.text("Advertisement") ]), Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("other") ])([ Halogen_HTML_Core.text("Other") ]) ]) ]) ]) ]) ]) ]);
+          return Halogen_HTML_Elements.section([ Halogen_HTML_Properties.class_("section-form"), Halogen_HTML_Properties.id_("form") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.h2_([ Halogen_HTML_Core.text("We're happy to hear from you") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.form([ Halogen_HTML_Properties.method(DOM_HTML_Indexed_FormMethod.POST.value), Halogen_HTML_Properties.action("#"), Halogen_HTML_Properties.class_("contact-form") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("name") ])([ Halogen_HTML_Core.text("Name") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputText.value), Halogen_HTML_Properties.name("name"), Halogen_HTML_Properties.id_("name"), Halogen_HTML_Properties.placeholder("Your name"), Halogen_HTML_Properties.required(true) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("email") ])([ Halogen_HTML_Core.text("Email") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputEmail.value), Halogen_HTML_Properties.name("email"), Halogen_HTML_Properties.id_("email"), Halogen_HTML_Properties.placeholder("Your email"), Halogen_HTML_Properties.required(true) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("find-us") ])([ Halogen_HTML_Core.text("How did you find us?") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.select([ Halogen_HTML_Properties.name("find-us"), Halogen_HTML_Properties.id_("find-us") ])([ Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("friends"), Halogen_HTML_Properties.selected(true) ])([ Halogen_HTML_Core.text("Friends") ]), Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("search") ])([ Halogen_HTML_Core.text("Search engine") ]), Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("ad") ])([ Halogen_HTML_Core.text("Advertisement") ]), Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("other") ])([ Halogen_HTML_Core.text("Other") ]) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label_([ Halogen_HTML_Core.text("Newsletter?") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputCheckbox.value), Halogen_HTML_Properties.name("news"), Halogen_HTML_Properties.id_("news"), Halogen_HTML_Properties.checked(true) ]), Halogen_HTML_Core.text("Yes please") ]) ]) ]) ]) ]);
       };
       var initialState = {
           b: Data_Maybe.Nothing.value,

@@ -137,10 +137,26 @@ ui =
                           ]
                       ]
                   ]
+              , HH.div
+                  [ HP.class_ (H.ClassName "row")]
+                  [ HH.div
+                      [ HP.class_ (H.ClassName "col span-1-of-3")]
+                      [ HH.label_
+                          [ HH.text "Newsletter?"]
+                      ]
+                  , HH.div
+                      [ HP.class_ (H.ClassName "col span-2-of-3")]
+                      [ HH.input
+                          [ HP.type_ HP.InputCheckbox
+                          , HP.name "news"
+                          , HP.id_ "news"
+                          , HP.checked true
+                          ]
+                      , HH.text "Yes please"
+                      ]                      
+                  ]
 
---              , HH.div
---                  [ HP.class_ (H.ClassName "row")]
---                  []
+
 
 --              , HH.div
 --                  [ HP.class_ (H.ClassName "row")]
