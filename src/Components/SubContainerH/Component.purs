@@ -2,6 +2,7 @@ module SubContainerH.Component where
 
 import Prelude
 
+import CSS (offset)
 import CSS as CB
 import ComponentA.Component as ComponentA
 import ComponentB.Component as ComponentB
@@ -91,7 +92,17 @@ ui =
                     , HE.onClick (HE.input_ MakeRequest)
                     ]
                     [ HH.text "Fetch info"]  
-                --, continue...                
+                , HH.p_
+                    [ HH.text (if state.loading then "Working..." else "")]
+                , HH.div_
+                    case state.result of
+                      Nothing -> []
+                      Just res ->
+                        [ HH.h2_
+                            [ HH.text "Response:"]
+                        , HH.pre_
+                            [ HH.code_ [ HH.text res]]
+                        ]              
                 ]
           ]
       -- END OF NEW CODE
