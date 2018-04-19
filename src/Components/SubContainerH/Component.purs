@@ -68,7 +68,11 @@ ui =
               HH.form_ $
                 [ HH.h1_ 
                     [ HH.text "Lookup GitHub user"]
-                -- , continue...                  
+                , HH.label_
+                    [ HH.div_
+                        [ HH.text "Enter username:"]
+                    --, continue...
+                    ]                  
                 ]
           ]
       -- END OF NEW CODE
