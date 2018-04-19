@@ -8,6 +8,7 @@ import ComponentB.Component as ComponentB
 import ComponentC.Component as ComponentC
 import Control.Monad.Eff.Exception (stack)
 import Control.Monad.State (state)
+import Data.Array.NonEmpty (findLastIndex)
 import Data.Either.Nested (Either3)
 import Data.Functor.Coproduct.Nested (Coproduct3)
 import Data.HTTP.Method (Method(..))
@@ -23,7 +24,12 @@ import Halogen.HTML.Properties as H.HTML
 import Halogen.HTML.Properties as HP
 import SubContainerH.Component.State (State)
 
-data Query a = ReadStates a
+-- This component is based partially on
+-- https://github.com/slamdata/purescript-halogen/blob/master/examples/effects-aff-ajax/src/Component.purs
+
+data Query a 
+  = ReadStates a
+  | SetUserName String a
 
 type ChildQuery = Coproduct3 ComponentA.Query ComponentB.Query ComponentC.Query
 type ChildSlot = Either3 Unit Unit Unit
@@ -48,6 +54,9 @@ ui =
   initialState =
     { b: Nothing
     , c: Nothing
+    , loading: false
+    , username: ""
+    , result: Nothing
     }     
 
   render :: State -> H.ParentHTML Query ChildQuery ChildSlot m 
@@ -71,8 +80,12 @@ ui =
                 , HH.label_
                     [ HH.div_
                         [ HH.text "Enter username:"]
-                    --, continue...
-                    ]                  
+                    , HH.input
+                        [ HP.value state.username
+                        , HE.onValueInput (HE.input SetUserName)
+                        ]
+                    ]
+                --, continue...                  
                 ]
           ]
       -- END OF NEW CODE
@@ -239,4 +252,7 @@ ui =
       --b <- H.query' CP.cp2 unit (H.request ItemListB.GetCount)
       --c <- H.query' CP.cp3 unit (H.request ItemListC.GetValue)
       --H.put { b, c }
+      pure next
+    SetUserName username next -> do
+      H.modify(_ { username = username, result = Nothing :: Maybe String })
       pure next
