@@ -3257,7 +3257,9 @@ var PS = {};
   "use strict";
   var DOM_Event_Types = PS["DOM.Event.Types"];
   var load = "load";      
-  var input = "input";
+  var input = "input";      
+  var click = "click";
+  exports["click"] = click;
   exports["input"] = input;
   exports["load"] = load;
 })(PS["DOM.HTML.Event.EventTypes"] = PS["DOM.HTML.Event.EventTypes"] || {});
@@ -8997,7 +8999,8 @@ var PS = {};
   var method = prop(Halogen_HTML_Core.formMethodIsProp)("method");
   var id_ = prop(Halogen_HTML_Core.stringIsProp)("id");
   var href = prop(Halogen_HTML_Core.stringIsProp)("href"); 
-  var $$for = prop(Halogen_HTML_Core.stringIsProp)("htmlFor");
+  var $$for = prop(Halogen_HTML_Core.stringIsProp)("htmlFor");       
+  var disabled = prop(Halogen_HTML_Core.booleanIsProp)("disabled");
   var class_ = function ($9) {
       return prop(Halogen_HTML_Core.stringIsProp)("className")(Data_Newtype.unwrap(Halogen_HTML_Core.newtypeClassName)($9));
   };
@@ -9016,6 +9019,7 @@ var PS = {};
   exports["action"] = action;
   exports["type_"] = type_;
   exports["value"] = value;
+  exports["disabled"] = disabled;
   exports["required"] = required;
   exports["checked"] = checked;
   exports["selected"] = selected;
@@ -9079,7 +9083,8 @@ var PS = {};
   var div = element("div");
   var div_ = div([  ]);  
   var cite = element("cite");
-  var cite_ = cite([  ]);    
+  var cite_ = cite([  ]);
+  var button = element("button");
   var br = function (props) {
       return element("br")(props)([  ]);
   };
@@ -9093,6 +9098,7 @@ var PS = {};
   exports["blockquote_"] = blockquote_;
   exports["br"] = br;
   exports["br_"] = br_;
+  exports["button"] = button;
   exports["cite"] = cite;
   exports["cite_"] = cite_;
   exports["div"] = div;
@@ -9283,7 +9289,13 @@ var PS = {};
   var Halogen_Query = PS["Halogen.Query"];
   var Halogen_Query_InputF = PS["Halogen.Query.InputF"];
   var Prelude = PS["Prelude"];
-  var Unsafe_Coerce = PS["Unsafe.Coerce"];
+  var Unsafe_Coerce = PS["Unsafe.Coerce"];      
+  var mouseHandler = Unsafe_Coerce.unsafeCoerce;
+  var input_ = function (f) {
+      return function (v) {
+          return Data_Maybe.Just.create(Halogen_Query.action(f));
+      };
+  };
   var input = function (f) {
       return function (x) {
           return Data_Maybe.Just.create(Halogen_Query.action(f(x)));
@@ -9293,6 +9305,9 @@ var PS = {};
       return function ($1) {
           return Halogen_HTML_Core.handler(et)(Data_Functor.map(Data_Functor.functorFn)(Data_Functor.map(Data_Maybe.functorMaybe)(Halogen_Query_InputF.Query.create))($1));
       };
+  };                                                       
+  var onClick = function ($2) {
+      return handler(DOM_HTML_Event_EventTypes.click)(mouseHandler($2));
   };
   var addForeignPropHandler = function (key) {
       return function (prop) {
@@ -9307,7 +9322,9 @@ var PS = {};
   };                                                                                                            
   var onValueInput = addForeignPropHandler(DOM_HTML_Event_EventTypes.input)("value")(Data_Foreign.readString);
   exports["input"] = input;
+  exports["input_"] = input_;
   exports["handler"] = handler;
+  exports["onClick"] = onClick;
   exports["onValueInput"] = onValueInput;
 })(PS["Halogen.HTML.Events"] = PS["Halogen.HTML.Events"] || {});
 (function(exports) {
@@ -9852,6 +9869,9 @@ var PS = {};
   var Halogen_Query_HalogenM = PS["Halogen.Query.HalogenM"];
   var Prelude = PS["Prelude"];
   var SubContainerH_Component_State = PS["SubContainerH.Component.State"];
+
+  // This component is based partially on
+  // https://github.com/slamdata/purescript-halogen/blob/master/examples/effects-aff-ajax/src/Component.purs
   var ReadStates = (function () {
       function ReadStates(value0) {
           this.value0 = value0;
@@ -9861,6 +9881,9 @@ var PS = {};
       };
       return ReadStates;
   })();
+
+  // This component is based partially on
+  // https://github.com/slamdata/purescript-halogen/blob/master/examples/effects-aff-ajax/src/Component.purs
   var SetUserName = (function () {
       function SetUserName(value0, value1) {
           this.value0 = value0;
@@ -9873,9 +9896,21 @@ var PS = {};
       };
       return SetUserName;
   })();
+
+  // This component is based partially on
+  // https://github.com/slamdata/purescript-halogen/blob/master/examples/effects-aff-ajax/src/Component.purs
+  var MakeRequest = (function () {
+      function MakeRequest(value0) {
+          this.value0 = value0;
+      };
+      MakeRequest.create = function (value0) {
+          return new MakeRequest(value0);
+      };
+      return MakeRequest;
+  })();
   var ui = (function () {
       var render = function (state) {
-          return Halogen_HTML_Elements.section([ Halogen_HTML_Properties.class_("section-form"), Halogen_HTML_Properties.id_("form2") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.h2_([ Halogen_HTML_Core.text("Example of Aff Ajax") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.form_([ Halogen_HTML_Elements.h1_([ Halogen_HTML_Core.text("Lookup GitHub user") ]), Halogen_HTML_Elements.label_([ Halogen_HTML_Elements.div_([ Halogen_HTML_Core.text("Enter username:") ]), Halogen_HTML_Elements.input([ Halogen_HTML_Properties.value(state.username), Halogen_HTML_Events.onValueInput(Halogen_HTML_Events.input(SetUserName.create)) ]) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.form([ Halogen_HTML_Properties.method(DOM_HTML_Indexed_FormMethod.POST.value), Halogen_HTML_Properties.action("#"), Halogen_HTML_Properties.class_("contact-form") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("name") ])([ Halogen_HTML_Core.text("Name") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputText.value), Halogen_HTML_Properties.name("name"), Halogen_HTML_Properties.id_("name"), Halogen_HTML_Properties.placeholder("Your name"), Halogen_HTML_Properties.required(true) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("email") ])([ Halogen_HTML_Core.text("Email") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputEmail.value), Halogen_HTML_Properties.name("email"), Halogen_HTML_Properties.id_("email"), Halogen_HTML_Properties.placeholder("Your email"), Halogen_HTML_Properties.required(true) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("find-us") ])([ Halogen_HTML_Core.text("How did you find us?") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.select([ Halogen_HTML_Properties.name("find-us"), Halogen_HTML_Properties.id_("find-us") ])([ Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("friends"), Halogen_HTML_Properties.selected(true) ])([ Halogen_HTML_Core.text("Friends") ]), Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("search") ])([ Halogen_HTML_Core.text("Search engine") ]), Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("ad") ])([ Halogen_HTML_Core.text("Advertisement") ]), Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("other") ])([ Halogen_HTML_Core.text("Other") ]) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label_([ Halogen_HTML_Core.text("Newsletter?") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputCheckbox.value), Halogen_HTML_Properties.name("news"), Halogen_HTML_Properties.id_("news"), Halogen_HTML_Properties.checked(true) ]), Halogen_HTML_Core.text("Yes please") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label_([ Halogen_HTML_Core.text("Drop us a line") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.textarea([ Halogen_HTML_Properties.name("message"), Halogen_HTML_Properties.placeholder("Your message") ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label_([ Halogen_HTML_Core.text(" ") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputSubmit.value), Halogen_HTML_Properties.value("Send it!") ]) ]) ]) ]) ]) ]);
+          return Halogen_HTML_Elements.section([ Halogen_HTML_Properties.class_("section-form"), Halogen_HTML_Properties.id_("form2") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.h2_([ Halogen_HTML_Core.text("Example of Aff Ajax") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.form_([ Halogen_HTML_Elements.h1_([ Halogen_HTML_Core.text("Lookup GitHub user") ]), Halogen_HTML_Elements.label_([ Halogen_HTML_Elements.div_([ Halogen_HTML_Core.text("Enter username:") ]), Halogen_HTML_Elements.input([ Halogen_HTML_Properties.value(state.username), Halogen_HTML_Events.onValueInput(Halogen_HTML_Events.input(SetUserName.create)) ]) ]), Halogen_HTML_Elements.button([ Halogen_HTML_Properties.disabled(state.loading), Halogen_HTML_Events.onClick(Halogen_HTML_Events.input_(MakeRequest.create)) ])([ Halogen_HTML_Core.text("Fetch info") ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.form([ Halogen_HTML_Properties.method(DOM_HTML_Indexed_FormMethod.POST.value), Halogen_HTML_Properties.action("#"), Halogen_HTML_Properties.class_("contact-form") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("name") ])([ Halogen_HTML_Core.text("Name") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputText.value), Halogen_HTML_Properties.name("name"), Halogen_HTML_Properties.id_("name"), Halogen_HTML_Properties.placeholder("Your name"), Halogen_HTML_Properties.required(true) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("email") ])([ Halogen_HTML_Core.text("Email") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputEmail.value), Halogen_HTML_Properties.name("email"), Halogen_HTML_Properties.id_("email"), Halogen_HTML_Properties.placeholder("Your email"), Halogen_HTML_Properties.required(true) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("find-us") ])([ Halogen_HTML_Core.text("How did you find us?") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.select([ Halogen_HTML_Properties.name("find-us"), Halogen_HTML_Properties.id_("find-us") ])([ Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("friends"), Halogen_HTML_Properties.selected(true) ])([ Halogen_HTML_Core.text("Friends") ]), Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("search") ])([ Halogen_HTML_Core.text("Search engine") ]), Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("ad") ])([ Halogen_HTML_Core.text("Advertisement") ]), Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("other") ])([ Halogen_HTML_Core.text("Other") ]) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label_([ Halogen_HTML_Core.text("Newsletter?") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputCheckbox.value), Halogen_HTML_Properties.name("news"), Halogen_HTML_Properties.id_("news"), Halogen_HTML_Properties.checked(true) ]), Halogen_HTML_Core.text("Yes please") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label_([ Halogen_HTML_Core.text("Drop us a line") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.textarea([ Halogen_HTML_Properties.name("message"), Halogen_HTML_Properties.placeholder("Your message") ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label_([ Halogen_HTML_Core.text(" ") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputSubmit.value), Halogen_HTML_Properties.value("Send it!") ]) ]) ]) ]) ]) ]);
       };
       var initialState = {
           b: Data_Maybe.Nothing.value,
@@ -9931,7 +9966,10 @@ var PS = {};
                   return Control_Applicative.pure(Halogen_Query_HalogenM.applicativeHalogenM)(v.value1);
               });
           };
-          throw new Error("Failed pattern match at SubContainerH.Component line 247, column 10 - line 255, column 12: " + [ v.constructor.name ]);
+          if (v instanceof MakeRequest) {
+              return Control_Applicative.pure(Halogen_Query_HalogenM.applicativeHalogenM)(v.value0);
+          };
+          throw new Error("Failed pattern match at SubContainerH.Component line 256, column 10 - line 267, column 12: " + [ v.constructor.name ]);
       };
       return Halogen_Component.parentComponent(Data_Either.ordEither(Data_Ord.ordUnit)(Data_Either.ordEither(Data_Ord.ordUnit)(Data_Either.ordEither(Data_Ord.ordUnit)(Data_Ord.ordVoid))))({
           initialState: Data_Function["const"](initialState),
@@ -9942,6 +9980,7 @@ var PS = {};
   })();
   exports["ReadStates"] = ReadStates;
   exports["SetUserName"] = SetUserName;
+  exports["MakeRequest"] = MakeRequest;
   exports["ui"] = ui;
 })(PS["SubContainerH.Component"] = PS["SubContainerH.Component"] || {});
 (function(exports) {

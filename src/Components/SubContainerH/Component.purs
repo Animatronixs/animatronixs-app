@@ -30,6 +30,7 @@ import SubContainerH.Component.State (State)
 data Query a 
   = ReadStates a
   | SetUserName String a
+  | MakeRequest a
 
 type ChildQuery = Coproduct3 ComponentA.Query ComponentB.Query ComponentC.Query
 type ChildSlot = Either3 Unit Unit Unit
@@ -85,7 +86,12 @@ ui =
                         , HE.onValueInput (HE.input SetUserName)
                         ]
                     ]
-                --, continue...                  
+                , HH.button
+                    [ HP.disabled state.loading
+                    , HE.onClick (HE.input_ MakeRequest)
+                    ]
+                    [ HH.text "Fetch info"]  
+                --, continue...                
                 ]
           ]
       -- END OF NEW CODE
@@ -255,4 +261,7 @@ ui =
       pure next
     SetUserName username next -> do
       H.modify(_ { username = username, result = Nothing :: Maybe String })
+      pure next
+    MakeRequest next -> do
+      -- more to do
       pure next
