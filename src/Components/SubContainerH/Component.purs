@@ -61,6 +61,17 @@ ui =
           [ HH. h2_ 
               [ HH.text "Example of Aff Ajax"]
           ]
+      -- START OF NEW CODE    
+      , HH.div
+          [ HP.class_ (H.ClassName "row")]
+          [
+              HH.form_ $
+                [ HH.h1_ 
+                    [ HH.text "Lookup GitHub user"]
+                -- , continue...                  
+                ]
+          ]
+      -- END OF NEW CODE
       , HH.div
           [ HP.class_ (H.ClassName "row")]
           [ HH.form
