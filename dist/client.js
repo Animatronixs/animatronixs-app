@@ -2180,8 +2180,16 @@ var PS = {};
           });
       };
   };
+  var gets = function (dictMonadState) {
+      return function (f) {
+          return state(dictMonadState)(function (s) {
+              return new Data_Tuple.Tuple(f(s), s);
+          });
+      };
+  };
   exports["state"] = state;
   exports["MonadState"] = MonadState;
+  exports["gets"] = gets;
   exports["put"] = put;
   exports["modify"] = modify;
 })(PS["Control.Monad.State.Class"] = PS["Control.Monad.State.Class"] || {});
@@ -9974,23 +9982,27 @@ var PS = {};
           };
           if (v instanceof SetUserName) {
               return Control_Bind.discard(Control_Bind.discardUnit)(Halogen_Query_HalogenM.bindHalogenM)(Control_Monad_State_Class.modify(Halogen_Query_HalogenM.monadStateHalogenM)(function (v1) {
-                  var $11 = {};
-                  for (var $12 in v1) {
-                      if ({}.hasOwnProperty.call(v1, $12)) {
-                          $11[$12] = v1[$12];
+                  var $13 = {};
+                  for (var $14 in v1) {
+                      if ({}.hasOwnProperty.call(v1, $14)) {
+                          $13[$14] = v1[$14];
                       };
                   };
-                  $11.username = v.value0;
-                  $11.result = Data_Maybe.Nothing.value;
-                  return $11;
+                  $13.username = v.value0;
+                  $13.result = Data_Maybe.Nothing.value;
+                  return $13;
               }))(function () {
                   return Control_Applicative.pure(Halogen_Query_HalogenM.applicativeHalogenM)(v.value1);
               });
           };
           if (v instanceof MakeRequest) {
-              return Control_Applicative.pure(Halogen_Query_HalogenM.applicativeHalogenM)(v.value0);
+              return Control_Bind.bind(Halogen_Query_HalogenM.bindHalogenM)(Control_Monad_State_Class.gets(Halogen_Query_HalogenM.monadStateHalogenM)(function (v1) {
+                  return v1.username;
+              }))(function (v1) {
+                  return Control_Applicative.pure(Halogen_Query_HalogenM.applicativeHalogenM)(v.value0);
+              });
           };
-          throw new Error("Failed pattern match at SubContainerH.Component line 267, column 10 - line 278, column 12: " + [ v.constructor.name ]);
+          throw new Error("Failed pattern match at SubContainerH.Component line 267, column 10 - line 279, column 12: " + [ v.constructor.name ]);
       };
       return Halogen_Component.parentComponent(Data_Either.ordEither(Data_Ord.ordUnit)(Data_Either.ordEither(Data_Ord.ordUnit)(Data_Either.ordEither(Data_Ord.ordUnit)(Data_Ord.ordVoid))))({
           initialState: Data_Function["const"](initialState),

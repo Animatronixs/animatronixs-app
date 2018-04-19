@@ -274,5 +274,6 @@ ui =
       H.modify(_ { username = username, result = Nothing :: Maybe String })
       pure next
     MakeRequest next -> do
+      username <- H.gets _.username
       -- more to do
       pure next
