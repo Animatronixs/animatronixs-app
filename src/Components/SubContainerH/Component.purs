@@ -7,6 +7,7 @@ import CSS as CB
 import ComponentA.Component as ComponentA
 import ComponentB.Component as ComponentB
 import ComponentC.Component as ComponentC
+import Control.Monad.Aff (Aff)
 import Control.Monad.Eff.Exception (stack)
 import Control.Monad.State (state)
 import Data.Array.NonEmpty (findLastIndex)
@@ -20,10 +21,11 @@ import Halogen.Component.ChildPath as CP
 import Halogen.HTML as HH
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
-import Halogen.HTML.Properties (FormMethod(..))
-import Halogen.HTML.Properties as H.HTML
 import Halogen.HTML.Properties as HP
+import Halogen.VDom.Util (effPure)
+import Network.HTTP.Affjax as AX
 import SubContainerH.Component.State (State)
+import Type.Row.Effect.Equality (effFrom)
 
 -- This component is based partially on
 -- https://github.com/slamdata/purescript-halogen/blob/master/examples/effects-aff-ajax/src/Component.purs
@@ -61,7 +63,7 @@ ui =
     , result: Nothing
     }     
 
-  render :: State -> H.ParentHTML Query ChildQuery ChildSlot m 
+  render :: State -> H.ParentHTML Query ChildQuery ChildSlot m
   render state =
     HH.section
       [ HP.class_ (H.ClassName "section-form")
@@ -109,7 +111,7 @@ ui =
       , HH.div
           [ HP.class_ (H.ClassName "row")]
           [ HH.form
-              [ HP.method (H.HTML.POST)
+              [ HP.method (HP.POST)
               , HP.action "#"
               , HP.class_ (H.ClassName "contact-form")  
               ] 
@@ -276,6 +278,7 @@ ui =
     MakeRequest next -> do
       username <- H.gets _.username
       H.modify (_ { loading = true })
-      -- more to do
-      H.modify (_ { loading = false, result = Just "bar"})
+      --todo: response <- H.liftAff $ AX.get ("https://api.github.com/users/" <> username)
+      --H.modify (_ { loading = false, result = Just response.response})
+      H.modify (_ { loading = false, result = Just "dummy response"})
       pure next
