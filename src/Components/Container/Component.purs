@@ -6,8 +6,8 @@ import CSS as CB
 import Container.Component.State (State)
 import Control.Monad.Eff.Exception (stack)
 import Control.Monad.State (state)
-import Data.Either.Nested (Either7)
-import Data.Functor.Coproduct.Nested (Coproduct7)
+import Data.Either.Nested (Either8)
+import Data.Functor.Coproduct.Nested (Coproduct8)
 import Data.Maybe (Maybe(..), maybe)
 import Halogen as H
 import Halogen.Component.ChildPath as CP
@@ -21,12 +21,13 @@ import SubContainerD.Component as SubContainerD
 import SubContainerE.Component as SubContainerE
 import SubContainerF.Component as SubContainerF
 import SubContainerG.Component as SubContainerG
+import SubContainerH.Component as SubContainerH
 --import ItemList.Component as ComponentA
 
 data Query a = ReadStates a
 
-type ChildQuery = Coproduct7 SubContainerA.Query SubContainerB.Query SubContainerC.Query SubContainerD.Query SubContainerE.Query SubContainerF.Query SubContainerG.Query
-type ChildSlot = Either7 Unit Unit Unit Unit Unit Unit Unit
+type ChildQuery = Coproduct8 SubContainerA.Query SubContainerB.Query SubContainerC.Query SubContainerD.Query SubContainerE.Query SubContainerF.Query SubContainerG.Query SubContainerH.Query
+type ChildSlot = Either8 Unit Unit Unit Unit Unit Unit Unit Unit
 
 -- Values of the type Slot are used as the IDs for child components
 -- in the rendered HTML.
@@ -52,7 +53,8 @@ ui =
     --, d: Nothing
     --, e: Nothing
     --, f: Nothing
-    --, g: Nothing                  
+    --, g: Nothing  
+    --, h: Nothing                     
     }   
 
   render :: State -> H.ParentHTML Query ChildQuery ChildSlot m 
@@ -65,6 +67,7 @@ ui =
     , HH.slot' CP.cp5 unit SubContainerE.ui unit absurd
     , HH.slot' CP.cp6 unit SubContainerF.ui unit absurd
     , HH.slot' CP.cp7 unit SubContainerG.ui unit absurd            
+    , HH.slot' CP.cp8 unit SubContainerH.ui unit absurd
 
 --      HH.div
 --        [ HP.class_ (H.ClassName "box")]
@@ -110,6 +113,7 @@ ui =
       --d <- H.query' CP.cp4 unit (H.request ComponentD.GetCount)
       --e <- H.query' CP.cp5 unit (H.request ComponentE.GetCount)
       --f <- H.query' CP.cp6 unit (H.request ComponentF.GetCount)
-      --g <- H.query' CP.cp7 unit (H.request ComponentG.GetCount)               
+      --g <- H.query' CP.cp7 unit (H.request ComponentG.GetCount)  
+      --h <- H.query' CP.cp8 unit (H.request ComponentH.GetCount)                    
       H.put {}
       pure next
