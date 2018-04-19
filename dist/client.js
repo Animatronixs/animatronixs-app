@@ -9982,15 +9982,15 @@ var PS = {};
           };
           if (v instanceof SetUserName) {
               return Control_Bind.discard(Control_Bind.discardUnit)(Halogen_Query_HalogenM.bindHalogenM)(Control_Monad_State_Class.modify(Halogen_Query_HalogenM.monadStateHalogenM)(function (v1) {
-                  var $13 = {};
-                  for (var $14 in v1) {
-                      if ({}.hasOwnProperty.call(v1, $14)) {
-                          $13[$14] = v1[$14];
+                  var $15 = {};
+                  for (var $16 in v1) {
+                      if ({}.hasOwnProperty.call(v1, $16)) {
+                          $15[$16] = v1[$16];
                       };
                   };
-                  $13.username = v.value0;
-                  $13.result = Data_Maybe.Nothing.value;
-                  return $13;
+                  $15.username = v.value0;
+                  $15.result = Data_Maybe.Nothing.value;
+                  return $15;
               }))(function () {
                   return Control_Applicative.pure(Halogen_Query_HalogenM.applicativeHalogenM)(v.value1);
               });
@@ -9999,10 +9999,33 @@ var PS = {};
               return Control_Bind.bind(Halogen_Query_HalogenM.bindHalogenM)(Control_Monad_State_Class.gets(Halogen_Query_HalogenM.monadStateHalogenM)(function (v1) {
                   return v1.username;
               }))(function (v1) {
-                  return Control_Applicative.pure(Halogen_Query_HalogenM.applicativeHalogenM)(v.value0);
+                  return Control_Bind.discard(Control_Bind.discardUnit)(Halogen_Query_HalogenM.bindHalogenM)(Control_Monad_State_Class.modify(Halogen_Query_HalogenM.monadStateHalogenM)(function (v2) {
+                      var $21 = {};
+                      for (var $22 in v2) {
+                          if ({}.hasOwnProperty.call(v2, $22)) {
+                              $21[$22] = v2[$22];
+                          };
+                      };
+                      $21.loading = true;
+                      return $21;
+                  }))(function () {
+                      return Control_Bind.discard(Control_Bind.discardUnit)(Halogen_Query_HalogenM.bindHalogenM)(Control_Monad_State_Class.modify(Halogen_Query_HalogenM.monadStateHalogenM)(function (v2) {
+                          var $24 = {};
+                          for (var $25 in v2) {
+                              if ({}.hasOwnProperty.call(v2, $25)) {
+                                  $24[$25] = v2[$25];
+                              };
+                          };
+                          $24.loading = false;
+                          $24.result = new Data_Maybe.Just("bar");
+                          return $24;
+                      }))(function () {
+                          return Control_Applicative.pure(Halogen_Query_HalogenM.applicativeHalogenM)(v.value0);
+                      });
+                  });
               });
           };
-          throw new Error("Failed pattern match at SubContainerH.Component line 267, column 10 - line 279, column 12: " + [ v.constructor.name ]);
+          throw new Error("Failed pattern match at SubContainerH.Component line 267, column 10 - line 281, column 12: " + [ v.constructor.name ]);
       };
       return Halogen_Component.parentComponent(Data_Either.ordEither(Data_Ord.ordUnit)(Data_Either.ordEither(Data_Ord.ordUnit)(Data_Either.ordEither(Data_Ord.ordUnit)(Data_Ord.ordVoid))))({
           initialState: Data_Function["const"](initialState),

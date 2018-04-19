@@ -275,5 +275,7 @@ ui =
       pure next
     MakeRequest next -> do
       username <- H.gets _.username
+      H.modify (_ { loading = true })
       -- more to do
+      H.modify (_ { loading = false, result = Just "bar"})
       pure next
