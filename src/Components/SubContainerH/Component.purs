@@ -290,7 +290,7 @@ ui =
     MakeRequest next -> do
       username <- H.gets _.username
       H.modify (_ { loading = true })
-      -- response <- H.liftAff $ AX.get ("https://api.github.com/users/" <> username)
-      -- H.modify (_ { loading = false, result = Just response.response})
-      H.modify (_ { loading = false, result = Just "dummy response"})
+      response <- H.liftAff $ AX.get ("https://api.github.com/users/" <> username)
+      H.modify (_ { loading = false, result = Just response.response})
+      -- H.modify (_ { loading = false, result = Just "dummy response"})
       pure next
