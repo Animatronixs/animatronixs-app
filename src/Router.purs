@@ -2,6 +2,8 @@ module Router where
 
 import BigPrelude
 
+import Control.Monad.Aff (Aff) -- new
+
 import Container.Component as Container
 import Control.Monad.Aff (Aff)
 import Control.Monad.State.Class (modify)
@@ -14,6 +16,9 @@ import Halogen.Aff as HA
 import Halogen.Component.ChildPath (ChildPath, cpL, cpR, (:>))
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
+
+import Network.HTTP.Affjax as AX -- new
+
 import Profile.Component as Profile
 import Routing (matchesAff)
 import Routing.Match (Match)
@@ -75,7 +80,8 @@ pathToContainer = cpR
 type QueryP
   = Coproduct Input ChildQuery
 
-ui :: forall m. H.Component HH.HTML Input Unit Void m
+-- ui :: forall m. H.Component HH.HTML Input Unit Void m
+ui :: forall eff. H.Component HH.HTML Input Unit Void (Aff (ajax :: AX.AJAX | eff))
 ui = H.parentComponent
   { initialState: const init
   , render
@@ -83,7 +89,8 @@ ui = H.parentComponent
   , receiver: const Nothing
   }
   where
-    render :: State -> H.ParentHTML Input ChildQuery ChildSlot m
+    -- render :: State -> H.ParentHTML Input ChildQuery ChildSlot m
+    render :: State -> H.ParentHTML Input ChildQuery ChildSlot (Aff (ajax :: AX.AJAX | eff))
     render st =
       HH.div_
         [ HH.header_
@@ -199,7 +206,8 @@ ui = H.parentComponent
 
     link s = HH.li_ [ HH.a [ HP.href ("#/" <> toLower s) ] [ HH.text s ] ]
 
-    viewPage :: String -> H.ParentHTML Input ChildQuery ChildSlot m
+    -- viewPage :: String -> H.ParentHTML Input ChildQuery ChildSlot m
+    viewPage :: String -> H.ParentHTML Input ChildQuery ChildSlot (Aff (ajax :: AX.AJAX | eff))
     viewPage "Container" =
       HH.slot' pathToContainer Container.Slot Container.ui unit absurd
     viewPage "Profile" =
@@ -207,7 +215,8 @@ ui = H.parentComponent
     viewPage _ =
       HH.div_ []
 
-    eval :: Input ~> H.ParentDSL State Input ChildQuery ChildSlot Void m
+    -- eval :: Input ~> H.ParentDSL State Input ChildQuery ChildSlot Void m
+    eval :: Input ~> H.ParentDSL State Input ChildQuery ChildSlot Void (Aff (ajax :: AX.AJAX | eff))
     eval (Goto Profile next) = do
       modify (_ { currentPage = "Profile" })
       pure next

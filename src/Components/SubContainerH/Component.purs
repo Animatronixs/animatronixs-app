@@ -6,7 +6,7 @@ import CSS (offset)
 import CSS as CB
 import ComponentA.Component as ComponentA
 import ComponentB.Component as ComponentB
-import ComponentC.Component as ComponentC
+import ComponentE.Component as ComponentE
 import Control.Monad.Aff (Aff)
 import Control.Monad.Eff.Exception (stack)
 import Control.Monad.State (state)
@@ -31,11 +31,12 @@ import Type.Row.Effect.Equality (effFrom)
 -- https://github.com/slamdata/purescript-halogen/blob/master/examples/effects-aff-ajax/src/Component.purs
 
 data Query a 
-  = ReadStates a
-  | SetUserName String a
+  -- = ReadStates a
+  -- | 
+  = SetUserName String a
   | MakeRequest a
 
-type ChildQuery = Coproduct3 ComponentA.Query ComponentB.Query ComponentC.Query
+type ChildQuery = Coproduct3 ComponentA.Query ComponentB.Query ComponentE.Query
 type ChildSlot = Either3 Unit Unit Unit
 
 -- Values of the type Slot are used as the IDs for child components
@@ -44,9 +45,11 @@ data Slot = Slot
 derive instance eqSlot :: Eq Slot
 derive instance ordSlot :: Ord Slot
 
-ui :: forall m. H.Component HH.HTML Query Unit Void m
+-- ui :: forall m. H.Component HH.HTML Query Unit Void m
+ui :: forall eff. H.Component HH.HTML Query Unit Void (Aff (ajax :: AX.AJAX | eff))
 ui = 
   H.parentComponent
+  -- H.component
     { initialState: const initialState
     , render
     , eval
@@ -63,7 +66,8 @@ ui =
     , result: Nothing
     }     
 
-  render :: State -> H.ParentHTML Query ChildQuery ChildSlot m
+  -- render :: State -> H.ParentHTML Query ChildQuery ChildSlot m
+  render :: State -> H.ParentHTML Query ChildQuery ChildSlot (Aff (ajax :: AX.AJAX | eff))
   render state =
     HH.section
       [ HP.class_ (H.ClassName "section-form")
@@ -234,6 +238,13 @@ ui =
                   ]
               ]
           ]
+
+
+      , HH.div_
+          [ HH.slot' CP.cp3 unit ComponentE.component unit absurd]
+
+
+
       ] 
 
 
@@ -265,20 +276,21 @@ ui =
 --        [ HH.text "Check states now" ]
 --    ]
 
-  eval :: Query ~> H.ParentDSL State Query ChildQuery ChildSlot Void m
+  -- eval :: Query ~> H.ParentDSL State Query ChildQuery ChildSlot Void m
+  eval :: Query ~> H.ParentDSL State Query ChildQuery ChildSlot Void (Aff (ajax :: AX.AJAX | eff))
   eval = case _ of
-    ReadStates next -> do
+   -- ReadStates next -> do
       --b <- H.query' CP.cp2 unit (H.request ItemListB.GetCount)
       --c <- H.query' CP.cp3 unit (H.request ItemListC.GetValue)
       --H.put { b, c }
-      pure next
+    --  pure next
     SetUserName username next -> do
       H.modify(_ { username = username, result = Nothing :: Maybe String })
       pure next
     MakeRequest next -> do
       username <- H.gets _.username
       H.modify (_ { loading = true })
-      --todo: response <- H.liftAff $ AX.get ("https://api.github.com/users/" <> username)
-      --H.modify (_ { loading = false, result = Just response.response})
+      -- response <- H.liftAff $ AX.get ("https://api.github.com/users/" <> username)
+      -- H.modify (_ { loading = false, result = Just response.response})
       H.modify (_ { loading = false, result = Just "dummy response"})
       pure next

@@ -9853,10 +9853,94 @@ var PS = {};
 })(PS["SubContainerG.Component"] = PS["SubContainerG.Component"] || {});
 (function(exports) {
     "use strict";
+  var Control_Applicative = PS["Control.Applicative"];
+  var Control_Monad_Aff = PS["Control.Monad.Aff"];
+  var Data_Array_ST_Iterator = PS["Data.Array.ST.Iterator"];
+  var Data_Function = PS["Data.Function"];
+  var Data_Maybe = PS["Data.Maybe"];
+  var Halogen = PS["Halogen"];
+  var Halogen_Component = PS["Halogen.Component"];
+  var Halogen_HTML = PS["Halogen.HTML"];
+  var Halogen_HTML_Core = PS["Halogen.HTML.Core"];
+  var Halogen_HTML_Elements = PS["Halogen.HTML.Elements"];
+  var Halogen_HTML_Events = PS["Halogen.HTML.Events"];
+  var Halogen_HTML_Properties = PS["Halogen.HTML.Properties"];
+  var Halogen_Query_HalogenM = PS["Halogen.Query.HalogenM"];
+  var Network_HTTP_Affjax = PS["Network.HTTP.Affjax"];
+  var Prelude = PS["Prelude"];        
+  var ToggleState = (function () {
+      function ToggleState(value0) {
+          this.value0 = value0;
+      };
+      ToggleState.create = function (value0) {
+          return new ToggleState(value0);
+      };
+      return ToggleState;
+  })();
+  var SetUserName = (function () {
+      function SetUserName(value0, value1) {
+          this.value0 = value0;
+          this.value1 = value1;
+      };
+      SetUserName.create = function (value0) {
+          return function (value1) {
+              return new SetUserName(value0, value1);
+          };
+      };
+      return SetUserName;
+  })();
+  var MakeRequest = (function () {
+      function MakeRequest(value0) {
+          this.value0 = value0;
+      };
+      MakeRequest.create = function (value0) {
+          return new MakeRequest(value0);
+      };
+      return MakeRequest;
+  })();
+
+  // component :: forall m. H.Component HH.HTML Query Unit Void m
+  var component = (function () {
+      var render = function (state) {
+          return Halogen_HTML_Elements.div_([ Halogen_HTML_Elements.p_([ Halogen_HTML_Core.text("Toggle me!") ]), Halogen_HTML_Elements.button([ Halogen_HTML_Events.onClick(Halogen_HTML_Events.input_(ToggleState.create)) ])([ Halogen_HTML_Core.text("button") ]) ]);
+      };
+      var initialState = {
+          loading: false,
+          username: "",
+          result: Data_Maybe.Nothing.value
+      };
+    
+      // eval :: Query ~> H.ComponentDSL State Query Void m
+  var $$eval = function (v) {
+          if (v instanceof ToggleState) {
+              return Control_Applicative.pure(Halogen_Query_HalogenM.applicativeHalogenM)(v.value0);
+          };
+          if (v instanceof SetUserName) {
+              return Control_Applicative.pure(Halogen_Query_HalogenM.applicativeHalogenM)(v.value1);
+          };
+          if (v instanceof MakeRequest) {
+              return Control_Applicative.pure(Halogen_Query_HalogenM.applicativeHalogenM)(v.value0);
+          };
+          throw new Error("Failed pattern match at ComponentE.Component line 54, column 10 - line 65, column 12: " + [ v.constructor.name ]);
+      };
+      return Halogen_Component.component(Halogen_HTML_Core.bifunctorHTML)({
+          initialState: Data_Function["const"](initialState),
+          render: render,
+          "eval": $$eval,
+          receiver: Data_Function["const"](Data_Maybe.Nothing.value)
+      });
+  })();
+  exports["ToggleState"] = ToggleState;
+  exports["SetUserName"] = SetUserName;
+  exports["MakeRequest"] = MakeRequest;
+  exports["component"] = component;
+})(PS["ComponentE.Component"] = PS["ComponentE.Component"] || {});
+(function(exports) {
+    "use strict";
   var CSS = PS["CSS"];
   var ComponentA_Component = PS["ComponentA.Component"];
   var ComponentB_Component = PS["ComponentB.Component"];
-  var ComponentC_Component = PS["ComponentC.Component"];
+  var ComponentE_Component = PS["ComponentE.Component"];
   var Control_Applicative = PS["Control.Applicative"];
   var Control_Bind = PS["Control.Bind"];
   var Control_Monad_Aff = PS["Control.Monad.Aff"];
@@ -9875,6 +9959,8 @@ var PS = {};
   var Data_Maybe = PS["Data.Maybe"];
   var Data_Ord = PS["Data.Ord"];
   var Data_Ordering = PS["Data.Ordering"];
+  var Data_Unit = PS["Data.Unit"];
+  var Data_Void = PS["Data.Void"];
   var Halogen = PS["Halogen"];
   var Halogen_Component = PS["Halogen.Component"];
   var Halogen_Component_ChildPath = PS["Halogen.Component.ChildPath"];
@@ -9889,18 +9975,6 @@ var PS = {};
   var Prelude = PS["Prelude"];
   var SubContainerH_Component_State = PS["SubContainerH.Component.State"];
   var Type_Row_Effect_Equality = PS["Type.Row.Effect.Equality"];
-
-  // This component is based partially on
-  // https://github.com/slamdata/purescript-halogen/blob/master/examples/effects-aff-ajax/src/Component.purs
-  var ReadStates = (function () {
-      function ReadStates(value0) {
-          this.value0 = value0;
-      };
-      ReadStates.create = function (value0) {
-          return new ReadStates(value0);
-      };
-      return ReadStates;
-  })();
 
   // This component is based partially on
   // https://github.com/slamdata/purescript-halogen/blob/master/examples/effects-aff-ajax/src/Component.purs
@@ -9928,8 +10002,12 @@ var PS = {};
       };
       return MakeRequest;
   })();
+
+  // ui :: forall m. H.Component HH.HTML Query Unit Void m
   var ui = (function () {
-      var render = function (state) {
+    
+      // render :: State -> H.ParentHTML Query ChildQuery ChildSlot m
+  var render = function (state) {
           return Halogen_HTML_Elements.section([ Halogen_HTML_Properties.class_("section-form"), Halogen_HTML_Properties.id_("form2") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.h2_([ Halogen_HTML_Core.text("Example of Aff Ajax") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.form_([ Halogen_HTML_Elements.h1_([ Halogen_HTML_Core.text("Lookup GitHub user") ]), Halogen_HTML_Elements.label_([ Halogen_HTML_Elements.div_([ Halogen_HTML_Core.text("Enter username:") ]), Halogen_HTML_Elements.input([ Halogen_HTML_Properties.value(state.username), Halogen_HTML_Events.onValueInput(Halogen_HTML_Events.input(SetUserName.create)) ]) ]), Halogen_HTML_Elements.button([ Halogen_HTML_Properties.disabled(state.loading), Halogen_HTML_Events.onClick(Halogen_HTML_Events.input_(MakeRequest.create)) ])([ Halogen_HTML_Core.text("Fetch info") ]), Halogen_HTML_Elements.p_([ Halogen_HTML_Core.text((function () {
               if (state.loading) {
                   return "Working...";
@@ -9942,8 +10020,8 @@ var PS = {};
               if (state.result instanceof Data_Maybe.Just) {
                   return [ Halogen_HTML_Elements.h2_([ Halogen_HTML_Core.text("Response:") ]), Halogen_HTML_Elements.pre_([ Halogen_HTML_Elements.code_([ Halogen_HTML_Core.text(state.result.value0) ]) ]) ];
               };
-              throw new Error("Failed pattern match at SubContainerH.Component line 100, column 21 - line 107, column 26: " + [ state.result.constructor.name ]);
-          })()) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.form([ Halogen_HTML_Properties.method(DOM_HTML_Indexed_FormMethod.POST.value), Halogen_HTML_Properties.action("#"), Halogen_HTML_Properties.class_("contact-form") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("name") ])([ Halogen_HTML_Core.text("Name") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputText.value), Halogen_HTML_Properties.name("name"), Halogen_HTML_Properties.id_("name"), Halogen_HTML_Properties.placeholder("Your name"), Halogen_HTML_Properties.required(true) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("email") ])([ Halogen_HTML_Core.text("Email") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputEmail.value), Halogen_HTML_Properties.name("email"), Halogen_HTML_Properties.id_("email"), Halogen_HTML_Properties.placeholder("Your email"), Halogen_HTML_Properties.required(true) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("find-us") ])([ Halogen_HTML_Core.text("How did you find us?") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.select([ Halogen_HTML_Properties.name("find-us"), Halogen_HTML_Properties.id_("find-us") ])([ Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("friends"), Halogen_HTML_Properties.selected(true) ])([ Halogen_HTML_Core.text("Friends") ]), Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("search") ])([ Halogen_HTML_Core.text("Search engine") ]), Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("ad") ])([ Halogen_HTML_Core.text("Advertisement") ]), Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("other") ])([ Halogen_HTML_Core.text("Other") ]) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label_([ Halogen_HTML_Core.text("Newsletter?") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputCheckbox.value), Halogen_HTML_Properties.name("news"), Halogen_HTML_Properties.id_("news"), Halogen_HTML_Properties.checked(true) ]), Halogen_HTML_Core.text("Yes please") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label_([ Halogen_HTML_Core.text("Drop us a line") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.textarea([ Halogen_HTML_Properties.name("message"), Halogen_HTML_Properties.placeholder("Your message") ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label_([ Halogen_HTML_Core.text(" ") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputSubmit.value), Halogen_HTML_Properties.value("Send it!") ]) ]) ]) ]) ]) ]);
+              throw new Error("Failed pattern match at SubContainerH.Component line 104, column 21 - line 111, column 26: " + [ state.result.constructor.name ]);
+          })()) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.form([ Halogen_HTML_Properties.method(DOM_HTML_Indexed_FormMethod.POST.value), Halogen_HTML_Properties.action("#"), Halogen_HTML_Properties.class_("contact-form") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("name") ])([ Halogen_HTML_Core.text("Name") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputText.value), Halogen_HTML_Properties.name("name"), Halogen_HTML_Properties.id_("name"), Halogen_HTML_Properties.placeholder("Your name"), Halogen_HTML_Properties.required(true) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("email") ])([ Halogen_HTML_Core.text("Email") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputEmail.value), Halogen_HTML_Properties.name("email"), Halogen_HTML_Properties.id_("email"), Halogen_HTML_Properties.placeholder("Your email"), Halogen_HTML_Properties.required(true) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label([ Halogen_HTML_Properties["for"]("find-us") ])([ Halogen_HTML_Core.text("How did you find us?") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.select([ Halogen_HTML_Properties.name("find-us"), Halogen_HTML_Properties.id_("find-us") ])([ Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("friends"), Halogen_HTML_Properties.selected(true) ])([ Halogen_HTML_Core.text("Friends") ]), Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("search") ])([ Halogen_HTML_Core.text("Search engine") ]), Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("ad") ])([ Halogen_HTML_Core.text("Advertisement") ]), Halogen_HTML_Elements.option([ Halogen_HTML_Properties.value("other") ])([ Halogen_HTML_Core.text("Other") ]) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label_([ Halogen_HTML_Core.text("Newsletter?") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputCheckbox.value), Halogen_HTML_Properties.name("news"), Halogen_HTML_Properties.id_("news"), Halogen_HTML_Properties.checked(true) ]), Halogen_HTML_Core.text("Yes please") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label_([ Halogen_HTML_Core.text("Drop us a line") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.textarea([ Halogen_HTML_Properties.name("message"), Halogen_HTML_Properties.placeholder("Your message") ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label_([ Halogen_HTML_Core.text(" ") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputSubmit.value), Halogen_HTML_Properties.value("Send it!") ]) ]) ]) ]) ]), Halogen_HTML_Elements.div_([ Halogen_HTML["slot'"](Halogen_Component_ChildPath.cp3)(Data_Unit.unit)(ComponentE_Component.component)(Data_Unit.unit)(Data_Void.absurd) ]) ]);
       };
       var initialState = {
           b: Data_Maybe.Nothing.value,
@@ -9980,21 +10058,19 @@ var PS = {};
       //        [ HE.onClick (HE.input_ ReadStates) ]
       //        [ HH.text "Check states now" ]
       //    ]
+      // eval :: Query ~> H.ParentDSL State Query ChildQuery ChildSlot Void m
   var $$eval = function (v) {
-          if (v instanceof ReadStates) {
-              return Control_Applicative.pure(Halogen_Query_HalogenM.applicativeHalogenM)(v.value0);
-          };
           if (v instanceof SetUserName) {
               return Control_Bind.discard(Control_Bind.discardUnit)(Halogen_Query_HalogenM.bindHalogenM)(Control_Monad_State_Class.modify(Halogen_Query_HalogenM.monadStateHalogenM)(function (v1) {
-                  var $15 = {};
-                  for (var $16 in v1) {
-                      if ({}.hasOwnProperty.call(v1, $16)) {
-                          $15[$16] = v1[$16];
+                  var $14 = {};
+                  for (var $15 in v1) {
+                      if ({}.hasOwnProperty.call(v1, $15)) {
+                          $14[$15] = v1[$15];
                       };
                   };
-                  $15.username = v.value0;
-                  $15.result = Data_Maybe.Nothing.value;
-                  return $15;
+                  $14.username = v.value0;
+                  $14.result = Data_Maybe.Nothing.value;
+                  return $14;
               }))(function () {
                   return Control_Applicative.pure(Halogen_Query_HalogenM.applicativeHalogenM)(v.value1);
               });
@@ -10004,32 +10080,32 @@ var PS = {};
                   return v1.username;
               }))(function (v1) {
                   return Control_Bind.discard(Control_Bind.discardUnit)(Halogen_Query_HalogenM.bindHalogenM)(Control_Monad_State_Class.modify(Halogen_Query_HalogenM.monadStateHalogenM)(function (v2) {
-                      var $21 = {};
-                      for (var $22 in v2) {
-                          if ({}.hasOwnProperty.call(v2, $22)) {
-                              $21[$22] = v2[$22];
+                      var $20 = {};
+                      for (var $21 in v2) {
+                          if ({}.hasOwnProperty.call(v2, $21)) {
+                              $20[$21] = v2[$21];
                           };
                       };
-                      $21.loading = true;
-                      return $21;
+                      $20.loading = true;
+                      return $20;
                   }))(function () {
                       return Control_Bind.discard(Control_Bind.discardUnit)(Halogen_Query_HalogenM.bindHalogenM)(Control_Monad_State_Class.modify(Halogen_Query_HalogenM.monadStateHalogenM)(function (v2) {
-                          var $24 = {};
-                          for (var $25 in v2) {
-                              if ({}.hasOwnProperty.call(v2, $25)) {
-                                  $24[$25] = v2[$25];
+                          var $23 = {};
+                          for (var $24 in v2) {
+                              if ({}.hasOwnProperty.call(v2, $24)) {
+                                  $23[$24] = v2[$24];
                               };
                           };
-                          $24.loading = false;
-                          $24.result = new Data_Maybe.Just("dummy response");
-                          return $24;
+                          $23.loading = false;
+                          $23.result = new Data_Maybe.Just("dummy response");
+                          return $23;
                       }))(function () {
                           return Control_Applicative.pure(Halogen_Query_HalogenM.applicativeHalogenM)(v.value0);
                       });
                   });
               });
           };
-          throw new Error("Failed pattern match at SubContainerH.Component line 269, column 10 - line 284, column 12: " + [ v.constructor.name ]);
+          throw new Error("Failed pattern match at SubContainerH.Component line 281, column 10 - line 296, column 12: " + [ v.constructor.name ]);
       };
       return Halogen_Component.parentComponent(Data_Either.ordEither(Data_Ord.ordUnit)(Data_Either.ordEither(Data_Ord.ordUnit)(Data_Either.ordEither(Data_Ord.ordUnit)(Data_Ord.ordVoid))))({
           initialState: Data_Function["const"](initialState),
@@ -10038,18 +10114,17 @@ var PS = {};
           receiver: Data_Function["const"](Data_Maybe.Nothing.value)
       });
   })();
-  exports["ReadStates"] = ReadStates;
   exports["SetUserName"] = SetUserName;
   exports["MakeRequest"] = MakeRequest;
   exports["ui"] = ui;
 })(PS["SubContainerH.Component"] = PS["SubContainerH.Component"] || {});
 (function(exports) {
-  // Generated by purs version 0.11.7
-  "use strict";
+    "use strict";
   var CSS = PS["CSS"];
   var Container_Component_State = PS["Container.Component.State"];
   var Control_Applicative = PS["Control.Applicative"];
   var Control_Bind = PS["Control.Bind"];
+  var Control_Monad_Aff = PS["Control.Monad.Aff"];
   var Control_Monad_Eff_Exception = PS["Control.Monad.Eff.Exception"];
   var Control_Monad_State = PS["Control.Monad.State"];
   var Control_Monad_State_Class = PS["Control.Monad.State.Class"];
@@ -10071,6 +10146,7 @@ var PS = {};
   var Halogen_HTML_Events = PS["Halogen.HTML.Events"];
   var Halogen_HTML_Properties = PS["Halogen.HTML.Properties"];
   var Halogen_Query_HalogenM = PS["Halogen.Query.HalogenM"];
+  var Network_HTTP_Affjax = PS["Network.HTTP.Affjax"];
   var Prelude = PS["Prelude"];
   var SubContainerA_Component = PS["SubContainerA.Component"];
   var SubContainerB_Component = PS["SubContainerB.Component"];
@@ -10080,6 +10156,9 @@ var PS = {};
   var SubContainerF_Component = PS["SubContainerF.Component"];
   var SubContainerG_Component = PS["SubContainerG.Component"];
   var SubContainerH_Component = PS["SubContainerH.Component"];        
+
+  // Values of the type Slot are used as the IDs for child components
+  // in the rendered HTML.
   var Slot = (function () {
       function Slot() {
 
@@ -10087,12 +10166,18 @@ var PS = {};
       Slot.value = new Slot();
       return Slot;
   })();
+
+  // ui :: forall m. H.Component HH.HTML Query Unit Void m
   var ui = (function () {
-      var render = function (state) {
+    
+      // render :: State -> H.ParentHTML Query ChildQuery ChildSlot m 
+  var render = function (state) {
           return Halogen_HTML_Elements.div_([ Halogen_HTML["slot'"](Halogen_Component_ChildPath.cp1)(Data_Unit.unit)(SubContainerA_Component.ui)(Data_Unit.unit)(Data_Void.absurd), Halogen_HTML["slot'"](Halogen_Component_ChildPath.cp2)(Data_Unit.unit)(SubContainerB_Component.ui)(Data_Unit.unit)(Data_Void.absurd), Halogen_HTML["slot'"](Halogen_Component_ChildPath.cp3)(Data_Unit.unit)(SubContainerC_Component.ui)(Data_Unit.unit)(Data_Void.absurd), Halogen_HTML["slot'"](Halogen_Component_ChildPath.cp4)(Data_Unit.unit)(SubContainerD_Component.ui)(Data_Unit.unit)(Data_Void.absurd), Halogen_HTML["slot'"](Halogen_Component_ChildPath.cp5)(Data_Unit.unit)(SubContainerE_Component.ui)(Data_Unit.unit)(Data_Void.absurd), Halogen_HTML["slot'"](Halogen_Component_ChildPath.cp6)(Data_Unit.unit)(SubContainerF_Component.ui)(Data_Unit.unit)(Data_Void.absurd), Halogen_HTML["slot'"](Halogen_Component_ChildPath.cp7)(Data_Unit.unit)(SubContainerG_Component.ui)(Data_Unit.unit)(Data_Void.absurd), Halogen_HTML["slot'"](Halogen_Component_ChildPath.cp8)(Data_Unit.unit)(SubContainerH_Component.ui)(Data_Unit.unit)(Data_Void.absurd) ]);
       };
       var initialState = {};
-      var $$eval = function (v) {
+    
+      // eval :: Query ~> H.ParentDSL State Query ChildQuery ChildSlot Void m
+  var $$eval = function (v) {
           return Control_Bind.discard(Control_Bind.discardUnit)(Halogen_Query_HalogenM.bindHalogenM)(Control_Monad_State_Class.put(Halogen_Query_HalogenM.monadStateHalogenM)({}))(function () {
               return Control_Applicative.pure(Halogen_Query_HalogenM.applicativeHalogenM)(v.value0);
           });
@@ -10995,8 +11080,7 @@ var PS = {};
   exports["matchesAff"] = matchesAff;
 })(PS["Routing"] = PS["Routing"] || {});
 (function(exports) {
-  // Generated by purs version 0.11.7
-  "use strict";
+    "use strict";
   var BigPrelude = PS["BigPrelude"];
   var Container_Component = PS["Container.Component"];
   var Control_Alt = PS["Control.Alt"];
@@ -11028,6 +11112,7 @@ var PS = {};
   var Halogen_HTML_Properties = PS["Halogen.HTML.Properties"];
   var Halogen_Query = PS["Halogen.Query"];
   var Halogen_Query_HalogenM = PS["Halogen.Query.HalogenM"];
+  var Network_HTTP_Affjax = PS["Network.HTTP.Affjax"];
   var Profile_Component = PS["Profile.Component"];
   var Routing = PS["Routing"];
   var Routing_Match = PS["Routing.Match"];
@@ -11071,7 +11156,9 @@ var PS = {};
       };
       var profile = Data_Functor.voidRight(Routing_Match.matchFunctor)(Profile.value)(route("profile"));
       var home = Data_Functor.voidRight(Routing_Match.matchFunctor)(Home.value)(Routing_Match_Class.lit(Routing_Match.matchMatchClass)(""));
-      var container = Data_Functor.voidRight(Routing_Match.matchFunctor)(Container.value)(route("container"));
+    
+      //    itemlist = ItemList <$> (route "itemlist" *> parseCRUD)
+  var container = Data_Functor.voidRight(Routing_Match.matchFunctor)(Container.value)(route("container"));
       return Control_Alt.alt(Routing_Match.matchAlt)(Control_Alt.alt(Routing_Match.matchAlt)(profile)(container))(home);
   })();
   var redirects = function (driver) {
@@ -11086,13 +11173,25 @@ var PS = {};
           return redirects(driver)(v.value0)(v.value1);
       });
   };
+
+  //pathToProfile :: ChildPath Profile.Input ChildQuery Profile.Slot ChildSlot
+  //pathToProfile = cpL
   var pathToProfile = Halogen_Component_ChildPath.cpL;
+
+  //pathToItemList :: ChildPath ItemList.Input ChildQuery ItemList.Slot ChildSlot
+  //pathToItemList = cpR
+  //pathToItemList :: ChildPath ItemList.Input ChildQuery ItemList.Slot ChildSlot
+  //pathToItemList = cpR :> cpL
   var pathToContainer = Halogen_Component_ChildPath.cpR;
   var init = {
       currentPage: "Home"
   };
+
+  // ui :: forall m. H.Component HH.HTML Input Unit Void m
   var ui = (function () {
-      var viewPage = function (v) {
+    
+      // viewPage :: String -> H.ParentHTML Input ChildQuery ChildSlot m
+  var viewPage = function (v) {
           if (v === "Container") {
               return Halogen_HTML["slot'"](pathToContainer)(Container_Component.Slot.value)(Container_Component.ui)(Data_Unit.unit)(Data_Void.absurd);
           };
@@ -11104,10 +11203,14 @@ var PS = {};
       var link = function (s) {
           return Halogen_HTML_Elements.li_([ Halogen_HTML_Elements.a([ Halogen_HTML_Properties.href("#/" + Data_String.toLower(s)) ])([ Halogen_HTML_Core.text(s) ]) ]);
       };
-      var render = function (st) {
+    
+      // render :: State -> H.ParentHTML Input ChildQuery ChildSlot m
+  var render = function (st) {
           return Halogen_HTML_Elements.div_([ Halogen_HTML_Elements.header_([ Halogen_HTML_Elements.nav_([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.img([ Halogen_HTML_Properties.src("logo-white.png"), Halogen_HTML_Properties.alt("Animatronixs logo"), Halogen_HTML_Properties.class_("logo") ]) ]), Halogen_HTML_Elements.ul([ Halogen_HTML_Properties.class_("main-nav js--main-nav") ])(Data_Functor.map(Data_Functor.functorArray)(link)([ "Home", "Profile", "Container" ])), Halogen_HTML_Elements.a([ Halogen_HTML_Properties.class_("mobile-nav-icon js--nav-icon") ])([ Halogen_HTML_Elements.i([ Halogen_HTML_Properties.class_("ion-navicon-round") ])([  ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("hero-text-box") ])([ Halogen_HTML_Elements.h1_([ Halogen_HTML_Core.text("Goodbye junk food."), Halogen_HTML_Elements.br_, Halogen_HTML_Core.text("Hello super healthy meals.") ]), Halogen_HTML_Elements.a([ Halogen_HTML_Properties.class_("btn btn-full js--scroll-to-plans"), Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Core.text("I'm hungry") ]), Halogen_HTML_Elements.a([ Halogen_HTML_Properties.class_("btn btn-ghost js--scroll-to-start"), Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Core.text("Show me more") ]) ]) ]), viewPage(st.currentPage), Halogen_HTML_Elements.footer_([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-2") ])([ Halogen_HTML_Elements.ul([ Halogen_HTML_Properties.class_("footer-nav") ])([ Halogen_HTML_Elements.li_([ Halogen_HTML_Elements.a([ Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Core.text("About us") ]) ]) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-2") ])([ Halogen_HTML_Elements.ul([ Halogen_HTML_Properties.class_("social-links") ])([ Halogen_HTML_Elements.li_([ Halogen_HTML_Elements.a([ Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Elements.i([ Halogen_HTML_Properties.class_("ion-social-facebook") ])([  ]) ]) ]), Halogen_HTML_Elements.li_([ Halogen_HTML_Elements.a([ Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Elements.i([ Halogen_HTML_Properties.class_("ion-social-twitter") ])([  ]) ]) ]), Halogen_HTML_Elements.li_([ Halogen_HTML_Elements.a([ Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Elements.i([ Halogen_HTML_Properties.class_("ion-social-googleplus") ])([  ]) ]) ]), Halogen_HTML_Elements.li_([ Halogen_HTML_Elements.a([ Halogen_HTML_Properties.href("#") ])([ Halogen_HTML_Elements.i([ Halogen_HTML_Properties.class_("ion-social-instagram") ])([  ]) ]) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.p_([ Halogen_HTML_Core.text("Copyright \xa9 2018 by Animatronixs. All rights reserved.") ]) ]) ]) ]) ]);
       };
-      var $$eval = function (v) {
+    
+      // eval :: Input ~> H.ParentDSL State Input ChildQuery ChildSlot Void m
+  var $$eval = function (v) {
           if (v.value0 instanceof Profile) {
               return Control_Bind.discard(Control_Bind.discardUnit)(Halogen_Query_HalogenM.bindHalogenM)(Control_Monad_State_Class.modify(Halogen_Query_HalogenM.monadStateHalogenM)(function (v1) {
                   var $12 = {};
@@ -11150,7 +11253,7 @@ var PS = {};
                   return Control_Applicative.pure(Halogen_Query_HalogenM.applicativeHalogenM)(v.value1);
               });
           };
-          throw new Error("Failed pattern match at Router line 210, column 5 - line 210, column 73: " + [ v.constructor.name ]);
+          throw new Error("Failed pattern match at Router line 219, column 5 - line 219, column 101: " + [ v.constructor.name ]);
       };
       return Halogen_Component.parentComponent(Data_Either.ordEither(Profile_Component.ordSlot)(Container_Component.ordSlot))({
           initialState: Data_Function["const"](init),
@@ -11172,17 +11275,21 @@ var PS = {};
   exports["redirects"] = redirects;
 })(PS["Router"] = PS["Router"] || {});
 (function(exports) {
-  // Generated by purs version 0.11.7
-  "use strict";
+    "use strict";
   var BigPrelude = PS["BigPrelude"];
+  var Color_Scheme_X11 = PS["Color.Scheme.X11"];
   var Control_Bind = PS["Control.Bind"];
   var Control_Monad_Aff = PS["Control.Monad.Aff"];
+  var DOM_HTML_Document = PS["DOM.HTML.Document"];
   var Data_Function = PS["Data.Function"];
   var Data_Unit = PS["Data.Unit"];
   var Halogen_Aff = PS["Halogen.Aff"];
   var Halogen_Aff_Util = PS["Halogen.Aff.Util"];
   var Halogen_VDom_Driver = PS["Halogen.VDom.Driver"];
+  var Network_HTTP_Affjax = PS["Network.HTTP.Affjax"];
   var Router = PS["Router"];        
+
+  // main :: forall eff. Eff (HA.HalogenEffects eff) Unit
   var main = Halogen_Aff_Util.runHalogenAff(Control_Bind.bind(Control_Monad_Aff.bindAff)(Halogen_Aff_Util.awaitBody)(function (v) {
       return Control_Bind.bind(Control_Monad_Aff.bindAff)(Halogen_VDom_Driver.runUI(Router.ui)(Data_Unit.unit)(v))(function (v1) {
           return Control_Monad_Aff.forkAff(Router.routeSignal(v1));

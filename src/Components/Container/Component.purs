@@ -2,6 +2,8 @@ module Container.Component where
 
 import Prelude
 
+import Control.Monad.Aff (Aff) -- new
+
 import CSS as CB
 import Container.Component.State (State)
 import Control.Monad.Eff.Exception (stack)
@@ -23,6 +25,7 @@ import SubContainerF.Component as SubContainerF
 import SubContainerG.Component as SubContainerG
 import SubContainerH.Component as SubContainerH
 --import ItemList.Component as ComponentA
+import Network.HTTP.Affjax as AX -- new
 
 data Query a = ReadStates a
 
@@ -35,7 +38,8 @@ data Slot = Slot
 derive instance eqSlot :: Eq Slot
 derive instance ordSlot :: Ord Slot
 
-ui :: forall m. H.Component HH.HTML Query Unit Void m
+-- ui :: forall m. H.Component HH.HTML Query Unit Void m
+ui :: forall eff. H.Component HH.HTML Query Unit Void (Aff (ajax :: AX.AJAX | eff))
 ui = 
   H.parentComponent
     { initialState: const initialState
@@ -57,7 +61,8 @@ ui =
     --, h: Nothing                     
     }   
 
-  render :: State -> H.ParentHTML Query ChildQuery ChildSlot m 
+  -- render :: State -> H.ParentHTML Query ChildQuery ChildSlot m 
+  render :: State -> H.ParentHTML Query ChildQuery ChildSlot (Aff (ajax :: AX.AJAX | eff))
   render state = 
     HH.div_
     [ HH.slot' CP.cp1 unit SubContainerA.ui unit absurd
@@ -66,7 +71,7 @@ ui =
     , HH.slot' CP.cp4 unit SubContainerD.ui unit absurd
     , HH.slot' CP.cp5 unit SubContainerE.ui unit absurd
     , HH.slot' CP.cp6 unit SubContainerF.ui unit absurd
-    , HH.slot' CP.cp7 unit SubContainerG.ui unit absurd            
+    , HH.slot' CP.cp7 unit SubContainerG.ui unit absurd
     , HH.slot' CP.cp8 unit SubContainerH.ui unit absurd
 
 --      HH.div
@@ -104,7 +109,8 @@ ui =
     --    [ HH.text "Check states now" ]
     ]
 
-  eval :: Query ~> H.ParentDSL State Query ChildQuery ChildSlot Void m
+  -- eval :: Query ~> H.ParentDSL State Query ChildQuery ChildSlot Void m
+  eval :: Query ~> H.ParentDSL State Query ChildQuery ChildSlot Void (Aff (ajax :: AX.AJAX | eff))
   eval = case _ of
     ReadStates next -> do
       --a <- H.query' CP.cp1 unit (H.request ComponentA.GetCount)
