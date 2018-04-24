@@ -15,14 +15,14 @@ import Network.HTTP.Affjax as AX
 -- type State = Boolean
 type State =
   { loading :: Boolean
-  , username :: String
+  , lednumber :: String
   , result :: Maybe String
   }
 
 data Query a
   = ToggleState a
 --  | GetState (Boolean -> a)
-  | SetUserName String a
+  | SetLEDNumber String a
   | MakeRequest a
 
 -- component :: forall m. H.Component HH.HTML Query Unit Void m
@@ -38,7 +38,7 @@ component =
 
   initialState :: State
   -- initialState = false
-  initialState = { loading: false, username: "", result: Nothing }
+  initialState = { loading: false, lednumber: "", result: Nothing }
 
   render :: State -> H.ComponentHTML Query
   render state =
@@ -52,17 +52,17 @@ component =
           [ HH.div
               [ HP.class_ (H.ClassName "col span-1-of-3")]
               [ HH.label_
-                  [ HH.text "User name"]
+                  [ HH.text "LED number"]
               ]
           , HH.div
               [ HP.class_ (H.ClassName "col span-2-of-3")]
               [ HH.input
                   [ HP.type_ HP.InputText
-                  , HP.name "username"
-                  , HP.id_ "username"
-                  , HP.placeholder "User name"
-                  , HP.value state.username  
-                  , HE.onValueInput (HE.input SetUserName)
+                  , HP.name "lednumber"
+                  , HP.id_ "lednumber"
+                  , HP.placeholder "LED number"
+                  , HP.value state.lednumber  
+                  , HE.onValueInput (HE.input SetLEDNumber)
                   ]
               ]                      
           ]
@@ -79,7 +79,7 @@ component =
                 [ HP.type_ HP.InputSubmit
                 , HP.disabled state.loading
                 , HE.onClick (HE.input_ MakeRequest)
-                , HP.value "Fetch info"
+                , HP.value "Toggle LED"
                 ]
               ]
               , HH.p_
@@ -108,12 +108,12 @@ component =
       pure next
 --  eval (GetState reply) = do
 --    reply <$> H.get
-    SetUserName username next -> do
-      H.modify (_ { username = username, result = Nothing :: Maybe String })
+    SetLEDNumber lednumber next -> do
+      H.modify (_ { lednumber = lednumber, result = Nothing :: Maybe String })
       pure next
     MakeRequest next -> do
-      username <- H.gets _.username
+      lednumber <- H.gets _.lednumber
       H.modify (_ { loading = true })
-      response <- H.liftAff $ AX.get ("https://api.github.com/users/" <> username)
+      response <- H.liftAff $ AX.get ("https://api.github.com/users/" <> lednumber)
       H.modify (_ { loading = false, result = Just response.response })
       pure next  

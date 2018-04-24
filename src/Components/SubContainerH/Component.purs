@@ -77,7 +77,7 @@ ui =
       [ HH.div
           [ HP.class_ (H.ClassName "row")]
           [ HH. h2_ 
-              [ HH.text "Example of Aff Ajax"]
+              [ HH.text "Examples of Aff Ajax"]
           ]   
       , HH.div
           [ HP.class_ (H.ClassName "row")]
