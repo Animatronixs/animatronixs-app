@@ -78,40 +78,44 @@ ui =
           [ HH. h2_ 
               [ HH.text "Example of Aff Ajax"]
           ]
+
       -- START OF NEW CODE    
       , HH.div
           [ HP.class_ (H.ClassName "row")]
-          [
-              HH.form_ $
-                [ HH.h1_ 
-                    [ HH.text "Lookup GitHub user"]
-                , HH.label_
-                    [ HH.div_
-                        [ HH.text "Enter username:"]
-                    , HH.input
-                        [ HP.value state.username
-                        , HE.onValueInput (HE.input SetUserName)
-                        ]
-                    ]
-                , HH.button
-                    [ HP.disabled state.loading
-                    , HE.onClick (HE.input_ MakeRequest)
-                    ]
-                    [ HH.text "Fetch info"]  
-                , HH.p_
-                    [ HH.text (if state.loading then "Working..." else "")]
-                , HH.div_
-                    case state.result of
-                      Nothing -> []
-                      Just res ->
-                        [ HH.h2_
-                            [ HH.text "Response:"]
-                        , HH.pre_
-                            [ HH.code_ [ HH.text res]]
-                        ]              
-                ]
-          ]
+          [ HH.slot' CP.cp3 unit ComponentE.component unit absurd]
+
+--          [
+--              HH.form_ $
+--                [ HH.h1_ 
+--                    [ HH.text "Lookup GitHub user"]
+--                , HH.label_
+--                    [ HH.div_
+--                        [ HH.text "Enter username:"]
+--                    , HH.input
+--                        [ HP.value state.username
+--                        , HE.onValueInput (HE.input SetUserName)
+--                        ]
+--                    ]
+--                , HH.button
+--                    [ HP.disabled state.loading
+--                    , HE.onClick (HE.input_ MakeRequest)
+--                    ]
+--                    [ HH.text "Fetch info"]  
+--                , HH.p_
+--                    [ HH.text (if state.loading then "Working..." else "")]
+--                , HH.div_
+--                    case state.result of
+--                      Nothing -> []
+--                      Just res ->
+--                        [ HH.h2_
+--                            [ HH.text "Response:"]
+--                        , HH.pre_
+--                            [ HH.code_ [ HH.text res]]
+--                        ]              
+--                ]
+--          ]
       -- END OF NEW CODE
+
       , HH.div
           [ HP.class_ (H.ClassName "row")]
           [ HH.form
@@ -240,8 +244,8 @@ ui =
           ]
 
 
-      , HH.div_
-          [ HH.slot' CP.cp3 unit ComponentE.component unit absurd]
+--      , HH.div_
+--          [ HH.slot' CP.cp3 unit ComponentE.component unit absurd]
 
 
 
