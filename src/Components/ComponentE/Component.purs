@@ -56,9 +56,9 @@ component =
               ]
           , HH.div
               [ HP.class_ (H.ClassName "col span-2-of-3")]
-              [ HH.textarea
-                  [ HP.name "username"
-                  , HP.placeholder "User name"
+              [ HH.input
+                  [ HP.value state.username  
+                  , HE.onValueInput (HE.input SetUserName)
                   ]
               ]                      
           ]
@@ -72,16 +72,19 @@ component =
           , HH.div
               [ HP.class_ (H.ClassName "col span-2-of-3")]
               [ HH.input
-                  [ HP.type_ HP.InputSubmit
-                  , HP.value "Fetch info"
-                  ]
-              ]                      
+                [ HP.type_ HP.InputSubmit
+                , HP.disabled state.loading
+                , HE.onClick (HE.input_ MakeRequest)
+                , HP.value "Fetch info"
+                ]
+              ]
+--              [ HH.input
+--                  [ HP.type_ HP.InputSubmit
+--                  , HP.value "Fetch info"
+--                  ]
+--              ]                      
           ]
       ]
-
-
-
-
 
 
 --      [ HH.h1_ 
