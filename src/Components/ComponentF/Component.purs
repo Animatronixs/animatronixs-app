@@ -60,7 +60,7 @@ component =
                   [ HP.type_ HP.InputText
                   , HP.name "lednumber"
                   , HP.id_ "lednumber"
-                  , HP.placeholder "LED number"
+                  , HP.placeholder "LED number (choose 1 or 2)"
                   , HP.value state.lednumber  
                   , HE.onValueInput (HE.input SetLEDNumber)
                   ]
@@ -114,6 +114,6 @@ component =
     MakeRequest next -> do
       lednumber <- H.gets _.lednumber
       H.modify (_ { loading = true })
-      response <- H.liftAff $ AX.get ("https://api.github.com/users/" <> lednumber)
+      response <- H.liftAff $ AX.get ("http://localhost:8080/getorders?params=" <> lednumber)
       H.modify (_ { loading = false, result = Just response.response })
       pure next  
