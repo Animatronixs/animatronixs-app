@@ -77,45 +77,10 @@ ui =
           [ HP.class_ (H.ClassName "row")]
           [ HH. h2_ 
               [ HH.text "Example of Aff Ajax"]
-          ]
-
-      -- START OF NEW CODE    
+          ]   
       , HH.div
           [ HP.class_ (H.ClassName "row")]
           [ HH.slot' CP.cp3 unit ComponentE.component unit absurd]
-
---          [
---              HH.form_ $
---                [ HH.h1_ 
---                    [ HH.text "Lookup GitHub user"]
---                , HH.label_
---                    [ HH.div_
---                        [ HH.text "Enter username:"]
---                    , HH.input
---                        [ HP.value state.username
---                        , HE.onValueInput (HE.input SetUserName)
---                        ]
---                    ]
---                , HH.button
---                    [ HP.disabled state.loading
---                    , HE.onClick (HE.input_ MakeRequest)
---                    ]
---                    [ HH.text "Fetch info"]  
---                , HH.p_
---                    [ HH.text (if state.loading then "Working..." else "")]
---                , HH.div_
---                    case state.result of
---                      Nothing -> []
---                      Just res ->
---                        [ HH.h2_
---                            [ HH.text "Response:"]
---                        , HH.pre_
---                            [ HH.code_ [ HH.text res]]
---                        ]              
---                ]
---          ]
-      -- END OF NEW CODE
-
       , HH.div
           [ HP.class_ (H.ClassName "row")]
           [ HH.form
@@ -242,43 +207,7 @@ ui =
                   ]
               ]
           ]
-
-
---      , HH.div_
---          [ HH.slot' CP.cp3 unit ComponentE.component unit absurd]
-
-
-
       ] 
-
-
---    HH.div_
---    [ HH.div
---        [ HP.class_ (H.ClassName "box")]
---        [ HH.h2_ [ HH.text "Component A" ]
---        , HH.slot' CP.cp1 unit ComponentA.component unit absurd
---        ]
---    , HH.div
---        [ HP.class_ (H.ClassName "box")]
---        [ HH.h2_ [ HH.text "Component B" ]
---        , HH.slot' CP.cp2 unit ComponentB.component unit absurd
---        ]
---    , HH.div
---        [ HP.class_ (H.ClassName "box")]
---        [ HH.h2_ [ HH.text "Component C" ]
---        , HH.slot' CP.cp3 unit ComponentC.component unit absurd
---        ]
---    , HH.p_
---        [ HH.text "Last observed states:"]
---    , HH.ul_
---        [ HH.li_ [ HH.text ("Component A: ") ]
---        , HH.li_ [ HH.text ("Component B: ") ]
---        , HH.li_ [ HH.text ("Component C: ") ]
---        ]
---    , HH.button
---        [ HE.onClick (HE.input_ ReadStates) ]
---        [ HH.text "Check states now" ]
---    ]
 
   -- eval :: Query ~> H.ParentDSL State Query ChildQuery ChildSlot Void m
   eval :: Query ~> H.ParentDSL State Query ChildQuery ChildSlot Void (Aff (ajax :: AX.AJAX | eff))

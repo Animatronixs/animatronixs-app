@@ -42,44 +42,79 @@ component =
 
   render :: State -> H.ComponentHTML Query
   render state =
-    HH.form_ $
-      [ HH.h1_ 
-          [ HH.text "Lookup GitHub user"]
-      , HH.label_
-          [ HH.div_
-              [ HH.text "Enter username"]
-              , HH.input
-                  [ HP.value state.username
-                  , HE.onValueInput (HE.input SetUserName)
-                  ]
-          ]
-      , HH.button
-          [ HP.disabled state.loading
-          , HE.onClick (HE.input_ MakeRequest)
-          ]
-          [ HH.text "Fetch info"]
-      , HH.p_
-          [ HH.text (if state.loading then "Working..." else "")]
-      , HH.div_
-          case state.result of
-            Nothing -> []
-            Just result ->
-              [ HH.h2_
-                  [ HH.text "Response:"]
-              , HH.pre_
-                  [ HH.code_
-                      [ HH.text result]
-                  ]
+    HH.form
+      [ HP.method (HP.POST)
+      , HP.action "#"
+      , HP.class_ (H.ClassName "contact-form")  
+      ]
+      [ HH.div
+          [ HP.class_ (H.ClassName "row")]
+          [ HH.div
+              [ HP.class_ (H.ClassName "col span-1-of-3")]
+              [ HH.label_
+                  [ HH.text "Enter user name"]
               ]
+          , HH.div
+              [ HP.class_ (H.ClassName "col span-2-of-3")]
+              [ HH.textarea
+                  [ HP.name "username"
+                  , HP.placeholder "User name"
+                  ]
+              ]                      
+          ]
+      , HH.div
+          [ HP.class_ (H.ClassName "row")]
+          [ HH.div
+              [ HP.class_ (H.ClassName "col span-1-of-3")]
+              [ HH.label_
+                  [ HH.text " "]
+              ]
+          , HH.div
+              [ HP.class_ (H.ClassName "col span-2-of-3")]
+              [ HH.input
+                  [ HP.type_ HP.InputSubmit
+                  , HP.value "Fetch info"
+                  ]
+              ]                      
+          ]
       ]
 
 
---    HH.div_
---      [ HH.p_ [ HH.text "Toggle me!" ]
+
+
+
+
+--      [ HH.h1_ 
+--          [ HH.text "Lookup GitHub user"]
+--      , HH.label_
+--          [ HH.div_
+--              [ HH.text "Enter username"]
+--              , HH.input
+--                  [ HP.value state.username
+--                  , HE.onValueInput (HE.input SetUserName)
+--                  ]
+--          ]
 --      , HH.button
---          [ HE.onClick (HE.input_ ToggleState) ]
---          [ HH.text "button" ] -- [ HH.text (if state then "On" else "Off") ]
+--          [ HP.disabled state.loading
+--          , HE.onClick (HE.input_ MakeRequest)
+--          ]
+--          [ HH.text "Fetch info"]
+--      , HH.p_
+--          [ HH.text (if state.loading then "Working..." else "")]
+--      , HH.div_
+--          case state.result of
+--            Nothing -> []
+--            Just result ->
+--              [ HH.h2_
+--                  [ HH.text "Response:"]
+--              , HH.pre_
+--                  [ HH.code_
+--                      [ HH.text result]
+--                  ]
+--              ]
 --      ]
+
+
 
   -- eval :: Query ~> H.ComponentDSL State Query Void m
   eval :: Query ~> H.ComponentDSL State Query Void (Aff (ajax :: AX.AJAX | eff))
