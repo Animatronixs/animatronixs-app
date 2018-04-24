@@ -212,3 +212,8 @@ Here's what we did:
 8) Run t2 list which should show the USB connection
 9) Do the rest... http://tessel.github.io/t2-start/
 10) Rejoice 
+
+## Apply Ajax REST API call 
+
+Based on [https://github.com/slamdata/purescript-halogen/blob/master/examples/effects-aff-ajax/src/Component.purs](https://github.com/slamdata/purescript-halogen/blob/master/examples/effects-aff-ajax/src/Component.purs)
+
