@@ -7,12 +7,13 @@ import CSS as CB
 import ComponentA.Component as ComponentA
 import ComponentB.Component as ComponentB
 import ComponentE.Component as ComponentE
+import ComponentF.Component as ComponentF
 import Control.Monad.Aff (Aff)
 import Control.Monad.Eff.Exception (stack)
 import Control.Monad.State (state)
 import Data.Array.NonEmpty (findLastIndex)
-import Data.Either.Nested (Either3)
-import Data.Functor.Coproduct.Nested (Coproduct3)
+import Data.Either.Nested (Either4)
+import Data.Functor.Coproduct.Nested (Coproduct4)
 import Data.HTTP.Method (Method(..))
 import Data.HTTP.Method as Data.HTTP.Method
 import Data.Maybe (Maybe(..), maybe)
@@ -36,8 +37,8 @@ data Query a
   = SetUserName String a
   | MakeRequest a
 
-type ChildQuery = Coproduct3 ComponentA.Query ComponentB.Query ComponentE.Query
-type ChildSlot = Either3 Unit Unit Unit
+type ChildQuery = Coproduct4 ComponentA.Query ComponentB.Query ComponentE.Query ComponentF.Query
+type ChildSlot = Either4 Unit Unit Unit Unit
 
 -- Values of the type Slot are used as the IDs for child components
 -- in the rendered HTML.
@@ -81,6 +82,9 @@ ui =
       , HH.div
           [ HP.class_ (H.ClassName "row")]
           [ HH.slot' CP.cp3 unit ComponentE.component unit absurd]
+      , HH.div
+          [ HP.class_ (H.ClassName "row")]
+          [ HH.slot' CP.cp4 unit ComponentF.component unit absurd]  
       ] 
 
   -- eval :: Query ~> H.ParentDSL State Query ChildQuery ChildSlot Void m
