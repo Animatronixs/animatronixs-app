@@ -52,12 +52,16 @@ component =
           [ HH.div
               [ HP.class_ (H.ClassName "col span-1-of-3")]
               [ HH.label_
-                  [ HH.text "Enter user name"]
+                  [ HH.text "User name"]
               ]
           , HH.div
               [ HP.class_ (H.ClassName "col span-2-of-3")]
               [ HH.input
-                  [ HP.value state.username  
+                  [ HP.type_ HP.InputText
+                  , HP.name "username"
+                  , HP.id_ "username"
+                  , HP.placeholder "User name"
+                  , HP.value state.username  
                   , HE.onValueInput (HE.input SetUserName)
                   ]
               ]                      
@@ -78,46 +82,21 @@ component =
                 , HP.value "Fetch info"
                 ]
               ]
---              [ HH.input
---                  [ HP.type_ HP.InputSubmit
---                  , HP.value "Fetch info"
---                  ]
---              ]                      
+              , HH.p_
+                  [ HH.text (if state.loading then "Working..." else "")]
+              , HH.div_
+                  case state.result of
+                    Nothing -> []
+                    Just result ->
+                      [ HH.h2_
+                          [ HH.text "Response:"]
+                      , HH.pre_
+                          [ HH.code_
+                              [ HH.text result]
+                          ]
+                      ]
           ]
       ]
-
-
---      [ HH.h1_ 
---          [ HH.text "Lookup GitHub user"]
---      , HH.label_
---          [ HH.div_
---              [ HH.text "Enter username"]
---              , HH.input
---                  [ HP.value state.username
---                  , HE.onValueInput (HE.input SetUserName)
---                  ]
---          ]
---      , HH.button
---          [ HP.disabled state.loading
---          , HE.onClick (HE.input_ MakeRequest)
---          ]
---          [ HH.text "Fetch info"]
---      , HH.p_
---          [ HH.text (if state.loading then "Working..." else "")]
---      , HH.div_
---          case state.result of
---            Nothing -> []
---            Just result ->
---              [ HH.h2_
---                  [ HH.text "Response:"]
---              , HH.pre_
---                  [ HH.code_
---                      [ HH.text result]
---                  ]
---              ]
---      ]
-
-
 
   -- eval :: Query ~> H.ComponentDSL State Query Void m
   eval :: Query ~> H.ComponentDSL State Query Void (Aff (ajax :: AX.AJAX | eff))
