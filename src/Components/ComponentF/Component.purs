@@ -114,6 +114,6 @@ component =
     MakeRequest next -> do
       lednumber <- H.gets _.lednumber
       H.modify (_ { loading = true })
-      response <- H.liftAff $ AX.get ("http://localhost:8080/getorders?params=" <> lednumber)
+      response <- H.liftAff $ AX.get ("http://localhost:8080/getleds?params=" <> lednumber)
       H.modify (_ { loading = false, result = Just response.response })
       pure next  
