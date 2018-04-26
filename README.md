@@ -1,5 +1,9 @@
 # Animatronixs - App
 
+## Install yarn for Windows
+
+https://yarnpkg.com/latest.msi
+
 ## Renaming your Tessel 2
 
 The following will rename your Tessel 2 to ```Animatronixs-Snowy-Owl```:
@@ -51,6 +55,10 @@ Most web applications are served from remote machines in data centers miles and 
 
 The Tessel 2 can run a server and deliver web applications to locally connected devices. It's quicker than those remote machines due to the immediate distance between the Tessel and devices connected to it. As part of this project we'll start a server on the Tessel and serve a web application that controls the Tessel through a local network.
 
+## Making use of the purescript-express module
+
+See https://github.com/nkly/purescript-express/blob/master/examples/bower.json
+
 ## Get Started
 
 ```bash
@@ -59,6 +67,9 @@ cd animatronixs-app
 
 # Install bower
 npm install -g bower
+
+# Clear the cache of bower (optional)
+bower cache clean
 
 # Install yarn
 npm install -g yarn
@@ -168,7 +179,7 @@ INFO Writing project to Flash on Animatronixs-Snowy-Owl (4291.072 kB)...
 INFO Deployed.
 INFO Your Tessel may now be untethered.
 INFO The application will run whenever Tessel boots up.
-INFO      To remove this application, use "t2 erase".
+INFO To remove this application, use "t2 erase".
 INFO Running server_tessel2.js...
 ```
 
