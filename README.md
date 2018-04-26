@@ -89,7 +89,33 @@ nvm use 8.10.0
 # Install npm, and yarn.
 yarn run installPackages
 
-# Make sure the 'dist' directory is deleted before running below script
+
+# When asked the following:
+
+Unable to find a suitable version for purescript-aff, please choose one by typing one of the numbers below:
+    1) purescript-aff#^3.0.0 which resolved to 3.1.0 and is required by purescript-affjax#4.0.0, purescript-fork#2.0.0, purescript-halogen#2.3.0, purescript-routing#5.1.0
+    2) purescript-aff#^4.0.0 which resolved to 4.1.1 and is required by purescript-fork#3.0.0, purescript-halogen#3.1.3
+
+    choose 1
+
+Unable to find a suitable version for purescript-dom-indexed, please choose one by typing one of the numbers below:
+    1) purescript-dom-indexed#^3.0.0 which resolved to 3.0.0 and is required by purescript-halogen#2.3.0
+    2) purescript-dom-indexed#^5.0.0 which resolved to 5.0.0 and is required by purescript-halogen#3.1.3
+
+Prefix the choice with ! to persist it to bower.json
+
+    choose 1    
+
+Unable to find a suitable version for purescript-fork, please choose one by typing one of the numbers below:
+    1) purescript-fork#^2.0.0 which resolved to 2.0.0 and is required by purescript-halogen#2.3.0
+    2) purescript-fork#^3.0.0 which resolved to 3.0.0 and is required by purescript-halogen#3.1.3
+
+Prefix the choice with ! to persist it to bower.json
+
+    choose 1
+
+
+# Make sure the 'dist' directory is deleted, and the 'output' directory exists, before running below script
 yarn run buildDist
 ```
 
