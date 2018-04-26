@@ -1,0 +1,9 @@
+
+Add the following
+
+      "purescript-node-fs": "^4.0.0",
+      "purescript-strings": "^3.3.1",
+      "purescript-refs": "^3.0.0",
+      "purescript-express": "master",
+      "purescript-node-process": "^5.0.0",
+      "purescript-fork": "^2.0.0"
