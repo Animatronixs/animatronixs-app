@@ -98,13 +98,30 @@ Unable to find a suitable version for purescript-aff, please choose one by typin
 
     choose 1
 
+Unable to find a suitable version for purescript-arraybuffer-types, please choose one by typing one of the numbers below:
+    1) purescript-arraybuffer-types#^1.0.0 which resolved to 1.0.0 and is required by purescript-affjax#4.0.0, purescript-dom#4.16.0
+    2) purescript-arraybuffer-types#^2.0.0 which resolved to 2.0.0 and is required by purescript-node-http#4.2.0
+
+Prefix the choice with ! to persist it to bower.json
+
+    choose 2
+
+Unable to find a suitable version for purescript-node-buffer, please choose one by typing one of the numbers below:
+    1) purescript-node-buffer#3.0.0 which resolved to 3.0.0 and is required by purescript-endpoints-express#0.2.0
+    2) purescript-node-buffer#^3.0.0 which resolved to 3.0.0 and is required by purescript-node-streams#3.3.0
+    3) purescript-node-buffer#^3.0.1 which resolved to 3.0.1 and is required by purescript-node-http#4.2.0
+
+Prefix the choice with ! to persist it to bower.json
+
+    Choose 3
+
 Unable to find a suitable version for purescript-dom-indexed, please choose one by typing one of the numbers below:
     1) purescript-dom-indexed#^3.0.0 which resolved to 3.0.0 and is required by purescript-halogen#2.3.0
     2) purescript-dom-indexed#^5.0.0 which resolved to 5.0.0 and is required by purescript-halogen#3.1.3
 
 Prefix the choice with ! to persist it to bower.json
 
-    choose 1    
+    choose 1   
 
 Unable to find a suitable version for purescript-fork, please choose one by typing one of the numbers below:
     1) purescript-fork#^2.0.0 which resolved to 2.0.0 and is required by purescript-halogen#2.3.0
@@ -249,6 +266,10 @@ Here's what we did:
 8) Run t2 list which should show the USB connection
 9) Do the rest... http://tessel.github.io/t2-start/
 10) Rejoice 
+
+## Have a look at this
+
+https://www.npmjs.com/package/tessel-led
 
 ## Apply Ajax REST API call 
 
