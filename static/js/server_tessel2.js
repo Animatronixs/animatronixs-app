@@ -14,6 +14,9 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 
+var foo = require('./foo'); // FOR TEST ONLY!!!
+var bar = require('./bar'); // FOR TEST ONLY!!!
+
 var server = http.createServer(function (request, response) {
   // Break up the url into easier-to-use parts
   var urlParts = url.parse(request.url, true);
