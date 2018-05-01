@@ -11,6 +11,7 @@ module Server where
 
 import Led.Model (Led(..), getLedsEndpoint)
 import Order.Model (Order(..), getOrdersEndpoint)
+import Index.Model (Index(..), getIndicesEndpoint)
 
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, log)
@@ -28,12 +29,16 @@ myLeds = [Led {ledId: 1, color: "green"}, Led {ledId: 2, color: "blue"}, Led {le
 myOrders :: Array Order
 myOrders = [Order {productId: 1, quantity: 50}, Order {productId: 2, quantity: 6}]
 
+myIndices :: Array Index
+myIndices = [Index {indexId: 1, title: "index"}]
+
 main :: forall eff. Eff ( console :: CONSOLE, express :: EXPRESS, ajax :: AJAX, exception :: EXCEPTION | eff ) Unit
 main = do
   -- let tessel = Tessel -- reference Tessel library
   app <- makeApp []
   hostEndpoint app getOrdersEndpoint (\productId _ -> pure $ filterOrders productId)
   hostEndpoint app getLedsEndpoint (\ledId _ -> pure $ filterLeds ledId)
+  hostEndpoint app getIndicesEndpoint (\indexId _ -> pure $ filterIndices indexId)
   -- hostStatic app "static"
   hostStatic app "dist"  
   listen app 8080
@@ -44,3 +49,6 @@ filterLeds id = filter (\(Led {ledId}) -> ledId == id) myLeds
 
 filterOrders :: Int -> Array Order
 filterOrders id = filter (\(Order {productId}) -> productId == id) myOrders
+
+filterIndices :: Int -> Array Index
+filterIndices id = filter (\(Index {indexId}) -> indexId == id) myIndices

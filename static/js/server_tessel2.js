@@ -27,6 +27,9 @@ var server = http.createServer(function (request, response) {
     case "/client.js" :
       returnClientJS(request, response);
       break;
+    case "/favicon.ico" :
+      returnFaviconIco(request, response);
+      break;  
     case "/" :  
       returnIndexHTML(request, response);
       break;
@@ -64,6 +67,18 @@ function returnClientJS (request, response) {
   fs.readFile(__dirname + '/client.js', function (err, content) {
     if (err) {
       throw err;
+    }
+    response.end(content);
+  });
+}
+
+function returnFaviconIco (request, response) {
+  response.writeHead(200, {"Content-Type": "image/x-icon"});
+  fs.readFile(__dirname + '/favicon.ico', function (err, content) {
+    if (err) {
+      // throw err;
+      // images can not be found on Tessel2 momentarily, so just continue instead
+      response.end();
     }
     response.end(content);
   });
