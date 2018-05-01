@@ -29,7 +29,10 @@ var server = http.createServer(function (request, response) {
       break;
     case "/favicon.ico" :
       returnFaviconIco(request, response);
-      break;  
+      break; 
+    case "/getleds?params=1" :  
+      returnGetLeds(request, response);
+      break;
     case "/" :  
       returnIndexHTML(request, response);
       break;
@@ -82,4 +85,12 @@ function returnFaviconIco (request, response) {
     }
     response.end(content);
   });
+}
+
+function returnGetLeds (request, response) {
+  response.writeHead(200, {"Content-Type": "application/json"});
+  // manipulate tessel here for its leds
+  // to do
+  content = JSON.stringify({"ledId": 1, "color": "green"});
+  response.end(content);
 }
