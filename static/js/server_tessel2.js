@@ -20,7 +20,12 @@ var bar = require('./bar'); // FOR TEST ONLY!!!
 var server = http.createServer(function (request, response) {
   // Break up the url into easier-to-use parts
   var urlParts = url.parse(request.url, true);
-  switch (request.url) {
+  var urlWithoutParams = request.url;
+  if(urlWithoutParams.indexOf('?') != -1) {
+    // ignore '?...' from request.url
+    urlWithoutParams = urlWithoutParams.substring(0, urlWithoutParams.indexOf('?'));
+  }
+  switch (urlWithoutParams) {
     case "/stylesheet.css" :
       returnStylesheetCSS(request, response);
       break;
@@ -30,7 +35,7 @@ var server = http.createServer(function (request, response) {
     case "/favicon.ico" :
       returnFaviconIco(request, response);
       break; 
-    case "/getleds?params=1" :  
+    case "/getleds" :  
       returnGetLeds(request, response);
       break;
     case "/" :  
