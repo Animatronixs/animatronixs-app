@@ -22,5 +22,8 @@ instance decodeJsonLed :: DecodeJson Led where
 instance showLed :: Show Led where
   show = gShow
 
-getLedsEndpoint :: Endpoint Int Unit (Array Led)
-getLedsEndpoint = Endpoint {url: "/getleds", method: GET}
+-- getLedsEndpoint :: Endpoint Int Unit (Array Led)
+-- getLedsEndpoint = Endpoint {url: "/getleds", method: GET}
+
+toggleLedsEndpoint :: Endpoint Int Unit (Array Led)
+toggleLedsEndpoint = Endpoint {url: "/toggleleds", method: GET}

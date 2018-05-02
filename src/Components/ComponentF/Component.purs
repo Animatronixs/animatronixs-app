@@ -116,6 +116,6 @@ component =
       H.modify (_ { loading = true })
       -- response <- H.liftAff $ AX.get ("http://localhost:8080/getleds?params=" <> lednumber)
       -- response <- H.liftAff $ AX.get ("http://192.168.1.101:8080/getleds?params=" <> lednumber)
-      response <- H.liftAff $ AX.get ("/getleds?params=" <> lednumber)
+      response <- H.liftAff $ AX.get ("/toggleleds?params=" <> lednumber)
       H.modify (_ { loading = false, result = Just response.response })
       pure next  

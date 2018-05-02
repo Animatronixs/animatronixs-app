@@ -9,7 +9,7 @@ module Server where
 -- var fs = require('fs');
 -- var url = require('url');
 
-import Led.Model (Led(..), getLedsEndpoint)
+import Led.Model (Led(..), toggleLedsEndpoint)
 import Order.Model (Order(..), getOrdersEndpoint)
 import Index.Model (Index(..), getIndicesEndpoint)
 
@@ -37,7 +37,7 @@ main = do
   -- let tessel = Tessel -- reference Tessel library
   app <- makeApp []
   hostEndpoint app getOrdersEndpoint (\productId _ -> pure $ filterOrders productId)
-  hostEndpoint app getLedsEndpoint (\ledId _ -> pure $ filterLeds ledId)
+  hostEndpoint app toggleLedsEndpoint (\ledId _ -> pure $ filterLeds ledId)
   hostEndpoint app getIndicesEndpoint (\indexId _ -> pure $ filterIndices indexId)
   -- hostStatic app "static"
   hostStatic app "dist"  
