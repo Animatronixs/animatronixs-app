@@ -38,6 +38,12 @@ var server = http.createServer(function (request, response) {
     case "/toggleleds" : 
       returnToggleLeds(request, response);
       break;
+    case "/rotateservos" : 
+      returnRotateServos(request, response);
+      break;
+    case "/hero.jpg" :
+      returnHeroJpg(request, response);
+      break;           
     case "/" :  
       returnIndexHTML(request, response);
       break;
@@ -92,6 +98,18 @@ function returnFaviconIco (request, response) {
   });
 }
 
+function returnHeroJpg (request, response) {
+  response.writeHead(200, {"Content-Type": "image/jpeg"});
+  fs.readFile(__dirname + '/hero.jpg', function (err, content) {
+    if (err) {
+      // throw err;
+      // images can not be found on Tessel2 momentarily, so just continue instead
+      response.end();
+    }
+    response.end(content);
+  });
+}
+
 function returnToggleLeds (request, response) {
   // Create a regular expression to find the number at the end of the url
   var indexRegex = /(\d+)$/;
@@ -136,5 +154,57 @@ function returnToggleLeds (request, response) {
         }
       });
     }
+  }
+}
+
+function returnRotateServos (request, response) {
+  // Create a regular expression to find the number at the end of the url
+  var indexRegex = /(\d+)$/;
+
+  // Capture the number, returns an array
+  var result = indexRegex.exec(request.url);
+
+  if(result === null) {
+    console.log("index is null");
+    response.writeHead(500, {"Content-Type": "application/json"});
+    response.end(JSON.stringify({servoId: null, error: "index is null"}));
+  }
+  else {
+    // Grab the captured result from the array
+    var index = result[1];
+    console.log("rotateservos called"); // TEMP ONLY
+    response.writeHead(200, {"Content-Type": "application/json"}); // TEMP ONLY
+    response.end(JSON.stringify({servoId: 0, foo: "bar"})); // TEMP ONLY
+/**    
+    // Use the index to reference the correct Servo
+    var servo = tessel.servo[index];
+
+    if(typeof led === 'undefined') {
+      console.log("led is undefined");
+      response.writeHead(500, {"Content-Type": "application/json"});
+      response.end(JSON.stringify({ledId: parseInt(index), error: "led is undefined"}));
+    }
+    else if(led === null) {
+      console.log("led is null");
+      response.writeHead(500, {"Content-Type": "application/json"});
+      response.end(JSON.stringify({ledId: null, error: "led is null"}));
+    }
+    else {
+      // Toggle the state of the led and call the callback after that's done
+      led.toggle(function (err) {
+        if (err) {
+          // Log the error, send back a 500 (internal server error) response to the client
+          console.log(err);
+          response.writeHead(500, {"Content-Type": "application/json"});
+          response.end(JSON.stringify({ledId: parseInt(index), error: err}));
+        } else {
+          // The led was successfully toggled, respond with the state of the toggled led using led.isOn
+          response.writeHead(200, {"Content-Type": "application/json"});
+          response.end(JSON.stringify({ledId: parseInt(index), on: led.isOn}));
+        }
+      });
+    }
+*/
+
   }
 }

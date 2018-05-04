@@ -12,6 +12,7 @@ module Server where
 import Led.Model (Led(..), toggleLedsEndpoint)
 import Order.Model (Order(..), getOrdersEndpoint)
 import Index.Model (Index(..), getIndicesEndpoint)
+import Servo.Model (Servo(..), rotateServosEndpoint)
 
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, log)
@@ -32,6 +33,9 @@ myOrders = [Order {productId: 1, quantity: 50}, Order {productId: 2, quantity: 6
 myIndices :: Array Index
 myIndices = [Index {indexId: 1, title: "index"}]
 
+myServos :: Array Servo
+myServos = [Servo {servoId: 1, color: "green"}, Servo {servoId: 2, color: "blue"}, Servo {servoId: 3, color: "white"}]
+
 main :: forall eff. Eff ( console :: CONSOLE, express :: EXPRESS, ajax :: AJAX, exception :: EXCEPTION | eff ) Unit
 main = do
   -- let tessel = Tessel -- reference Tessel library
@@ -39,6 +43,7 @@ main = do
   hostEndpoint app getOrdersEndpoint (\productId _ -> pure $ filterOrders productId)
   hostEndpoint app toggleLedsEndpoint (\ledId _ -> pure $ filterLeds ledId)
   hostEndpoint app getIndicesEndpoint (\indexId _ -> pure $ filterIndices indexId)
+  hostEndpoint app rotateServosEndpoint (\servoId _ -> pure $ filterServos servoId)
   -- hostStatic app "static"
   hostStatic app "dist"  
   listen app 8080
@@ -52,3 +57,6 @@ filterOrders id = filter (\(Order {productId}) -> productId == id) myOrders
 
 filterIndices :: Int -> Array Index
 filterIndices id = filter (\(Index {indexId}) -> indexId == id) myIndices
+
+filterServos :: Int -> Array Servo
+filterServos id = filter (\(Servo {servoId}) -> servoId == id) myServos
