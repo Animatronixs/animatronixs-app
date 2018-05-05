@@ -8377,7 +8377,7 @@ var MakeRequest = (function () {
 })();
 var component = (function () {
     var render = function (state) {
-        return Halogen_HTML_Elements.form([ Halogen_HTML_Properties.method(DOM_HTML_Indexed_FormMethod.POST.value), Halogen_HTML_Properties.action("#"), Halogen_HTML_Properties.class_("contact-form") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label_([ Halogen_HTML_Core.text("Servo number") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputText.value), Halogen_HTML_Properties.name("servonumber"), Halogen_HTML_Properties.id_("servonumber"), Halogen_HTML_Properties.placeholder("Servo number (choose 1 or 2)"), Halogen_HTML_Properties.value(state.servonumber), Halogen_HTML_Events.onValueInput(Halogen_HTML_Events.input(SetServoNumber.create)) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label_([ Halogen_HTML_Core.text(" ") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputSubmit.value), Halogen_HTML_Properties.disabled(state.loading), Halogen_HTML_Events.onClick(Halogen_HTML_Events.input_(MakeRequest.create)), Halogen_HTML_Properties.value("Rotate Servo") ]) ]), Halogen_HTML_Elements.p_([ Halogen_HTML_Core.text((function () {
+        return Halogen_HTML_Elements.form([ Halogen_HTML_Properties.method(DOM_HTML_Indexed_FormMethod.POST.value), Halogen_HTML_Properties.action("#"), Halogen_HTML_Properties.class_("contact-form") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label_([ Halogen_HTML_Core.text("Servo number") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputRange.value), Halogen_HTML_Properties.name("servonumber"), Halogen_HTML_Properties.id_("servonumber"), Halogen_HTML_Properties.value(state.servonumber), Halogen_HTML_Events.onValueChange(Halogen_HTML_Events.input(SetServoNumber.create)) ]) ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("row") ])([ Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-1-of-3") ])([ Halogen_HTML_Elements.label_([ Halogen_HTML_Core.text(" ") ]) ]), Halogen_HTML_Elements.div([ Halogen_HTML_Properties.class_("col span-2-of-3") ])([ Halogen_HTML_Elements.input([ Halogen_HTML_Properties.type_(Halogen_HTML_Core.inputTypeIsProp)(DOM_HTML_Indexed_InputType.InputSubmit.value), Halogen_HTML_Properties.disabled(state.loading), Halogen_HTML_Events.onClick(Halogen_HTML_Events.input_(MakeRequest.create)), Halogen_HTML_Properties.value("Rotate Servo") ]) ]), Halogen_HTML_Elements.p_([ Halogen_HTML_Core.text((function () {
             if (state.loading) {
                 return "Working...";
             };
@@ -8389,7 +8389,7 @@ var component = (function () {
             if (state.result instanceof Data_Maybe.Just) {
                 return [ Halogen_HTML_Elements.h2_([ Halogen_HTML_Core.text("Response:") ]), Halogen_HTML_Elements.pre_([ Halogen_HTML_Elements.code_([ Halogen_HTML_Core.text(state.result.value0) ]) ]) ];
             };
-            throw new Error("Failed pattern match at ComponentG.Component line 88, column 19 - line 97, column 24: " + [ state.result.constructor.name ]);
+            throw new Error("Failed pattern match at ComponentG.Component line 115, column 19 - line 124, column 24: " + [ state.result.constructor.name ]);
         })()) ]) ]);
     };
     var initialState = {
@@ -8448,7 +8448,7 @@ var component = (function () {
                 });
             });
         };
-        throw new Error("Failed pattern match at ComponentG.Component line 103, column 10 - line 121, column 12: " + [ v.constructor.name ]);
+        throw new Error("Failed pattern match at ComponentG.Component line 130, column 10 - line 148, column 12: " + [ v.constructor.name ]);
     };
     return Halogen_Component.component(Halogen_HTML_Core.bifunctorHTML)({
         initialState: Data_Function["const"](initialState),

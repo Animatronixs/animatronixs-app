@@ -56,15 +56,42 @@ component =
               ]
           , HH.div
               [ HP.class_ (H.ClassName "col span-2-of-3")]
+              --[ HH.input
+              --    [ HP.type_ HP.InputText
+              --    , HP.name "servonumber"
+              --    , HP.id_ "servonumber"
+              --    , HP.placeholder "Servo number (choose 1 or 2)"
+              --    , HP.value state.servonumber  
+              --    , HE.onValueInput (HE.input SetServoNumber)
+              --    ]
+              --] 
               [ HH.input
-                  [ HP.type_ HP.InputText
-                  , HP.name "servonumber"
-                  , HP.id_ "servonumber"
-                  , HP.placeholder "Servo number (choose 1 or 2)"
-                  , HP.value state.servonumber  
-                  , HE.onValueInput (HE.input SetServoNumber)
-                  ]
-              ]                      
+                [ HP.type_ HP.InputRange
+                -- , HP.list "tickmarks" 
+                , HP.name "servonumber"
+                , HP.id_ "servonumber"
+                , HP.value state.servonumber
+                , HE.onValueChange (HE.input SetServoNumber)
+                ]
+              ]
+
+-- <input type="range" list="tickmarks">
+
+-- <datalist id="tickmarks">
+--   <option value="0" label="0%">
+--   <option value="10">
+--   <option value="20">
+--   <option value="30">
+--   <option value="40">
+--   <option value="50" label="50%">
+--   <option value="60">
+--   <option value="70">
+--   <option value="80">
+--   <option value="90">
+--   <option value="100" label="100%">
+-- </datalist>
+
+
           ]
       , HH.div
           [ HP.class_ (H.ClassName "row")]

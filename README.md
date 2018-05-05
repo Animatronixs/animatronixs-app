@@ -196,19 +196,23 @@ It will return:
 [{"values":[{"quantity":6,"productId":2}],"tag":"EndpointExample.Model.Order"}]
 ```
 
-Install and run the Animatronixs web app on the Tessel 2:
+Install and run the Animatronixs web app on the Tessel 2 (make sure you have Internet connection):
 
 ```javascript
 cd dist
+t2 erase
+npm install
 t2 run server_tessel2.js
 ```
 
 The Server now runs on the Tessel 2 and listens to http://192.168.1.101 on WiFi Access Point "Animatronixs-Snowy-Owl"
 
-Want to untether your computer from your Tessel? Run:
+Want to untether your computer from your Tessel? Run (make sure you have Internet connection):
 
 ```javascript
 cd dist
+t2 erase
+npm install
 t2 push server_tessel2.js
 ```
 
