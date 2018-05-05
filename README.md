@@ -240,6 +240,20 @@ GET http://localhost:8080/leds/2
 TO DO:
 Rewrite Server.purs so it includes the logic of server_tessels.js to toggle LEDs on the Tessel 2. Later include a REST API to manipulate a Servo motor.
 
+### Servo 
+
+Plug servo into port “1” on the module as shown.
+
+- the brown wire (ground) goes to -
+- the red wire (power) goes to +
+- the yellow wire (signal) goes to S
+
+Plug 5V adapter into the barrel jack on the servo module, then plug into wall power.
+
+Install by typing ```npm install servo-pca9685 --save``` into the command line.
+
+NOTE: If the above node module is already listed in package.json, there is no need to install it again.
+
 References:
 
 "Type-safe client-server communication with PureScript" at 

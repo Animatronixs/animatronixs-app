@@ -5,10 +5,19 @@
 # You DO NOT need to list node_modules or package.json
 # For more information, visit: https://tessel.io/docs/cli#usage
 
-index.html
+app-iPhone.png
+back-customers.jpg
+berlin.jpg
 client.js
-stylesheet.css
-logo.png
+customer-1.jpg
+customer-2.jpg
+customer-3.jpg
+download-app-android.png
+download-app.svg
+favicon.ico
+hero.jpg
+hero-min.jpg
+index.html
 ionicons.eot
 ionicons.svg
 ionicons.ttf
@@ -23,3 +32,17 @@ Lato-Italic.ttf
 Lato-Light.ttf
 Lato-LightItalic.ttf
 Lato-Regular.ttf
+lisbon.jpg
+logo.png
+logo-white.png
+london.jpg
+meal-001.jpg
+meal-002.jpg
+meal-003.jpg
+meal-004.jpg
+meal-005.jpg
+meal-006.jpg
+meal-007.jpg
+meal-008.jpg
+san-francisco.jpg
+stylesheet.css

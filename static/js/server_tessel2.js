@@ -20,35 +20,62 @@ var bar = require('./bar'); // FOR TEST ONLY!!!
 var server = http.createServer(function (request, response) {
   // Break up the url into easier-to-use parts
   var urlParts = url.parse(request.url, true);
+  console.log("inside server, request.url: ", request.url);
   var urlWithoutParams = request.url;
   if(urlWithoutParams.indexOf('?') != -1) {
     // ignore '?...' from request.url
     urlWithoutParams = urlWithoutParams.substring(0, urlWithoutParams.indexOf('?'));
   }
-  switch (urlWithoutParams) {
-    case "/stylesheet.css" :
-      returnStylesheetCSS(request, response);
-      break;
-    case "/client.js" :
-      returnClientJS(request, response);
-      break;
-    case "/favicon.ico" :
-      returnFaviconIco(request, response);
+  var fileExtension = urlWithoutParams.split('.').pop();
+  var contentType = "";
+  switch(fileExtension.toUpperCase()) {
+    case "CSS":
+      contentType = "text/css";
+      returnAsset(request, response, contentType)
       break; 
+    case "HTML":
+      contentType = "text/html";
+      returnAsset(request, response, contentType)
+      break; 
+    case "ICO":
+      contentType = "image/x-icon";
+      returnAsset(request, response, contentType)
+      break; 
+    case "JPEG":
+      contentType = "image/jpeg";
+      returnAsset(request, response, contentType)
+      break;                    
+    case "JPG":
+      contentType = "image/jpeg";
+      returnAsset(request, response, contentType)
+      break;
+    case "JS":
+      contentType = "application/javascript";
+      returnAsset(request, response, contentType)
+      break;      
+    case "PNG":
+      contentType = "image/png";
+      returnAsset(request, response, contentType)
+      break;      
+    default :
+      // DO NOTHING
+  }
+
+  switch (urlWithoutParams) {  
     case "/toggleleds" : 
       returnToggleLeds(request, response);
       break;
     case "/rotateservos" : 
       returnRotateServos(request, response);
-      break;
-    case "/hero.jpg" :
-      returnHeroJpg(request, response);
-      break;           
-    case "/" :  
-      returnIndexHTML(request, response);
+      break;                
+    case "/" : 
+      request.url = "/index.html";
+      contentType = "text/html";
+      console.log("case '/'");
+      returnAsset(request, response, contentType);
       break;
     default :
-      returnIndexHTML(request, response);
+      // DO NOTHING
   };
 });
 
@@ -56,55 +83,15 @@ server.listen(8080);
 console.log("Connect to WiFi access point 'Animatronixs-*'");
 console.log("Server running at http://192.168.1.101:8080/");
 
-function returnIndexHTML (request, response) {
-  response.writeHead(200, {"Content-Type": "text/html"});
-  fs.readFile(__dirname + '/index.html', function (err, content) {
+function returnAsset (request, response, contentType) {
+  console.log("inside returnAsset(), request.url: ", request.url, "contentType: ", contentType);
+  response.writeHead(200, {"Content-Type": contentType});
+  fs.readFile(__dirname + request.url, function (err, content) {
     if (err) {
-      throw err;
-    }
-    response.end(content);
-  });
-}
-
-function returnStylesheetCSS (request, response) {
-  response.writeHead(200, {"Content-Type": "text/css"});
-  fs.readFile(__dirname + '/stylesheet.css', function (err, content) {
-    if (err) {
-      throw err;
-    }
-    response.end(content);
-  });
-}
-
-function returnClientJS (request, response) {
-  response.writeHead(200, {"Content-Type": "application/javascript"});
-  fs.readFile(__dirname + '/client.js', function (err, content) {
-    if (err) {
-      throw err;
-    }
-    response.end(content);
-  });
-}
-
-function returnFaviconIco (request, response) {
-  response.writeHead(200, {"Content-Type": "image/x-icon"});
-  fs.readFile(__dirname + '/favicon.ico', function (err, content) {
-    if (err) {
-      // throw err;
-      // images can not be found on Tessel2 momentarily, so just continue instead
-      response.end();
-    }
-    response.end(content);
-  });
-}
-
-function returnHeroJpg (request, response) {
-  response.writeHead(200, {"Content-Type": "image/jpeg"});
-  fs.readFile(__dirname + '/hero.jpg', function (err, content) {
-    if (err) {
-      // throw err;
-      // images can not be found on Tessel2 momentarily, so just continue instead
-      response.end();
+      //throw err;
+      console.log(err);
+      response.writeHead(500, {"Content-Type": "application/json"});
+      response.end(JSON.stringify({asset: request.url, error: err}));
     }
     response.end(content);
   });
@@ -173,8 +160,46 @@ function returnRotateServos (request, response) {
     // Grab the captured result from the array
     var index = result[1];
     console.log("rotateservos called"); // TEMP ONLY
+
+    /*********************************************
+    This servo module demo turns the servo around
+    1/10 of its full rotation  every 500ms, then
+    resets it after 10 turns, reading out position
+    to the console at each movement.
+    *********************************************/
+
+    var servolib = require('servo-pca9685');
+
+    var servo = servolib.use(tessel.port['A']);
+
+    var servo1 = 1; // We have a servo plugged in at position 1
+    
+    servo.on('ready', function () {
+      var position = 0;  //  Target position of the servo between 0 (min) and 1 (max).
+    
+      //  Set the minimum and maximum duty cycle for servo 1.
+      //  If the servo doesn't move to its full extent or stalls out
+      //  and gets hot, try tuning these values (0.05 and 0.12).
+      //  Moving them towards each other = less movement range
+      //  Moving them apart = more range, more likely to stall and burn out
+      servo.configure(servo1, 0.05, 0.12, function () {
+        setInterval(function () {
+          console.log('Position (in range 0-1):', position);
+          //  Set servo #1 to position pos.
+          servo.move(servo1, position);
+    
+          // Increment by 10% (~18 deg for a normal servo)
+          position += 0.1;
+          if (position > 1) {
+            position = 0; // Reset servo position
+          }
+        }, 500); // Every 500 milliseconds
+      });
+    });    
+
     response.writeHead(200, {"Content-Type": "application/json"}); // TEMP ONLY
     response.end(JSON.stringify({servoId: 0, foo: "bar"})); // TEMP ONLY
+
 /**    
     // Use the index to reference the correct Servo
     var servo = tessel.servo[index];
