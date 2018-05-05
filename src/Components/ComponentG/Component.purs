@@ -73,6 +73,48 @@ component =
                 , HP.value state.servonumber
                 , HE.onValueChange (HE.input SetServoNumber)
                 ]
+              , HH.datalist
+                [ HP.id_ "tickmarks" ]
+                [ HH.option
+                  [ HP.value "0"
+                  -- , HP.label "0%" 
+                  ]
+                  []
+                , HH.option
+                  [ HP.value "10" ]
+                  []
+                , HH.option
+                  [ HP.value "20" ]
+                  []
+                , HH.option
+                  [ HP.value "30" ]
+                  []
+                , HH.option
+                  [ HP.value "40" ]
+                  []
+                , HH.option
+                  [ HP.value "50" 
+                  -- , HP.label "50%"    
+                  ]
+                  []
+                , HH.option
+                  [ HP.value "60" ]
+                  []
+                , HH.option
+                  [ HP.value "70" ]
+                  []
+                , HH.option
+                  [ HP.value "80" ]
+                  []
+                , HH.option
+                  [ HP.value "90" ]
+                  []
+                , HH.option
+                  [ HP.value "100" 
+                  -- , HP.label "100%"    
+                  ]
+                  []                                                                                                                                                              
+                ]
               ]
 
 -- <input type="range" list="tickmarks">
