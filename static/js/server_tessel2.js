@@ -33,6 +33,10 @@ var server = http.createServer(function (request, response) {
       contentType = "text/css";
       returnAsset(request, response, contentType)
       break; 
+    case "EOT":
+      contentType = "application/vnd.ms-fontobject";
+      returnAsset(request, response, contentType)
+      break;
     case "HTML":
       contentType = "text/html";
       returnAsset(request, response, contentType)
@@ -56,7 +60,23 @@ var server = http.createServer(function (request, response) {
     case "PNG":
       contentType = "image/png";
       returnAsset(request, response, contentType)
+      break;
+    case "SVG":
+      contentType = "image/svg+xml";
+      returnAsset(request, response, contentType)
       break;      
+    case "TTF":
+      contentType = "font/ttf";
+      returnAsset(request, response, contentType)
+      break; 
+    case "WOFF":
+      contentType = "font/woff";
+      returnAsset(request, response, contentType)
+      break;
+    case "XML":
+      contentType = "text/xml";
+      returnAsset(request, response, contentType)
+      break;                     
     default :
       // DO NOTHING
   }

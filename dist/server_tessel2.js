@@ -33,6 +33,10 @@ var server = http.createServer(function (request, response) {
       contentType = "text/css";
       returnAsset(request, response, contentType)
       break; 
+    case "EOT":
+      contentType = "application/vnd.ms-fontobject";
+      returnAsset(request, response, contentType)
+      break;
     case "HTML":
       contentType = "text/html";
       returnAsset(request, response, contentType)
@@ -56,43 +60,34 @@ var server = http.createServer(function (request, response) {
     case "PNG":
       contentType = "image/png";
       returnAsset(request, response, contentType)
+      break;
+    case "SVG":
+      contentType = "image/svg+xml";
+      returnAsset(request, response, contentType)
       break;      
+    case "TTF":
+      contentType = "font/ttf";
+      returnAsset(request, response, contentType)
+      break; 
+    case "WOFF":
+      contentType = "font/woff";
+      returnAsset(request, response, contentType)
+      break;
+    case "XML":
+      contentType = "text/xml";
+      returnAsset(request, response, contentType)
+      break;                     
     default :
-      console.log("fileExtension.toUpperCase(), case default"); // DO NOTHING
+      // DO NOTHING
   }
 
-  //if(urlWithoutParams == "/favicon.ico"){ returnICO(request, response) };
-  //if(urlWithoutParams == "/hero.jpg"){ returnJPG(request, response) };
-  //if(urlWithoutParams == "/logo-white.png"){ returnPNG(request, response) };
-
-  switch (urlWithoutParams) {
-
-/**
-    case "/stylesheet.css" :
-      returnStylesheetCSS(request, response);
-      break;
-*/
-/**
-    case "/client.js" :
-      returnClientJS(request, response);
-      break;
-*/      
-/**      
-    case "/favicon.ico" :
-      returnFaviconICO(request, response);
-      break; 
-*/      
+  switch (urlWithoutParams) {  
     case "/toggleleds" : 
       returnToggleLeds(request, response);
       break;
     case "/rotateservos" : 
       returnRotateServos(request, response);
-      break;
-/**      
-    case "/hero.jpg" :
-      returnHeroJPG(request, response);
-      break; 
-*/                
+      break;                
     case "/" : 
       request.url = "/index.html";
       contentType = "text/html";
@@ -100,76 +95,13 @@ var server = http.createServer(function (request, response) {
       returnAsset(request, response, contentType);
       break;
     default :
-      //request.url = "/index.html";
-      //contentType = "text/html";
-      console.log("urlWithoutParams, case default"); // DO NOTHING
-      //returnAsset(request, response, contentType);
+      // DO NOTHING
   };
 });
 
 server.listen(8080);
 console.log("Connect to WiFi access point 'Animatronixs-*'");
 console.log("Server running at http://192.168.1.101:8080/");
-
-/**
-function returnIndexHTML (request, response) {
-  response.writeHead(200, {"Content-Type": "text/html"});
-  fs.readFile(__dirname + '/index.html', function (err, content) {
-    if (err) {
-      throw err;
-    }
-    response.end(content);
-  });
-}
-*/
-
-/**
-function returnStylesheetCSS (request, response) {
-  response.writeHead(200, {"Content-Type": "text/css"});
-  fs.readFile(__dirname + '/stylesheet.css', function (err, content) {
-    if (err) {
-      throw err;
-    }
-    response.end(content);
-  });
-}
-*/
-/**
-function returnClientJS (request, response) {
-  response.writeHead(200, {"Content-Type": "application/javascript"});
-  fs.readFile(__dirname + '/client.js', function (err, content) {
-    if (err) {
-      throw err;
-    }
-    response.end(content);
-  });
-}
-*/
-/**
-function returnICO (request, response) {
-  response.writeHead(200, {"Content-Type": "image/x-icon"});
-  fs.readFile(__dirname + request.url, function (err, content) {
-    if (err) {
-      throw err;
-      response.end();
-    }
-    response.end(content);
-  });
-}
-*/
-
-/**
-function returnHeroJPG (request, response) {
-  response.writeHead(200, {"Content-Type": "image/jpeg"});
-  fs.readFile(__dirname + '/hero.jpg', function (err, content) {
-    if (err) {
-      throw err;
-      response.end();
-    }
-    response.end(content);
-  });
-}
-*/
 
 function returnAsset (request, response, contentType) {
   console.log("inside returnAsset(), request.url: ", request.url, "contentType: ", contentType);
@@ -184,30 +116,6 @@ function returnAsset (request, response, contentType) {
     response.end(content);
   });
 }
-
-/**
-function returnJPG (request, response) {
-  response.writeHead(200, {"Content-Type": "image/jpeg"});
-  fs.readFile(__dirname + request.url, function (err, content) {
-    if (err) {
-      throw err;
-    }
-    response.end(content);
-  });
-}
-*/
-
-/**
-function returnPNG (request, response) {
-  response.writeHead(200, {"Content-Type": "image/png"});
-  fs.readFile(__dirname + request.url, function (err, content) {
-    if (err) {
-      throw err;
-    }
-    response.end(content);
-  });
-}
-*/
 
 function returnToggleLeds (request, response) {
   // Create a regular expression to find the number at the end of the url
@@ -308,9 +216,6 @@ function returnRotateServos (request, response) {
         }, 500); // Every 500 milliseconds
       });
     });    
-
-
-
 
     response.writeHead(200, {"Content-Type": "application/json"}); // TEMP ONLY
     response.end(JSON.stringify({servoId: 0, foo: "bar"})); // TEMP ONLY
