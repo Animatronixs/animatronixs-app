@@ -20,7 +20,6 @@ var bar = require('./bar'); // FOR TEST ONLY!!!
 var server = http.createServer(function (request, response) {
   // Break up the url into easier-to-use parts
   var urlParts = url.parse(request.url, true);
-  console.log("inside server, request.url: ", request.url);
   var urlWithoutParams = request.url;
   if(urlWithoutParams.indexOf('?') != -1) {
     // ignore '?...' from request.url
@@ -91,7 +90,6 @@ var server = http.createServer(function (request, response) {
     case "/" : 
       request.url = "/index.html";
       contentType = "text/html";
-      console.log("case '/'");
       returnAsset(request, response, contentType);
       break;
     default :
@@ -104,7 +102,6 @@ console.log("Connect to WiFi access point 'Animatronixs-*'");
 console.log("Server running at http://192.168.1.101:8080/");
 
 function returnAsset (request, response, contentType) {
-  console.log("inside returnAsset(), request.url: ", request.url, "contentType: ", contentType);
   response.writeHead(200, {"Content-Type": contentType});
   fs.readFile(__dirname + request.url, function (err, content) {
     if (err) {
