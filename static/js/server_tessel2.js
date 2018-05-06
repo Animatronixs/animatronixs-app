@@ -190,8 +190,43 @@ function returnRotateServos (request, response) {
     var servo = servolib.use(tessel.port['A']);
 
     var servoId = 1; // We have a servo plugged in at position 1, make it a dynamic assignment by parameter
-    var position = index; //  Target position of the servo between 0 (min) and 1 (max).
-    
+    // NOTE: index is between 0 and 100
+    var position = index == 0 ? 0 : (index/100); //  Target position of the servo between 0 (min) and 1 (max).
+
+    servo.on('ready', function () {
+      if(position < 0 || position > 1) // Make sure the target position of the servo is between 0 (min) and 1 (max), 
+                                       // otherwise it may cause damage to the servo
+      {
+        console.log("target position is not between 0 (min) and 1 (max): ", position);
+        response.writeHead(500, {"Content-Type": "application/json"});
+        response.end(JSON.stringify({servoId: servoId, error: "target position  is not between 0 (min) and 1 (max)"}));
+      }
+      else //  Target position of the servo between 0 (min) and 1 (max).
+      {
+        //  Set the minimum and maximum duty cycle for servo.
+        //  If the servo doesn't move to its full extent or stalls out
+        //  and gets hot, try tuning these values (0.05 and 0.12).
+        //  Moving them towards each other = less movement range
+        //  Moving them apart = more range, more likely to stall and burn out
+        servo.configure(servoId, 0.05, 0.12, function () {
+          console.log('Position (in range 0-1):', position);
+          // Set servo to position
+          servo.move(servoId, position);
+        });
+
+        console.log("target position is between 0 (min) and 1 (max): ", position);
+        response.writeHead(200, {"Content-Type": "application/json"});
+        response.end(JSON.stringify({servoId: servoId, position: position}));
+      }
+    });
+   
+    /*********************************************
+    This servo module demo turns the servo around
+    1/10 of its full rotation  every 500ms, then
+    resets it after 10 turns, reading out position
+    to the console at each movement.
+    *********************************************/
+/** 
     servo.on('ready', function () {
       position = 0;  //  Target position of the servo between 0 (min) and 1 (max).
     
@@ -213,7 +248,8 @@ function returnRotateServos (request, response) {
           }
         }, 500); // Every 500 milliseconds
       });
-    });    
+    });
+*/    
 
     response.writeHead(200, {"Content-Type": "application/json"}); // TEMP ONLY
     response.end(JSON.stringify({servoId: servoId, position: position})); // TEMP ONLY

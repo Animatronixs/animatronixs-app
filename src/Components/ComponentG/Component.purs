@@ -15,14 +15,14 @@ import Network.HTTP.Affjax as AX
 -- type State = Boolean
 type State =
   { loading :: Boolean
-  , servonumber :: String
+  , servoposition :: String
   , result :: Maybe String
   }
 
 data Query a
   = ToggleState a
 --  | GetState (Boolean -> a)
-  | SetServoNumber String a
+  | SetServoPosition String a
   | MakeRequest a
 
 -- component :: forall m. H.Component HH.HTML Query Unit Void m
@@ -38,7 +38,7 @@ component =
 
   initialState :: State
   -- initialState = false
-  initialState = { loading: false, servonumber: "", result: Nothing }
+  initialState = { loading: false, servoposition: "", result: Nothing }
 
   render :: State -> H.ComponentHTML Query
   render state =
@@ -52,26 +52,26 @@ component =
           [ HH.div
               [ HP.class_ (H.ClassName "col span-1-of-3")]
               [ HH.label_
-                  [ HH.text "Servo number"]
+                  [ HH.text "Servo position (0%=left, 50%=center, 100%=right)"]
               ]
           , HH.div
               [ HP.class_ (H.ClassName "col span-2-of-3")]
               --[ HH.input
               --    [ HP.type_ HP.InputText
-              --    , HP.name "servonumber"
-              --    , HP.id_ "servonumber"
-              --    , HP.placeholder "Servo number (choose 1 or 2)"
-              --    , HP.value state.servonumber  
-              --    , HE.onValueInput (HE.input SetServoNumber)
+              --    , HP.name "servoposition"
+              --    , HP.id_ "servoposition"
+              --    , HP.placeholder "Servo position (choose 1 or 2)"
+              --    , HP.value state.servoposition  
+              --    , HE.onValueInput (HE.input SetServoPosition)
               --    ]
               --] 
               [ HH.input
                 [ HP.type_ HP.InputRange
                 -- , HP.list "tickmarks" 
-                , HP.name "servonumber"
-                , HP.id_ "servonumber"
-                , HP.value state.servonumber
-                , HE.onValueChange (HE.input SetServoNumber)
+                , HP.name "servoposition"
+                , HP.id_ "servoposition"
+                , HP.value state.servoposition
+                , HE.onValueChange (HE.input SetServoPosition)
                 ]
               , HH.datalist
                 [ HP.id_ "tickmarks" ]
@@ -177,14 +177,14 @@ component =
       pure next
 --  eval (GetState reply) = do
 --    reply <$> H.get
-    SetServoNumber servonumber next -> do
-      H.modify (_ { servonumber = servonumber, result = Nothing :: Maybe String })
+    SetServoPosition servoposition next -> do
+      H.modify (_ { servoposition = servoposition, result = Nothing :: Maybe String })
       pure next
     MakeRequest next -> do
-      servonumber <- H.gets _.servonumber
+      servoposition <- H.gets _.servoposition
       H.modify (_ { loading = true })
-      -- response <- H.liftAff $ AX.get ("http://localhost:8080/rotateservos?params=" <> servonumber)
-      -- response <- H.liftAff $ AX.get ("http://192.168.1.101:8080/rotateservos?params=" <> servonumber)
-      response <- H.liftAff $ AX.get ("/rotateservos?params=" <> servonumber)
+      -- response <- H.liftAff $ AX.get ("http://localhost:8080/rotateservos?params=" <> servoposition)
+      -- response <- H.liftAff $ AX.get ("http://192.168.1.101:8080/rotateservos?params=" <> servoposition)
+      response <- H.liftAff $ AX.get ("/rotateservos?params=" <> servoposition)
       H.modify (_ { loading = false, result = Just response.response })
       pure next  

@@ -244,6 +244,26 @@ GET http://localhost:8080/leds/2
 TO DO:
 Rewrite Server.purs so it includes the logic of server_tessels.js to toggle LEDs on the Tessel 2. Later include a REST API to manipulate a Servo motor.
 
+### TP-Link: 4G LTE Mobile Wi-Fi (M7350)
+
+See also instruction video at https://youtu.be/KM21t1Rarn0
+
+Make sure there is a SIM card inside the TP-Link, as well as a charged battery (can be charged by USB cable).
+
+- Hold down the power button (|) for 5 seconds until the TP-Link shows up as an Access Point ("TP-Link_CCC0") on your desktop or mobile device.
+
+- Choose the Access Point to connect to through WiFi (if prompted, use the password as printed on the label inside the backcover of the TP-Link).
+
+- Open a browser to http://192.168.0.1 (or http://tplinkmifi.net) on your desktop, enter the default password "admin" and click the Login button.
+
+- Alternatively, open the tpMiFi app on your mobile device, login with the default password "admin". 
+
+NOTE: To turn the password back to factory settings ("admin"), press the reset button inside the TP-Link M7350 with a pin-shaped object until the LED comes on stating "resetting".
+
+NOTE: If you log in with one device, the other logged in devices will be logged out automatically.
+
+
+
 ### Servo 
 
 Plug servo into port “1” on the module as shown.
