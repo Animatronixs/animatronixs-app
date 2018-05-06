@@ -176,19 +176,8 @@ function returnRotateServos (request, response) {
   else {
     // Grab the captured result from the array
     var index = result[1];
-    console.log("rotateservos called"); // TEMP ONLY
-
-    /*********************************************
-    This servo module demo turns the servo around
-    1/10 of its full rotation  every 500ms, then
-    resets it after 10 turns, reading out position
-    to the console at each movement.
-    *********************************************/
-
     var servolib = require('servo-pca9685');
-
     var servo = servolib.use(tessel.port['A']);
-
     var servoId = 1; // We have a servo plugged in at position 1, make it a dynamic assignment by parameter
     // NOTE: index is between 0 and 100
     var position = index == 0 ? 0 : (index/100); //  Target position of the servo between 0 (min) and 1 (max).
@@ -197,7 +186,7 @@ function returnRotateServos (request, response) {
       if(position < 0 || position > 1) // Make sure the target position of the servo is between 0 (min) and 1 (max), 
                                        // otherwise it may cause damage to the servo
       {
-        console.log("target position is not between 0 (min) and 1 (max): ", position);
+        console.log("servo target position is not between 0 (min) and 1 (max): ", position);
         response.writeHead(500, {"Content-Type": "application/json"});
         response.end(JSON.stringify({servoId: servoId, error: "target position  is not between 0 (min) and 1 (max)"}));
       }
@@ -209,81 +198,14 @@ function returnRotateServos (request, response) {
         //  Moving them towards each other = less movement range
         //  Moving them apart = more range, more likely to stall and burn out
         servo.configure(servoId, 0.05, 0.12, function () {
-          console.log('Position (in range 0-1):', position);
+          // console.log('Position (in range 0-1):', position);
           // Set servo to position
           servo.move(servoId, position);
         });
-
-        console.log("target position is between 0 (min) and 1 (max): ", position);
+        console.log("servo target position is between 0 (min) and 1 (max): ", position);
         response.writeHead(200, {"Content-Type": "application/json"});
         response.end(JSON.stringify({servoId: servoId, position: position}));
       }
     });
-   
-    /*********************************************
-    This servo module demo turns the servo around
-    1/10 of its full rotation  every 500ms, then
-    resets it after 10 turns, reading out position
-    to the console at each movement.
-    *********************************************/
-/** 
-    servo.on('ready', function () {
-      position = 0;  //  Target position of the servo between 0 (min) and 1 (max).
-    
-      //  Set the minimum and maximum duty cycle for servo.
-      //  If the servo doesn't move to its full extent or stalls out
-      //  and gets hot, try tuning these values (0.05 and 0.12).
-      //  Moving them towards each other = less movement range
-      //  Moving them apart = more range, more likely to stall and burn out
-      servo.configure(servoId, 0.05, 0.12, function () {
-        setInterval(function () {
-          console.log('Position (in range 0-1):', position);
-          //  Set servo to position pos.
-          servo.move(servoId, position);
-    
-          // Increment by 10% (~18 deg for a normal servo)
-          position += 0.1;
-          if (position > 1) {
-            position = 0; // Reset servo position
-          }
-        }, 500); // Every 500 milliseconds
-      });
-    });
-*/    
-
-    response.writeHead(200, {"Content-Type": "application/json"}); // TEMP ONLY
-    response.end(JSON.stringify({servoId: servoId, position: position})); // TEMP ONLY
-
-/**    
-    // Use the index to reference the correct Servo
-    var servo = tessel.servo[index];
-
-    if(typeof led === 'undefined') {
-      console.log("led is undefined");
-      response.writeHead(500, {"Content-Type": "application/json"});
-      response.end(JSON.stringify({ledId: parseInt(index), error: "led is undefined"}));
-    }
-    else if(led === null) {
-      console.log("led is null");
-      response.writeHead(500, {"Content-Type": "application/json"});
-      response.end(JSON.stringify({ledId: null, error: "led is null"}));
-    }
-    else {
-      // Toggle the state of the led and call the callback after that's done
-      led.toggle(function (err) {
-        if (err) {
-          // Log the error, send back a 500 (internal server error) response to the client
-          console.log(err);
-          response.writeHead(500, {"Content-Type": "application/json"});
-          response.end(JSON.stringify({ledId: parseInt(index), error: err}));
-        } else {
-          // The led was successfully toggled, respond with the state of the toggled led using led.isOn
-          response.writeHead(200, {"Content-Type": "application/json"});
-          response.end(JSON.stringify({ledId: parseInt(index), on: led.isOn}));
-        }
-      });
-    }
-*/
-
   }
 }
