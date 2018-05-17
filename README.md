@@ -276,6 +276,8 @@ Go out the door, see that you and your MiFi and Tessel2 stay in connection to on
 
 Try to send the instructions through the web page to the Tessel2.
 
+From my findings, there is not even a need for the MiFi, your mobile phone and Tessel 2 can have a direct connection!
+
 ### Servo 
 
 Plug servo into port “1” on the module as shown.
