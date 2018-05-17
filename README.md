@@ -250,6 +250,12 @@ See also instruction video at https://youtu.be/KM21t1Rarn0
 
 Make sure there is a SIM card inside the TP-Link, as well as a charged battery (can be charged by USB cable).
 
+Currently we have two SIM cards (which will both work internationally:
+
+- For NL with mobile number +31 (0)621497860
+
+- For UK with mobile number +44 (0)7770691974
+
 - Hold down the power button (|) for 5 seconds until the TP-Link shows up as an Access Point ("TP-Link_CCC0") on your desktop or mobile device.
 
 - Choose the Access Point to connect to through WiFi (if prompted, use the password as printed on the label inside the backcover of the TP-Link).
@@ -262,7 +268,13 @@ NOTE: To turn the password back to factory settings ("admin"), press the reset b
 
 NOTE: If you log in with one device, the other logged in devices will be logged out automatically.
 
+Unthether the Tessel2, as described above.
 
+Hook up your Tessel2 to the USB battery pack. You can now connect to 'Animatronics-Snowy-Owl' wireless access point from e.g. your mobile phone, no longer restricted to your fixed in home router, but your MiFi instead. 
+
+Go out the door, see that you and your MiFi and Tessel2 stay in connection to one another. Open the Tessel2's web page on your mobile phone at http://192.168.1.101:8080
+
+Try to send the instructions through the web page to the Tessel2.
 
 ### Servo 
 
@@ -312,4 +324,7 @@ https://www.npmjs.com/package/tessel-led
 ## Apply Ajax REST API call 
 
 Based on [https://github.com/slamdata/purescript-halogen/blob/master/examples/effects-aff-ajax/src/Component.purs](https://github.com/slamdata/purescript-halogen/blob/master/examples/effects-aff-ajax/src/Component.purs)
+
+
+
 
