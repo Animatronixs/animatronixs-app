@@ -244,6 +244,13 @@ GET http://localhost:8080/leds/2
 TO DO:
 Rewrite Server.purs so it includes the logic of server_tessels.js to toggle LEDs on the Tessel 2. Later include a REST API to manipulate a Servo motor.
 
+
+### ServoBlocks
+
+ServoBlocks™ increase a servo’s load-bearing capabilities by helping to isolate the lateral load from the servo spline and case. The extreme versatility of ServoBlocks™ allow users to create complex, extremely rigid, structures with ease using standard Hitec servos. The ½” aluminum hub shaft provides multiple mounting options using 6-32 screws. The robust 6061 T-6 aluminum framework acts as a servo exoskeleton, greatly enhancing the mechanical loads the servo can withstand.  Our .770” hub pattern is repeated throughout the framework to allow endless attachment options.  Compatible with standard size Hitec servos with a 24T spline. Kit comes unassembled, servo not included. Patented.
+
+See also https://www.servocity.com/637110
+
 ### TP-Link: 4G LTE Mobile Wi-Fi (M7350)
 
 See also instruction video at https://youtu.be/KM21t1Rarn0
