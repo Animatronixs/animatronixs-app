@@ -55,10 +55,10 @@ ui =
     [ HH.div 
       [ HP.class_ (H.ClassName "row")]
       [ HH.h2_
-        [ HH.text "Get food fast — not fast food"]
+        [ HH.text "Make it real — make it life"]
       , HH.p
         [ HP.class_ (H.ClassName "long-copy")]
-        [ HH.text "Hello, we're Animatronixs, your new premium food delivery service. We know you're always busy. No time for cooking. So let us take care of that, we'really good at it, we promise!"]  
+        [ HH.text "Hello, we're Animatronixs, your real life creation service. We know you're imaginative. No time for waiting. So let us turn your ideas into reality, we'really good at it, we promise!"]  
       ]
     , HH.div
       [ HP.class_ (H.ClassName "row js-waypoint-1 animated fadeIn")]
@@ -68,7 +68,7 @@ ui =
           [ HP.class_ (H.ClassName "ion-ios-infinite-outline icon-big")]
           []
         , HH.h3_
-          [ HH.text "Up to 365 days/year"]
+          [ HH.text "Control at your fingertips"]
         , HH.p_
           [ HH.text "Never cook again! We really mean that. Our subscription plans include up to 365 days/year coverage. You can also choose to order more flexibly if that's your style."] 
         ]
@@ -78,7 +78,7 @@ ui =
           [ HP.class_ (H.ClassName "ion-ios-stopwatch-outline icon-big")]
           []
         , HH.h3_
-          [ HH.text "Ready in 20 minutes"]
+          [ HH.text "Real-time actions"]
         , HH.p_
           [ HH.text "You're only twenty minutes away from your delicious and super healthy meals delivered right to your home. We work with the best chefs in each town to ensure that you're 100% happy."]
         ]
@@ -88,7 +88,7 @@ ui =
           [ HP.class_ (H.ClassName "ion-ios-nutrition-outline icon-big")]
           []
         , HH.h3_
-          [ HH.text "100% organic"]
+          [ HH.text "100% creator-friendly"]
         , HH.p_
           [ HH.text "All our vegetables are fresh, organic and local. Animals are raised without added hormones or antibiotics. Good for your health, the environment, and it also tastes better!"]
         ]
@@ -98,45 +98,14 @@ ui =
           [ HP.class_ (H.ClassName "ion-ios-cart-outline icon-big")]
           []
         , HH.h3_
-          [ HH.text "Order anything"]
+          [ HH.text "Start collecting"]
         , HH.p_
           [ HH.text "We don't limit your creativity, which means you can order whatever you feel like. You can also choose from our menu containing over 100 delicious meals. It's up to you!"]
         ]
       ]
     ]
 
---    HH.div_
---    [ HH.div
---        [ HP.class_ (H.ClassName "box")]
---        [ HH.h2_ [ HH.text "Component A" ]
---        , HH.slot' CP.cp1 unit ComponentA.component unit absurd
---        ]
---    , HH.div
---        [ HP.class_ (H.ClassName "box")]
---        [ HH.h2_ [ HH.text "Component B" ]
---        , HH.slot' CP.cp2 unit ComponentB.component unit absurd
---        ]
---    , HH.div
---        [ HP.class_ (H.ClassName "box")]
---        [ HH.h2_ [ HH.text "Component C" ]
---        , HH.slot' CP.cp3 unit ComponentC.component unit absurd
---        ]
---    , HH.p_
---        [ HH.text "Last observed states:"]
---    , HH.ul_
---        [ HH.li_ [ HH.text ("Component A: ") ]
---        , HH.li_ [ HH.text ("Component B: ") ]
---        , HH.li_ [ HH.text ("Component C: ") ]
---        ]
---    , HH.button
---        [ HE.onClick (HE.input_ ReadStates) ]
---        [ HH.text "Check states now" ]
---    ]
-
   eval :: Query ~> H.ParentDSL State Query ChildQuery ChildSlot Void m
   eval = case _ of
     ReadStates next -> do
-      --b <- H.query' CP.cp2 unit (H.request ItemListB.GetCount)
-      --c <- H.query' CP.cp3 unit (H.request ItemListC.GetValue)
-      --H.put { b, c }
       pure next
