@@ -117,15 +117,15 @@ ui = H.parentComponent
             , HH.div
               [ HP.class_ (H.ClassName "hero-text-box")]
               [ HH.h1_
-                [ HH.text "Goodbye junk food." 
+                [ HH.text "Goodbye fake." 
                   , HH.br_
-                  , HH.text "Hello super healthy meals."
+                  , HH.text "Hello super realism."
                 ]
                 , HH.a 
                   [ HP.class_ (H.ClassName "btn btn-full js--scroll-to-plans")
                     , HP.href ("#")
                   ]
-                  [ HH.text "I'm hungry" ]
+                  [ HH.text "I'm hooked" ]
                 , HH.a 
                   [ HP.class_ (H.ClassName "btn btn-ghost js--scroll-to-start")
                     , HP.href ("#")
